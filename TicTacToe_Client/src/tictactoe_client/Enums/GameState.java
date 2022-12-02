@@ -11,8 +11,8 @@ package tictactoe_client.Enums;
  */
 public enum GameState {
     X_TURN,
-    Y_TURN,
+    O_TURN,
     DRAW,
     X_WIN,
-    Y_WIN
+    O_WIN
 }
