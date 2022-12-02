@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package tictactoe.game_server;
+package tictactoe_server;
 
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
@@ -15,7 +15,7 @@ import javafx.stage.Stage;
  *
  * @author DELL
  */
-public class TicTacToeGame_Server extends Application {
+public class TicTacToe_Server extends Application {
     
     @Override
     public void start(Stage stage) throws Exception {
