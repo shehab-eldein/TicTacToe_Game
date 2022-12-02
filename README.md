@@ -4,4 +4,4 @@
 
 - Classes: PascalCase e.g. (NewClass)
 - Methods And Attributes: Camel Case e.g. (newClass)
-- Enums Values: SnakeCase e.g. (NEW_CLASS)
+- Enums Values And Constants: SnakeCase e.g. (NEW_CLASS)
