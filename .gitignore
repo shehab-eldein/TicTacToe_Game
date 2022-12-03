@@ -24,3 +24,5 @@ hs_err_pid*
 replay_pid*
 /TicTacToe_Client/nbproject/private/
 /TicTacToe Game_Server/nbproject/private/
+/TicTacToe_Client/build/
+/TicTacToe_Client/dist/
