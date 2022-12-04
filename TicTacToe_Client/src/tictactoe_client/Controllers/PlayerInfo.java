@@ -96,12 +96,23 @@ public abstract class PlayerInfo extends AnchorPane {
         btnStartGame.setTextFill(javafx.scene.paint.Color.WHITE);
         btnStartGame.setFont(new Font("System Bold Italic", 23.0));
         btnStartGame.setOnAction(new EventHandler<ActionEvent>() {
-                Parent root = new BordBase() {
-};
+            Parent root = new BordBase() {
+            };
             Navigation nav = new Navigation();
+
             @Override
             public void handle(ActionEvent event) {
-                nav.navigateTo(root, event);
+                if (player1Name.getText().isEmpty()) {
+                    Alert a = new Alert(Alert.AlertType.INFORMATION);
+                    a.setContentText("Player1 name is required");
+                    a.show();
+                } else if (player2Name.getText().isEmpty()) {
+                    Alert a = new Alert(Alert.AlertType.INFORMATION);
+                    a.setContentText("Player2 name is required");
+                    a.show();
+                } else {
+                    nav.navigateTo(root, event);
+                }
             }
         });
 
