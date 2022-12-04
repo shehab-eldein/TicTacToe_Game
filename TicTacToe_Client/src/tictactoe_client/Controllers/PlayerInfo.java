@@ -13,6 +13,7 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.text.Font;
+import services.DataSaver;
 import services.Navigation;
 
 public  class PlayerInfo extends AnchorPane {
@@ -107,6 +108,9 @@ public  class PlayerInfo extends AnchorPane {
                     a.setContentText("Player2 name is required");
                     a.show();
                 } else {
+                    DataSaver dataSaver = DataSaver.dataSaverInstance();
+                    dataSaver.setPlayer1Data(player1Name.getText());
+                    dataSaver.setPlayer2Data(player2Name.getText());
                     Navigation.navigateTo(new BordBase(), event);
                 }
             }

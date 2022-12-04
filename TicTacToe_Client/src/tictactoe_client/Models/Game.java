@@ -26,7 +26,6 @@ public class Game {
         board = new Board();
         gameState = GameState.X_TURN;
         //history
-
     }
 
     GameState action(Move move) {

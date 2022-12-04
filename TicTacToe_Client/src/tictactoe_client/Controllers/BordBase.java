@@ -15,6 +15,7 @@ import javafx.scene.layout.ColumnConstraints;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.RowConstraints;
 import javafx.scene.text.Font;
+import services.DataSaver;
 import services.Navigation;
 
 public class BordBase extends AnchorPane {
@@ -196,9 +197,10 @@ public class BordBase extends AnchorPane {
             }
         });
         player1Name.setPrefWidth(119.0);
-        player1Name.setText("Player1");
+        player1Name.setText(DataSaver.dataSaverInstance().getPlayer1Data());
         player1Name.setTextFill(javafx.scene.paint.Color.WHITE);
         player1Name.setFont(new Font("System Bold Italic", 25.0));
+        
 
         backArowPlayerName1.setFitHeight(26.0);
         backArowPlayerName1.setFitWidth(23.0);
@@ -220,7 +222,7 @@ public class BordBase extends AnchorPane {
         Player2Name.setLayoutY(14.0);
         Player2Name.setPrefHeight(42.0);
         Player2Name.setPrefWidth(119.0);
-        Player2Name.setText("Player2");
+        Player2Name.setText(DataSaver.dataSaverInstance().getPlayer2Data());
         Player2Name.setTextFill(javafx.scene.paint.Color.WHITE);
         Player2Name.setFont(new Font("System Bold Italic", 25.0));
 

@@ -2,7 +2,6 @@ package tictactoe_client.Controllers;
 
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
-import javafx.scene.Parent;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
@@ -57,7 +56,7 @@ public class Start extends AnchorPane {
             
             @Override
             public void handle(ActionEvent event) {
-                Navigation.navigateTo(new ChooseMode(), event);
+                Navigation.navigateTo(new ChooseMode(), event);         
             }
         });
 

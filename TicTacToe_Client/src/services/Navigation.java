@@ -39,9 +39,9 @@ public class Navigation {
         stage = currentStage;
         showScene();
     }
-    
+   
     private static void showScene(){
         stage.setScene(scene);
         stage.show();
-    }
+    }  
 }
