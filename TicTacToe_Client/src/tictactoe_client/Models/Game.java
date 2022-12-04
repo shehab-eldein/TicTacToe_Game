@@ -19,7 +19,7 @@ public class Game {
     Board board;
     GameState gameState;
     ArrayList<Move> history;
-    
+
     public Game(Player playerX, Player playerO) {
         this.playerX = playerX;
         this.playerO = playerO;
@@ -28,22 +28,22 @@ public class Game {
         //history
     }
 
-    GameState action(Move move) {
+    public GameState action(Move move) {
 
         if (board.isValidMove(move)) {
             gameState = board.applyMove(move);
             // add move to history 
-            history.add(move);
+           // history.add(move);
         } else {
             //not Valid Move
         }
         return gameState;
     }
+
     void save() {
         //in data base in server
         //OR
         //in text File
     }
-    
 
 }

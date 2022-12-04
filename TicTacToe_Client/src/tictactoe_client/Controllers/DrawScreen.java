@@ -1,10 +1,15 @@
 package tictactoe_client.Controllers;
 
+import java.io.File;
+import javafx.event.ActionEvent;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.media.Media;
+import javafx.scene.media.MediaPlayer;
 import javafx.scene.media.MediaView;
 import javafx.scene.text.Font;
+import services.Navigation;
 
 public class DrawScreen extends AnchorPane {
 
@@ -12,6 +17,10 @@ public class DrawScreen extends AnchorPane {
     protected final Button btnDrawPlayAgain;
     protected final Button btnDrawExit;
     protected final Label label;
+    private  File file;
+    private MediaPlayer mediaplayer;
+    private  Media media;
+
 
     public DrawScreen() {
 
@@ -31,6 +40,11 @@ public class DrawScreen extends AnchorPane {
         DrawVideo.setLayoutX(40.0);
         DrawVideo.setLayoutY(14.0);
         DrawVideo.setPreserveRatio(false);
+        file = new File("src/tictactoe_client/Views/img/dr.mp4");
+        media = new Media(file.toURI().toString());  
+        mediaplayer = new MediaPlayer(media);
+        DrawVideo.setMediaPlayer(mediaplayer);
+        mediaplayer.play();
 
         btnDrawPlayAgain.setLayoutX(193.0);
         btnDrawPlayAgain.setLayoutY(290.0);
@@ -41,6 +55,10 @@ public class DrawScreen extends AnchorPane {
         btnDrawPlayAgain.setText("play Again");
         btnDrawPlayAgain.setTextFill(javafx.scene.paint.Color.WHITE);
         btnDrawPlayAgain.setFont(new Font("System Bold Italic", 19.0));
+        btnDrawPlayAgain.setOnAction((ActionEvent event) -> {
+            Navigation.navigateTo(new BordBase(), event);
+        });
+        
 
         btnDrawExit.setLayoutX(193.0);
         btnDrawExit.setLayoutY(338.0);
@@ -51,12 +69,16 @@ public class DrawScreen extends AnchorPane {
         btnDrawExit.setText("Exit");
         btnDrawExit.setTextFill(javafx.scene.paint.Color.WHITE);
         btnDrawExit.setFont(new Font("System Bold Italic", 19.0));
+        btnDrawExit.setOnAction((ActionEvent event) -> {
+           
+           Navigation.navigateTo(new ChooseMode(), event); 
+        });    
 
         label.setLayoutX(182.0);
         label.setLayoutY(244.0);
         label.setPrefHeight(43.0);
         label.setPrefWidth(196.0);
-        label.setText("Game Over");
+        label.setText("  Game Over");
         label.setTextFill(javafx.scene.paint.Color.WHITE);
         label.setFont(new Font("System Bold Italic", 23.0));
 

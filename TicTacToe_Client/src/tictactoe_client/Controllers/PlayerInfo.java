@@ -127,10 +127,8 @@ public  class PlayerInfo extends AnchorPane {
 
             @Override
             public void handle(Event event) {
-                Navigation.navigateTo(new Start(), event);
-                Alert a = new Alert(Alert.AlertType.INFORMATION);
-                a.setContentText("This is checkmark");
-                a.show();
+                Navigation.navigateTo(new ChooseMode(), event);
+              
             }
         });
 

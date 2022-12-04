@@ -1,5 +1,6 @@
 package tictactoe_client.Controllers;
 
+import javafx.event.ActionEvent;
 import javafx.event.Event;
 import javafx.event.EventHandler;
 import javafx.event.EventType;
@@ -17,6 +18,12 @@ import javafx.scene.layout.RowConstraints;
 import javafx.scene.text.Font;
 import services.DataSaver;
 import services.Navigation;
+import tictactoe_client.Enums.GameState;
+import tictactoe_client.Enums.PlayerType;
+import tictactoe_client.Enums.Shape;
+import tictactoe_client.Models.Game;
+import tictactoe_client.Models.Move;
+import tictactoe_client.Models.Player;
 
 public class BordBase extends AnchorPane {
 
@@ -43,8 +50,17 @@ public class BordBase extends AnchorPane {
     protected final Label label;
     protected final Label player1Score;
     protected final Label player2Score;
+    protected Shape shap;
 
     public BordBase() {
+
+        Game game;
+        Player player1;
+        Player player2;
+        shap = Shape.X;
+        boolean shapeProp = true;
+//        Move  move = new Move("0",Shape.X);
+        GameState gameState;
 
         gridPane = new GridPane();
         columnConstraints = new ColumnConstraints();
@@ -69,6 +85,11 @@ public class BordBase extends AnchorPane {
         label = new Label();
         player1Score = new Label();
         player2Score = new Label();
+
+        // define for game
+        player1 = new Player(player1Name.getText(), PlayerType.HUMAN, Shape.X);
+        player2 = new Player(Player2Name.getText(), PlayerType.HUMAN, Shape.O);
+        game = new Game(player1, player2);
 
         setId("AnchorPane");
         setPrefHeight(409.0);
@@ -115,6 +136,36 @@ public class BordBase extends AnchorPane {
         btn0.setPrefWidth(100.0);
         btn0.setStyle("-fx-background-color: #3F2D73;");
         btn0.setTextFill(javafx.scene.paint.Color.WHITE);
+        btn0.setOnAction(new EventHandler<ActionEvent>() {
+
+            @Override
+            public void handle(ActionEvent event) {
+//              new Move("0",Shape.X);
+//             /* GameState  gameState =*/ Move move =new Move("btn0",Shape.X);
+                GameState gameState = game.action(new Move("btn0", shap));
+
+                switch (gameState) {
+                    case X_TURN:
+                        shap = Shape.X;
+                        btn0.setText("0");
+                        break;
+                    case O_TURN:
+                        shap = Shape.O;
+                        btn0.setText("x");
+                        break;
+                    case X_WIN:
+                        Navigation.navigateTo(new WinScreen(), event);
+                        break;
+                    case O_WIN:
+                        Navigation.navigateTo(new WinScreen(), event);
+                        break;
+                    default:
+                        Navigation.navigateTo(new DrawScreen(), event);
+                        break;
+                }
+                System.out.println(gameState.toString());
+            }
+        });
 
         GridPane.setColumnIndex(btn1, 1);
         btn1.setMnemonicParsing(false);
@@ -122,6 +173,44 @@ public class BordBase extends AnchorPane {
         btn1.setPrefWidth(100.0);
         btn1.setStyle("-fx-background-color: #3F2D73;");
         btn1.setTextFill(javafx.scene.paint.Color.WHITE);
+        btn1.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent event) {
+                GameState gameState = game.action(new Move("btn1", shap));
+                Alert a;
+
+                switch (gameState) {
+                    case X_TURN:
+                        shap = Shape.X;
+                        btn1.setText("0");
+                        break;
+                    case O_TURN:
+                        shap = Shape.O;
+                        btn1.setText("x");
+                        break;
+                    case X_WIN:
+                        Navigation.navigateTo(new WinScreen(), event);
+//                        a = new Alert(Alert.AlertType.INFORMATION);
+//                        a.setContentText("PlayerX win");
+//                        a.show();
+                        break;
+                    case O_WIN:
+                       Navigation.navigateTo(new WinScreen(), event);
+//                        a = new Alert(Alert.AlertType.INFORMATION);
+//                        a.setContentText("playerY win");
+//                        a.show();
+                        break;
+                    default:
+                      Navigation.navigateTo(new DrawScreen(), event);
+//                        a = new Alert(Alert.AlertType.INFORMATION);
+//                        a.setContentText("No one win");
+//                        a.show();
+                        break;
+                }
+                System.out.println(gameState.toString());
+
+            }
+        });
 
         GridPane.setColumnIndex(btn2, 2);
         btn2.setMnemonicParsing(false);
@@ -129,6 +218,43 @@ public class BordBase extends AnchorPane {
         btn2.setPrefWidth(100.0);
         btn2.setStyle("-fx-background-color: #3F2D73;");
         btn2.setTextFill(javafx.scene.paint.Color.WHITE);
+        btn2.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent event) {
+                GameState gameState = game.action(new Move("btn2", shap));
+                Alert a;
+
+                switch (gameState) {
+                    case X_TURN:
+                        shap = Shape.X;
+                        btn2.setText("0");
+                        break;
+                    case O_TURN:
+                        shap = Shape.O;
+                        btn2.setText("x");
+                        break;
+                    case X_WIN:
+                        Navigation.navigateTo(new WinScreen(), event);
+//                        a = new Alert(Alert.AlertType.INFORMATION);
+//                        a.setContentText("PlayerX win");
+//                        a.show();
+                        break;
+                    case O_WIN:
+                        Navigation.navigateTo(new WinScreen(), event);
+//                        a = new Alert(Alert.AlertType.INFORMATION);
+//                        a.setContentText("playerY win");
+//                        a.show();
+                        break;
+                    default:
+                        Navigation.navigateTo(new DrawScreen(), event);
+//                        a = new Alert(Alert.AlertType.INFORMATION);
+//                        a.setContentText("No one win");
+//                        a.show();
+                        break;
+                }
+                System.out.println(gameState.toString());
+            }
+        });
 
         GridPane.setRowIndex(btn3, 1);
         btn3.setMnemonicParsing(false);
@@ -136,6 +262,43 @@ public class BordBase extends AnchorPane {
         btn3.setPrefWidth(100.0);
         btn3.setStyle("-fx-background-color: #3F2D73;");
         btn3.setTextFill(javafx.scene.paint.Color.WHITE);
+        btn3.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent event) {
+                GameState gameState = game.action(new Move("btn3", shap));
+                Alert a;
+
+                switch (gameState) {
+                    case X_TURN:
+                        shap = Shape.X;
+                        btn3.setText("0");
+                        break;
+                    case O_TURN:
+                        shap = Shape.O;
+                        btn3.setText("x");
+                        break;
+                    case X_WIN:
+                        Navigation.navigateTo(new WinScreen(), event);
+//                        a = new Alert(Alert.AlertType.INFORMATION);
+//                        a.setContentText("PlayerX win");
+//                        a.show();
+                        break;
+                    case O_WIN:
+                        Navigation.navigateTo(new WinScreen(), event);
+//                        a = new Alert(Alert.AlertType.INFORMATION);
+//                        a.setContentText("playerY win");
+//                        a.show();
+                        break;
+                    default:
+                        Navigation.navigateTo(new DrawScreen(), event);
+//                        a = new Alert(Alert.AlertType.INFORMATION);
+//                        a.setContentText("No one win");
+//                        a.show();
+                        break;
+                }
+                System.out.println(gameState.toString());
+            }
+        });
 
         GridPane.setRowIndex(btn6, 2);
         btn6.setMnemonicParsing(false);
@@ -143,6 +306,43 @@ public class BordBase extends AnchorPane {
         btn6.setPrefWidth(100.0);
         btn6.setStyle("-fx-background-color: #3F2D73;");
         btn6.setTextFill(javafx.scene.paint.Color.WHITE);
+        btn6.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent event) {
+                GameState gameState = game.action(new Move("btn6", shap));
+                Alert a;
+
+                switch (gameState) {
+                    case X_TURN:
+                        shap = Shape.X;
+                        btn6.setText("0");
+                        break;
+                    case O_TURN:
+                        shap = Shape.O;
+                        btn6.setText("x");
+                        break;
+                    case X_WIN:
+                        Navigation.navigateTo(new WinScreen(), event);
+//                        a = new Alert(Alert.AlertType.INFORMATION);
+//                        a.setContentText("PlayerX win");
+//                        a.show();
+                        break;
+                    case O_WIN:
+                        Navigation.navigateTo(new WinScreen(), event);
+//                        a = new Alert(Alert.AlertType.INFORMATION);
+//                        a.setContentText("playerY win");
+//                        a.show();
+                        break;
+                    default:
+                        Navigation.navigateTo(new DrawScreen(), event);
+//                        a = new Alert(Alert.AlertType.INFORMATION);
+//                        a.setContentText("No one win");
+//                        a.show();
+                        break;
+                }
+                System.out.println(gameState.toString());
+            }
+        });
 
         GridPane.setColumnIndex(btn5, 2);
         GridPane.setRowIndex(btn5, 1);
@@ -151,6 +351,43 @@ public class BordBase extends AnchorPane {
         btn5.setPrefWidth(100.0);
         btn5.setStyle("-fx-background-color: #3F2D73;");
         btn5.setTextFill(javafx.scene.paint.Color.WHITE);
+        btn5.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent event) {
+                GameState gameState = game.action(new Move("btn5", shap));
+                Alert a;
+
+                switch (gameState) {
+                    case X_TURN:
+                        shap = Shape.X;
+                        btn5.setText("0");
+                        break;
+                    case O_TURN:
+                        shap = Shape.O;
+                        btn5.setText("x");
+                        break;
+                    case X_WIN:
+                        Navigation.navigateTo(new WinScreen(), event);
+//                        a = new Alert(Alert.AlertType.INFORMATION);
+//                        a.setContentText("PlayerX win");
+//                        a.show();
+                        break;
+                    case O_WIN:
+                        Navigation.navigateTo(new WinScreen(), event);
+//                        a = new Alert(Alert.AlertType.INFORMATION);
+//                        a.setContentText("playerY win");
+//                        a.show();
+                        break;
+                    default:
+                        Navigation.navigateTo(new DrawScreen(), event);
+//                        a = new Alert(Alert.AlertType.INFORMATION);
+//                        a.setContentText("No one win");
+//                        a.show();
+                        break;
+                }
+                System.out.println(gameState.toString());
+            }
+        });
 
         GridPane.setColumnIndex(btn4, 1);
         GridPane.setRowIndex(btn4, 1);
@@ -159,6 +396,43 @@ public class BordBase extends AnchorPane {
         btn4.setPrefWidth(100.0);
         btn4.setStyle("-fx-background-color: #3F2D73;");
         btn4.setTextFill(javafx.scene.paint.Color.WHITE);
+        btn4.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent event) {
+                GameState gameState = game.action(new Move("btn4", shap));
+                Alert a;
+
+                switch (gameState) {
+                    case X_TURN:
+                        shap = Shape.X;
+                        btn4.setText("0");
+                        break;
+                    case O_TURN:
+                        shap = Shape.O;
+                        btn4.setText("x");
+                        break;
+                    case X_WIN:
+                        Navigation.navigateTo(new WinScreen(), event);
+//                        a = new Alert(Alert.AlertType.INFORMATION);
+//                        a.setContentText("PlayerX win");
+//                        a.show();
+                        break;
+                    case O_WIN:
+                        Navigation.navigateTo(new WinScreen(), event);
+//                        a = new Alert(Alert.AlertType.INFORMATION);
+//                        a.setContentText("playerY win");
+//                        a.show();
+                        break;
+                    default:
+                        Navigation.navigateTo(new DrawScreen(), event);
+//                        a = new Alert(Alert.AlertType.INFORMATION);
+//                        a.setContentText("No one win");
+//                        a.show();
+                        break;
+                }
+                System.out.println(gameState.toString());
+            }
+        });
 
         GridPane.setColumnIndex(btn7, 1);
         GridPane.setRowIndex(btn7, 2);
@@ -167,6 +441,43 @@ public class BordBase extends AnchorPane {
         btn7.setPrefWidth(100.0);
         btn7.setStyle("-fx-background-color: #3F2D73;");
         btn7.setTextFill(javafx.scene.paint.Color.WHITE);
+        btn7.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent event) {
+                GameState gameState = game.action(new Move("btn7", shap));
+                Alert a;
+
+                switch (gameState) {
+                    case X_TURN:
+                        shap = Shape.X;
+                        btn7.setText("0");
+                        break;
+                    case O_TURN:
+                        shap = Shape.O;
+                        btn7.setText("x");
+                        break;
+                    case X_WIN:
+                        Navigation.navigateTo(new WinScreen(), event);
+//                        a = new Alert(Alert.AlertType.INFORMATION);
+//                        a.setContentText("PlayerX win");
+//                        a.show();
+                        break;
+                    case O_WIN:
+                        Navigation.navigateTo(new WinScreen(), event);
+//                        a = new Alert(Alert.AlertType.INFORMATION);
+//                        a.setContentText("playerY win");
+//                        a.show();
+                        break;
+                    default:
+                        Navigation.navigateTo(new DrawScreen(), event);
+//                        a = new Alert(Alert.AlertType.INFORMATION);
+//                        a.setContentText("No one win");
+//                        a.show();
+                        break;
+                }
+                System.out.println(gameState.toString());
+            }
+        });
 
         GridPane.setColumnIndex(btn8, 2);
         GridPane.setRowIndex(btn8, 2);
@@ -175,6 +486,45 @@ public class BordBase extends AnchorPane {
         btn8.setPrefWidth(100.0);
         btn8.setStyle("-fx-background-color: #3F2D73;");
         btn8.setTextFill(javafx.scene.paint.Color.WHITE);
+        btn8.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent event) {
+                Alert a;
+                GameState gameState = game.action(new Move("btn8", shap));
+
+                switch (gameState) {
+                    case X_TURN:
+                        shap = Shape.X;
+                        btn8.setText("0");
+                        break;
+                    case O_TURN:
+                        shap = Shape.O;
+                        btn8.setText("x");
+                        break;
+                    case X_WIN:
+                        btn8.setText("x");
+                        Navigation.navigateTo(new WinScreen(), event);
+//                        a = new Alert(Alert.AlertType.INFORMATION);
+//                        a.setContentText("PlayerX win");
+//                        a.show();
+                        break;
+                    case O_WIN:
+                        btn8.setText("0");
+                        Navigation.navigateTo(new WinScreen(), event);
+//                        a = new Alert(Alert.AlertType.INFORMATION);
+//                        a.setContentText("playerY win");
+//                        a.show();
+                        break;
+                    default:
+                        Navigation.navigateTo(new DrawScreen(), event);
+//                        a = new Alert(Alert.AlertType.INFORMATION);
+//                        a.setContentText("No one win");
+//                        a.show();
+                        break;
+                }
+                System.out.println(gameState.toString());
+            }
+        });
 
         backArowPlayerName.setFitHeight(26.0);
         backArowPlayerName.setFitWidth(23.0);
@@ -208,15 +558,13 @@ public class BordBase extends AnchorPane {
         backArowPlayerName1.setLayoutY(16.0);
         backArowPlayerName1.setPickOnBounds(true);
         backArowPlayerName1.setImage(new Image("tictactoe_client/Views/img/backarow.png"));
-       backArowPlayerName1.setOnMouseClicked(new EventHandler() {
+        backArowPlayerName1.setOnMouseClicked(new EventHandler() {
             @Override
             public void handle(Event event) {
-               Navigation.navigateTo(new PlayerInfo(),event);
-                Alert a = new Alert(Alert.AlertType.INFORMATION);
-                a.setContentText("This is checkmark");
-                a.show();
+                Navigation.navigateTo(new PlayerInfo(), event);
+
             }
-        }); 
+        });
 
         Player2Name.setLayoutX(365.0);
         Player2Name.setLayoutY(14.0);
