@@ -1,7 +1,6 @@
 package tictactoe_client.Controllers;
 
 import java.io.File;
-import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
@@ -18,10 +17,10 @@ public class DrawScreen extends AnchorPane {
     protected final Button btnDrawPlayAgain;
     protected final Button btnDrawExit;
     protected final Label label;
-    private MediaView mediaview ;
-    private final  File file;
-    private final MediaPlayer mediaplayer;
-    private final Media media;
+    private  File file;
+    private MediaPlayer mediaplayer;
+    private  Media media;
+
 
     public DrawScreen() {
 
@@ -41,12 +40,11 @@ public class DrawScreen extends AnchorPane {
         DrawVideo.setLayoutX(40.0);
         DrawVideo.setLayoutY(14.0);
         DrawVideo.setPreserveRatio(false);
-         //adding videa
-        file=new File("");
-        media=new Media(file.toURI().toString()); 
-        mediaplayer=new MediaPlayer(media);
-        mediaview.setMediaPlayer(mediaplayer);
-        mediaplayer.setAutoPlay(true);
+        file = new File("src/tictactoe_client/Views/img/dr.mp4");
+        media = new Media(file.toURI().toString());  
+        mediaplayer = new MediaPlayer(media);
+        DrawVideo.setMediaPlayer(mediaplayer);
+        mediaplayer.play();
 
         btnDrawPlayAgain.setLayoutX(193.0);
         btnDrawPlayAgain.setLayoutY(290.0);
@@ -80,7 +78,7 @@ public class DrawScreen extends AnchorPane {
         label.setLayoutY(244.0);
         label.setPrefHeight(43.0);
         label.setPrefWidth(196.0);
-        label.setText("Game Over");
+        label.setText("  Game Over");
         label.setTextFill(javafx.scene.paint.Color.WHITE);
         label.setFont(new Font("System Bold Italic", 23.0));
 

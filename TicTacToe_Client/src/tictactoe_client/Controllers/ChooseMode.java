@@ -1,8 +1,6 @@
 package tictactoe_client.Controllers;
 
 import javafx.event.ActionEvent;
-import javafx.event.EventHandler;
-import javafx.scene.Parent;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
@@ -57,11 +55,9 @@ public class ChooseMode extends AnchorPane {
         btnMultiMode.setText("Multi Mode");
         btnMultiMode.setTextFill(javafx.scene.paint.Color.WHITE);
         btnMultiMode.setFont(new Font("System Bold Italic", 20.0));
-        btnMultiMode.setOnAction(new EventHandler<ActionEvent>() {
-            @Override
-            public void handle(ActionEvent event) {
-                Navigation.navigateTo(new PlayerInfo(), event);
-            }
+        btnMultiMode.setOnAction((ActionEvent event) -> {
+            Navigation.navigateTo(new PlayerInfo(), event);
+           //  btnMultiMode.applyCss();
         });
 
         btnOnlineMode.setLayoutX(44.0);

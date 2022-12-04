@@ -188,22 +188,22 @@ public class BordBase extends AnchorPane {
                         btn1.setText("x");
                         break;
                     case X_WIN:
-//                        Navigation.navigateTo(new WinScreen(), event);
-                        a = new Alert(Alert.AlertType.INFORMATION);
-                        a.setContentText("PlayerX win");
-                        a.show();
+                        Navigation.navigateTo(new WinScreen(), event);
+//                        a = new Alert(Alert.AlertType.INFORMATION);
+//                        a.setContentText("PlayerX win");
+//                        a.show();
                         break;
                     case O_WIN:
-//                        Navigation.navigateTo(new WinScreen(), event);
-                        a = new Alert(Alert.AlertType.INFORMATION);
-                        a.setContentText("playerY win");
-                        a.show();
+                       Navigation.navigateTo(new WinScreen(), event);
+//                        a = new Alert(Alert.AlertType.INFORMATION);
+//                        a.setContentText("playerY win");
+//                        a.show();
                         break;
                     default:
-//                        Navigation.navigateTo(new DrawScreen(), event);
-                        a = new Alert(Alert.AlertType.INFORMATION);
-                        a.setContentText("No one win");
-                        a.show();
+                      Navigation.navigateTo(new DrawScreen(), event);
+//                        a = new Alert(Alert.AlertType.INFORMATION);
+//                        a.setContentText("No one win");
+//                        a.show();
                         break;
                 }
                 System.out.println(gameState.toString());
@@ -233,22 +233,22 @@ public class BordBase extends AnchorPane {
                         btn2.setText("x");
                         break;
                     case X_WIN:
-//                        Navigation.navigateTo(new WinScreen(), event);
-                        a = new Alert(Alert.AlertType.INFORMATION);
-                        a.setContentText("PlayerX win");
-                        a.show();
+                        Navigation.navigateTo(new WinScreen(), event);
+//                        a = new Alert(Alert.AlertType.INFORMATION);
+//                        a.setContentText("PlayerX win");
+//                        a.show();
                         break;
                     case O_WIN:
-//                        Navigation.navigateTo(new WinScreen(), event);
-                        a = new Alert(Alert.AlertType.INFORMATION);
-                        a.setContentText("playerY win");
-                        a.show();
+                        Navigation.navigateTo(new WinScreen(), event);
+//                        a = new Alert(Alert.AlertType.INFORMATION);
+//                        a.setContentText("playerY win");
+//                        a.show();
                         break;
                     default:
-//                        Navigation.navigateTo(new DrawScreen(), event);
-                        a = new Alert(Alert.AlertType.INFORMATION);
-                        a.setContentText("No one win");
-                        a.show();
+                        Navigation.navigateTo(new DrawScreen(), event);
+//                        a = new Alert(Alert.AlertType.INFORMATION);
+//                        a.setContentText("No one win");
+//                        a.show();
                         break;
                 }
                 System.out.println(gameState.toString());
@@ -277,22 +277,22 @@ public class BordBase extends AnchorPane {
                         btn3.setText("x");
                         break;
                     case X_WIN:
-//                        Navigation.navigateTo(new WinScreen(), event);
-                        a = new Alert(Alert.AlertType.INFORMATION);
-                        a.setContentText("PlayerX win");
-                        a.show();
+                        Navigation.navigateTo(new WinScreen(), event);
+//                        a = new Alert(Alert.AlertType.INFORMATION);
+//                        a.setContentText("PlayerX win");
+//                        a.show();
                         break;
                     case O_WIN:
-//                        Navigation.navigateTo(new WinScreen(), event);
-                        a = new Alert(Alert.AlertType.INFORMATION);
-                        a.setContentText("playerY win");
-                        a.show();
+                        Navigation.navigateTo(new WinScreen(), event);
+//                        a = new Alert(Alert.AlertType.INFORMATION);
+//                        a.setContentText("playerY win");
+//                        a.show();
                         break;
                     default:
-//                        Navigation.navigateTo(new DrawScreen(), event);
-                        a = new Alert(Alert.AlertType.INFORMATION);
-                        a.setContentText("No one win");
-                        a.show();
+                        Navigation.navigateTo(new DrawScreen(), event);
+//                        a = new Alert(Alert.AlertType.INFORMATION);
+//                        a.setContentText("No one win");
+//                        a.show();
                         break;
                 }
                 System.out.println(gameState.toString());
@@ -321,22 +321,22 @@ public class BordBase extends AnchorPane {
                         btn6.setText("x");
                         break;
                     case X_WIN:
-//                        Navigation.navigateTo(new WinScreen(), event);
-                        a = new Alert(Alert.AlertType.INFORMATION);
-                        a.setContentText("PlayerX win");
-                        a.show();
+                        Navigation.navigateTo(new WinScreen(), event);
+//                        a = new Alert(Alert.AlertType.INFORMATION);
+//                        a.setContentText("PlayerX win");
+//                        a.show();
                         break;
                     case O_WIN:
-//                        Navigation.navigateTo(new WinScreen(), event);
-                        a = new Alert(Alert.AlertType.INFORMATION);
-                        a.setContentText("playerY win");
-                        a.show();
+                        Navigation.navigateTo(new WinScreen(), event);
+//                        a = new Alert(Alert.AlertType.INFORMATION);
+//                        a.setContentText("playerY win");
+//                        a.show();
                         break;
                     default:
-//                        Navigation.navigateTo(new DrawScreen(), event);
-                        a = new Alert(Alert.AlertType.INFORMATION);
-                        a.setContentText("No one win");
-                        a.show();
+                        Navigation.navigateTo(new DrawScreen(), event);
+//                        a = new Alert(Alert.AlertType.INFORMATION);
+//                        a.setContentText("No one win");
+//                        a.show();
                         break;
                 }
                 System.out.println(gameState.toString());
@@ -366,22 +366,22 @@ public class BordBase extends AnchorPane {
                         btn5.setText("x");
                         break;
                     case X_WIN:
-//                        Navigation.navigateTo(new WinScreen(), event);
-                        a = new Alert(Alert.AlertType.INFORMATION);
-                        a.setContentText("PlayerX win");
-                        a.show();
+                        Navigation.navigateTo(new WinScreen(), event);
+//                        a = new Alert(Alert.AlertType.INFORMATION);
+//                        a.setContentText("PlayerX win");
+//                        a.show();
                         break;
                     case O_WIN:
-//                        Navigation.navigateTo(new WinScreen(), event);
-                        a = new Alert(Alert.AlertType.INFORMATION);
-                        a.setContentText("playerY win");
-                        a.show();
+                        Navigation.navigateTo(new WinScreen(), event);
+//                        a = new Alert(Alert.AlertType.INFORMATION);
+//                        a.setContentText("playerY win");
+//                        a.show();
                         break;
                     default:
-//                        Navigation.navigateTo(new DrawScreen(), event);
-                        a = new Alert(Alert.AlertType.INFORMATION);
-                        a.setContentText("No one win");
-                        a.show();
+                        Navigation.navigateTo(new DrawScreen(), event);
+//                        a = new Alert(Alert.AlertType.INFORMATION);
+//                        a.setContentText("No one win");
+//                        a.show();
                         break;
                 }
                 System.out.println(gameState.toString());
@@ -411,22 +411,22 @@ public class BordBase extends AnchorPane {
                         btn4.setText("x");
                         break;
                     case X_WIN:
-//                        Navigation.navigateTo(new WinScreen(), event);
-                        a = new Alert(Alert.AlertType.INFORMATION);
-                        a.setContentText("PlayerX win");
-                        a.show();
+                        Navigation.navigateTo(new WinScreen(), event);
+//                        a = new Alert(Alert.AlertType.INFORMATION);
+//                        a.setContentText("PlayerX win");
+//                        a.show();
                         break;
                     case O_WIN:
-//                        Navigation.navigateTo(new WinScreen(), event);
-                        a = new Alert(Alert.AlertType.INFORMATION);
-                        a.setContentText("playerY win");
-                        a.show();
+                        Navigation.navigateTo(new WinScreen(), event);
+//                        a = new Alert(Alert.AlertType.INFORMATION);
+//                        a.setContentText("playerY win");
+//                        a.show();
                         break;
                     default:
-//                        Navigation.navigateTo(new DrawScreen(), event);
-                        a = new Alert(Alert.AlertType.INFORMATION);
-                        a.setContentText("No one win");
-                        a.show();
+                        Navigation.navigateTo(new DrawScreen(), event);
+//                        a = new Alert(Alert.AlertType.INFORMATION);
+//                        a.setContentText("No one win");
+//                        a.show();
                         break;
                 }
                 System.out.println(gameState.toString());
@@ -456,22 +456,22 @@ public class BordBase extends AnchorPane {
                         btn7.setText("x");
                         break;
                     case X_WIN:
-//                        Navigation.navigateTo(new WinScreen(), event);
-                        a = new Alert(Alert.AlertType.INFORMATION);
-                        a.setContentText("PlayerX win");
-                        a.show();
+                        Navigation.navigateTo(new WinScreen(), event);
+//                        a = new Alert(Alert.AlertType.INFORMATION);
+//                        a.setContentText("PlayerX win");
+//                        a.show();
                         break;
                     case O_WIN:
-//                        Navigation.navigateTo(new WinScreen(), event);
-                        a = new Alert(Alert.AlertType.INFORMATION);
-                        a.setContentText("playerY win");
-                        a.show();
+                        Navigation.navigateTo(new WinScreen(), event);
+//                        a = new Alert(Alert.AlertType.INFORMATION);
+//                        a.setContentText("playerY win");
+//                        a.show();
                         break;
                     default:
-//                        Navigation.navigateTo(new DrawScreen(), event);
-                        a = new Alert(Alert.AlertType.INFORMATION);
-                        a.setContentText("No one win");
-                        a.show();
+                        Navigation.navigateTo(new DrawScreen(), event);
+//                        a = new Alert(Alert.AlertType.INFORMATION);
+//                        a.setContentText("No one win");
+//                        a.show();
                         break;
                 }
                 System.out.println(gameState.toString());
@@ -502,23 +502,23 @@ public class BordBase extends AnchorPane {
                         break;
                     case X_WIN:
                         btn8.setText("x");
-//                        Navigation.navigateTo(new WinScreen(), event);
-                        a = new Alert(Alert.AlertType.INFORMATION);
-                        a.setContentText("PlayerX win");
-                        a.show();
+                        Navigation.navigateTo(new WinScreen(), event);
+//                        a = new Alert(Alert.AlertType.INFORMATION);
+//                        a.setContentText("PlayerX win");
+//                        a.show();
                         break;
                     case O_WIN:
                         btn8.setText("0");
-//                        Navigation.navigateTo(new WinScreen(), event);
-                        a = new Alert(Alert.AlertType.INFORMATION);
-                        a.setContentText("playerY win");
-                        a.show();
+                        Navigation.navigateTo(new WinScreen(), event);
+//                        a = new Alert(Alert.AlertType.INFORMATION);
+//                        a.setContentText("playerY win");
+//                        a.show();
                         break;
                     default:
-//                        Navigation.navigateTo(new DrawScreen(), event);
-                        a = new Alert(Alert.AlertType.INFORMATION);
-                        a.setContentText("No one win");
-                        a.show();
+                        Navigation.navigateTo(new DrawScreen(), event);
+//                        a = new Alert(Alert.AlertType.INFORMATION);
+//                        a.setContentText("No one win");
+//                        a.show();
                         break;
                 }
                 System.out.println(gameState.toString());

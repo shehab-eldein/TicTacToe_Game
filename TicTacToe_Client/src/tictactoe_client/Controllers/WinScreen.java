@@ -1,7 +1,6 @@
 package tictactoe_client.Controllers;
 
 import java.io.File;
-import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
@@ -19,10 +18,9 @@ public  class WinScreen extends AnchorPane {
     protected final Button btnWinExit;
     protected final Label label;
     protected final Label labelWinPlayerName;
-    private MediaView mediaview;
-    private final File file;
-    private final MediaPlayer mediaplayer;
-    private final Media media;
+    private  File file;
+    private MediaPlayer mediaplayer;
+    private  Media media;
 
     public WinScreen() {
 
@@ -43,12 +41,11 @@ public  class WinScreen extends AnchorPane {
         winVideo.setLayoutX(40.0);
         winVideo.setLayoutY(14.0);
         winVideo.setPreserveRatio(false);
-        //adding videa
-        file = new File("");
-        media = new Media(file.toURI().toString());
+        file = new File("src/tictactoe_client/Views/img/win.mp4");
+        media = new Media(file.toURI().toString());  
         mediaplayer = new MediaPlayer(media);
-        mediaview.setMediaPlayer(mediaplayer);
-        mediaplayer.setAutoPlay(true);
+        winVideo.setMediaPlayer(mediaplayer);
+        mediaplayer.play();
 
         btnWinPlayAgain.setLayoutX(193.0);
         btnWinPlayAgain.setLayoutY(290.0);
@@ -95,7 +92,8 @@ public  class WinScreen extends AnchorPane {
         labelWinPlayerName.setText("PLayer Name");
         labelWinPlayerName.setTextFill(javafx.scene.paint.Color.valueOf("#ff5c9d"));
         labelWinPlayerName.setFont(new Font("System Italic", 15.0));
-
+        //game state 
+       
         getChildren().add(winVideo);
         getChildren().add(btnWinPlayAgain);
         getChildren().add(btnWinExit);
@@ -103,4 +101,5 @@ public  class WinScreen extends AnchorPane {
         getChildren().add(labelWinPlayerName);
 
     }
+    
 }
