@@ -22,23 +22,23 @@ public class Move {
     
     private int getPostionByBlockId(){
         switch (blockId) {
-            case "block1" :
+            case "btn0" :
                 return 0;
-            case "block2" :
+            case "btn1" :
                 return 1;
-            case "block3" :
+            case "btn2" :
                 return 2;
-            case "block4" :
+            case "btn3" :
                 return 3;
-            case "block5" :
+            case "btn4" :
                 return 4;
-            case "block6" :
+            case "btn5" :
                 return 5;
-            case "block7" :
+            case "btn6" :
                return 6;
-            case "block8" :
+            case "btn7" :
                 return 7;
-            case "block9" :
+            case "btn8" :
                return 8;
         }
         return -1;
