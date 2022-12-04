@@ -210,9 +210,7 @@ public class BordBase extends AnchorPane {
             @Override
             public void handle(Event event) {
                Navigation.navigateTo(new PlayerInfo(),event);
-                Alert a = new Alert(Alert.AlertType.INFORMATION);
-                a.setContentText("This is checkmark");
-                a.show();
+                
             }
         }); 
 
