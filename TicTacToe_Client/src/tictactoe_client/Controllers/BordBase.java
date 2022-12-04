@@ -17,7 +17,7 @@ import javafx.scene.layout.RowConstraints;
 import javafx.scene.text.Font;
 import services.Navigation;
 
-public abstract class BordBase extends AnchorPane {
+public class BordBase extends AnchorPane {
 
     protected final GridPane gridPane;
     protected final ColumnConstraints columnConstraints;
@@ -206,19 +206,15 @@ public abstract class BordBase extends AnchorPane {
         backArowPlayerName1.setLayoutY(16.0);
         backArowPlayerName1.setPickOnBounds(true);
         backArowPlayerName1.setImage(new Image("tictactoe_client/Views/img/backarow.png"));
-    /*    backArowPlayerName1.setOnMouseClicked(new EventHandler() {
-            Parent root = new PlayerInfo() {};
-//            Parent root = new Start() {};
-            Navigation nav = new Navigation();
-
+       backArowPlayerName1.setOnMouseClicked(new EventHandler() {
             @Override
             public void handle(Event event) {
-               nav.navigateTo(root,event);
-//                Alert a = new Alert(Alert.AlertType.INFORMATION);
-//                a.setContentText("This is checkmark");
-//                a.show();
+               Navigation.navigateTo(new PlayerInfo(),event);
+                Alert a = new Alert(Alert.AlertType.INFORMATION);
+                a.setContentText("This is checkmark");
+                a.show();
             }
-        }); */
+        }); 
 
         Player2Name.setLayoutX(365.0);
         Player2Name.setLayoutY(14.0);

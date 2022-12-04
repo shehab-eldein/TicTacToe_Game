@@ -21,10 +21,7 @@ public class TicTacToe_Client extends Application {
     
     @Override
     public void start(Stage stage) throws Exception {
-         Parent root = new Start() {
-};
-        Navigation nav = new Navigation();
-        nav.navigateTo(root, stage);
+        Navigation.navigateTo(new Start(), stage);
     }
 
     /**

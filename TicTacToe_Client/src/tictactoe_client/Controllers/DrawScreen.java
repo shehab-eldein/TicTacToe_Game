@@ -6,7 +6,7 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.media.MediaView;
 import javafx.scene.text.Font;
 
-public abstract class DrawScreen extends AnchorPane {
+public class DrawScreen extends AnchorPane {
 
     protected final MediaView DrawVideo;
     protected final Button btnDrawPlayAgain;
@@ -56,7 +56,7 @@ public abstract class DrawScreen extends AnchorPane {
         label.setLayoutY(244.0);
         label.setPrefHeight(43.0);
         label.setPrefWidth(196.0);
-        label.setText("     Game Over");
+        label.setText("Game Over");
         label.setTextFill(javafx.scene.paint.Color.WHITE);
         label.setFont(new Font("System Bold Italic", 23.0));
 

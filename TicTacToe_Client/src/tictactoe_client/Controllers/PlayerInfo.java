@@ -3,8 +3,8 @@ package tictactoe_client.Controllers;
 import javafx.event.ActionEvent;
 import javafx.event.Event;
 import javafx.event.EventHandler;
-import javafx.event.EventType;
 import javafx.scene.Parent;
+
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
@@ -15,7 +15,7 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.text.Font;
 import services.Navigation;
 
-public abstract class PlayerInfo extends AnchorPane {
+public  class PlayerInfo extends AnchorPane {
 
     protected final Label labelPlayer1;
     protected final ImageView imageView;
@@ -27,7 +27,6 @@ public abstract class PlayerInfo extends AnchorPane {
     protected final ImageView backArowPlayerName;
 
     public PlayerInfo() {
-
         labelPlayer1 = new Label();
         imageView = new ImageView();
         labelPlayer2 = new Label();
@@ -96,12 +95,9 @@ public abstract class PlayerInfo extends AnchorPane {
         btnStartGame.setTextFill(javafx.scene.paint.Color.WHITE);
         btnStartGame.setFont(new Font("System Bold Italic", 23.0));
         btnStartGame.setOnAction(new EventHandler<ActionEvent>() {
-            Parent root = new BordBase() {
-            };
-            Navigation nav = new Navigation();
-
             @Override
             public void handle(ActionEvent event) {
+                
                 if (player1Name.getText().isEmpty()) {
                     Alert a = new Alert(Alert.AlertType.INFORMATION);
                     a.setContentText("Player1 name is required");
@@ -111,7 +107,7 @@ public abstract class PlayerInfo extends AnchorPane {
                     a.setContentText("Player2 name is required");
                     a.show();
                 } else {
-                    nav.navigateTo(root, event);
+                    Navigation.navigateTo(new BordBase(), event);
                 }
             }
         });
@@ -123,12 +119,11 @@ public abstract class PlayerInfo extends AnchorPane {
         backArowPlayerName.setPickOnBounds(true);
         backArowPlayerName.setImage(new Image("tictactoe_client/Views/img/backarow.png"));
         backArowPlayerName.setOnMouseClicked(new EventHandler() {
-//            Parent root = new Start() {} ;
-//            Navigation nav = new Navigation();
+            
 
             @Override
             public void handle(Event event) {
-//                nav.navigateTo(root, event);
+                Navigation.navigateTo(new Start(), event);
                 Alert a = new Alert(Alert.AlertType.INFORMATION);
                 a.setContentText("This is checkmark");
                 a.show();

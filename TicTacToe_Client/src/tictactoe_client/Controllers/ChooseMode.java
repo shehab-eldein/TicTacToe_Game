@@ -11,7 +11,7 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.text.Font;
 import services.Navigation;
 
-public abstract class ChooseMode extends AnchorPane {
+public class ChooseMode extends AnchorPane {
 
     protected final ImageView imageView;
     protected final Button btnSingleMode;
@@ -58,14 +58,9 @@ public abstract class ChooseMode extends AnchorPane {
         btnMultiMode.setTextFill(javafx.scene.paint.Color.WHITE);
         btnMultiMode.setFont(new Font("System Bold Italic", 20.0));
         btnMultiMode.setOnAction(new EventHandler<ActionEvent>() {
-            Parent root = new PlayerInfo() {
-
-            };
-            Navigation nav = new Navigation();
-
             @Override
             public void handle(ActionEvent event) {
-                nav.navigateTo(root, event);
+                Navigation.navigateTo(new PlayerInfo(), event);
             }
         });
 

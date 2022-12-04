@@ -11,7 +11,7 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.text.Font;
 import services.Navigation;
 
-public abstract class Start extends AnchorPane {
+public class Start extends AnchorPane {
 
     protected final ImageView imageView;
     protected final Label label;
@@ -54,14 +54,10 @@ public abstract class Start extends AnchorPane {
         btnStart.setTextFill(javafx.scene.paint.Color.WHITE);
         btnStart.setFont(new Font("System Bold Italic", 23.0));
         btnStart.setOnAction(new EventHandler<ActionEvent>() {
-            //    Parent root = new ChooseMode();
-            Parent root = new ChooseMode() {
-            };
-            Navigation nav = new Navigation();
-
+            
             @Override
             public void handle(ActionEvent event) {
-                nav.navigateTo(root, event);
+                Navigation.navigateTo(new ChooseMode(), event);
             }
         });
 
