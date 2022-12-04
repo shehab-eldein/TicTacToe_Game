@@ -1,4 +1,4 @@
-package tictactoe_client.Views;
+package tictactoe_client.Controllers;
 
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;

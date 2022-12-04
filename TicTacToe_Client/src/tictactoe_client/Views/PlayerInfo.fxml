@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane id="AnchorPane" prefHeight="409.0" prefWidth="560.0" style="-fx-background-color: #291660;" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/8.0.171" fx:controller="tictactoe_client.FXMLDocumentController">
+    <children>
+        <Label fx:id="labelPlayer1" layoutX="53.0" layoutY="152.0" minHeight="16" minWidth="69" prefHeight="29.0" prefWidth="84.0" text="Player1:" textFill="WHITE">
+         <font>
+            <Font name="System Bold" size="20.0" />
+         </font></Label>
+      <ImageView fitHeight="428.0" fitWidth="263.0" layoutX="308.0" pickOnBounds="true">
+         <image>
+            <Image url="@img/start.png" />
+         </image>
+      </ImageView>
+      <Label fx:id="labelPlayer2" layoutX="50.0" layoutY="208.0" minHeight="16" minWidth="69" prefHeight="29.0" prefWidth="84.0" text="Player2:" textFill="WHITE">
+         <font>
+            <Font name="System Bold" size="20.0" />
+         </font>
+      </Label>
+      <TextField fx:id="player1Name" layoutX="137.0" layoutY="154.0" promptText="Enter Your Name" style="-fx-border-color: #ff5c9b;" />
+      <TextField fx:id="player2Name" layoutX="134.0" layoutY="210.0" promptText="Enter Your Name" style="-fx-border-color: #ff5c9b;" />
+      <Label fx:id="label" layoutX="12.0" layoutY="50.0" minHeight="16" minWidth="69" text="Tic Tac Toe" textFill="WHITE">
+         <font>
+            <Font name="System Bold Italic" size="38.0" />
+         </font>
+      </Label>
+      <Button fx:id="btnStartGame" layoutX="111.0" layoutY="296.0" mnemonicParsing="false" prefHeight="37.0" prefWidth="113.0" style="-fx-background-color: #FF5C9D;" text="Start" textFill="WHITE">
+         <font>
+            <Font name="System Bold Italic" size="23.0" />
+         </font>
+      </Button>
+      <ImageView fx:id="backArowPlayerName" fitHeight="26.0" fitWidth="23.0" layoutX="6.0" layoutY="6.0" pickOnBounds="true">
+         <image>
+            <Image url="@img/back%20arow.png" />
+         </image>
+      </ImageView>
+    </children>
+</AnchorPane>
