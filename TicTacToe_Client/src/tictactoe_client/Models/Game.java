@@ -25,10 +25,11 @@ public class Game {
         this.playerO = playerO;
         board = new Board();
         gameState = GameState.X_TURN;
+        //history
 
     }
 
-    GameState gameAction(Move move) {
+    GameState action(Move move) {
 
         if (board.isValidMove(move)) {
             gameState = board.applyMove(move);
