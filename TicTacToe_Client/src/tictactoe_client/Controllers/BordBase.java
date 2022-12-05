@@ -142,7 +142,7 @@ public class BordBase extends AnchorPane {
             public void handle(ActionEvent event) {
                 GameState gameState = game.action(new Move("btn0", shap));
                 playState(btn0, gameState, event);
-               
+
             }
         });
 
@@ -228,7 +228,7 @@ public class BordBase extends AnchorPane {
             @Override
             public void handle(ActionEvent event) {
                 GameState gameState = game.action(new Move("btn4", shap));
-                 playState(btn4, gameState, event);
+                playState(btn4, gameState, event);
             }
         });
 
@@ -287,7 +287,6 @@ public class BordBase extends AnchorPane {
         player1Name.setText(DataSaver.dataSaverInstance().getPlayer1Data());
         player1Name.setTextFill(javafx.scene.paint.Color.WHITE);
         player1Name.setFont(new Font("System Bold Italic", 25.0));
-        
 
         backArowPlayerName1.setFitHeight(26.0);
         backArowPlayerName1.setFitWidth(23.0);
@@ -354,33 +353,39 @@ public class BordBase extends AnchorPane {
         getChildren().add(label);
         getChildren().add(player1Score);
         getChildren().add(player2Score);
-        
-         
 
     }
+
     //play sate
-    public void playState (Button b, GameState gameState, ActionEvent event){
-                   
+    public void playState(Button b, GameState gameState, ActionEvent event) {
 
         switch (gameState) {
-                    case X_TURN:
-                        shap = Shape.X;
-                        b.setText("o");
-                        break;
-                    case O_TURN:
-                        shap = Shape.O;
-                        b.setText("x");
-                        break;
-                    case X_WIN:
-                        Navigation.navigateTo(new WinScreen(), event);
-                        break;
-                    case O_WIN:
-                        Navigation.navigateTo(new WinScreen(), event);
-                        break;
-                    default:
-                        Navigation.navigateTo(new DrawScreen(), event);
-                        break;
-                }
-        
+            case X_TURN:
+                shap = Shape.X;
+                b.setText("o");
+                b.setStyle("-fx-font-size:34;"
+                        + " -fx-text-fill: #9C4F6E;"
+                        + "-fx-background-color: #3F2D73;"
+                        + "-fx-font-weight: bold ");
+                break;
+            case O_TURN:
+                shap = Shape.O;
+                b.setText("x");
+                b.setStyle("-fx-font-size:34;"
+                        + " -fx-text-fill: #BCB9E5;"
+                        + "-fx-background-color: #3F2D73;"
+                        + "-fx-font-weight: bold ");
+                break;
+            case X_WIN:
+                Navigation.navigateTo(new WinScreen(), event);
+                break;
+            case O_WIN:
+                Navigation.navigateTo(new WinScreen(), event);
+                break;
+            default:
+                Navigation.navigateTo(new DrawScreen(), event);
+                break;
+        }
+
     }
 }
