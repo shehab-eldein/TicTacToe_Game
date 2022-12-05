@@ -355,7 +355,7 @@ public class BordBase extends AnchorPane {
         getChildren().add(player1Score);
         getChildren().add(player2Score);
         
-         Navigation.stopMaxmize();
+         
 
     }
     //play sate

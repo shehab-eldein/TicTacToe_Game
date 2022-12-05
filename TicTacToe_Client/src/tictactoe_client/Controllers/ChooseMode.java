@@ -92,7 +92,7 @@ public class ChooseMode extends AnchorPane {
         getChildren().add(btnOnlineMode);
         getChildren().add(label);
         
-        Navigation.stopMaxmize();
+        
        
 
     }

@@ -141,7 +141,7 @@ public  class PlayerInfo extends AnchorPane {
         getChildren().add(btnStartGame);
         getChildren().add(backArowPlayerName);
         
-         Navigation.stopMaxmize();
+        
 
     }
 }

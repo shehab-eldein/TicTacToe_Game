@@ -87,6 +87,6 @@ public class DrawScreen extends AnchorPane {
         getChildren().add(btnDrawExit);
         getChildren().add(label);
         
-         Navigation.stopMaxmize();
+         
     }
 }
