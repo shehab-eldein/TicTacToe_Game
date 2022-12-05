@@ -1,13 +1,21 @@
 package tictactoe_client.Controllers;
 
+import java.io.File;
+import java.io.IOException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
+import javafx.scene.Node;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.text.Font;
+import javafx.stage.FileChooser;
+import javafx.stage.Stage;
+import services.FileManger;
 import services.Navigation;
 
 public class Start extends AnchorPane {
@@ -56,7 +64,7 @@ public class Start extends AnchorPane {
             
             @Override
             public void handle(ActionEvent event) {
-                Navigation.navigateTo(new ChooseMode(), event);         
+                Navigation.navigateTo(new ChooseMode(), event); 
             }
         });
 
