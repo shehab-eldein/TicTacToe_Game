@@ -140,30 +140,9 @@ public class BordBase extends AnchorPane {
 
             @Override
             public void handle(ActionEvent event) {
-//              new Move("0",Shape.X);
-//             /* GameState  gameState =*/ Move move =new Move("btn0",Shape.X);
                 GameState gameState = game.action(new Move("btn0", shap));
+                playState(btn0, gameState, event);
 
-                switch (gameState) {
-                    case X_TURN:
-                        shap = Shape.X;
-                        btn0.setText("0");
-                        break;
-                    case O_TURN:
-                        shap = Shape.O;
-                        btn0.setText("x");
-                        break;
-                    case X_WIN:
-                        Navigation.navigateTo(new WinScreen(), event);
-                        break;
-                    case O_WIN:
-                        Navigation.navigateTo(new WinScreen(), event);
-                        break;
-                    default:
-                        Navigation.navigateTo(new DrawScreen(), event);
-                        break;
-                }
-                System.out.println(gameState.toString());
             }
         });
 
@@ -177,38 +156,7 @@ public class BordBase extends AnchorPane {
             @Override
             public void handle(ActionEvent event) {
                 GameState gameState = game.action(new Move("btn1", shap));
-                Alert a;
-
-                switch (gameState) {
-                    case X_TURN:
-                        shap = Shape.X;
-                        btn1.setText("0");
-                        break;
-                    case O_TURN:
-                        shap = Shape.O;
-                        btn1.setText("x");
-                        break;
-                    case X_WIN:
-                        Navigation.navigateTo(new WinScreen(), event);
-//                        a = new Alert(Alert.AlertType.INFORMATION);
-//                        a.setContentText("PlayerX win");
-//                        a.show();
-                        break;
-                    case O_WIN:
-                       Navigation.navigateTo(new WinScreen(), event);
-//                        a = new Alert(Alert.AlertType.INFORMATION);
-//                        a.setContentText("playerY win");
-//                        a.show();
-                        break;
-                    default:
-                      Navigation.navigateTo(new DrawScreen(), event);
-//                        a = new Alert(Alert.AlertType.INFORMATION);
-//                        a.setContentText("No one win");
-//                        a.show();
-                        break;
-                }
-                System.out.println(gameState.toString());
-
+                playState(btn1, gameState, event);
             }
         });
 
@@ -222,37 +170,7 @@ public class BordBase extends AnchorPane {
             @Override
             public void handle(ActionEvent event) {
                 GameState gameState = game.action(new Move("btn2", shap));
-                Alert a;
-
-                switch (gameState) {
-                    case X_TURN:
-                        shap = Shape.X;
-                        btn2.setText("0");
-                        break;
-                    case O_TURN:
-                        shap = Shape.O;
-                        btn2.setText("x");
-                        break;
-                    case X_WIN:
-                        Navigation.navigateTo(new WinScreen(), event);
-//                        a = new Alert(Alert.AlertType.INFORMATION);
-//                        a.setContentText("PlayerX win");
-//                        a.show();
-                        break;
-                    case O_WIN:
-                        Navigation.navigateTo(new WinScreen(), event);
-//                        a = new Alert(Alert.AlertType.INFORMATION);
-//                        a.setContentText("playerY win");
-//                        a.show();
-                        break;
-                    default:
-                        Navigation.navigateTo(new DrawScreen(), event);
-//                        a = new Alert(Alert.AlertType.INFORMATION);
-//                        a.setContentText("No one win");
-//                        a.show();
-                        break;
-                }
-                System.out.println(gameState.toString());
+                playState(btn2, gameState, event);
             }
         });
 
@@ -266,37 +184,7 @@ public class BordBase extends AnchorPane {
             @Override
             public void handle(ActionEvent event) {
                 GameState gameState = game.action(new Move("btn3", shap));
-                Alert a;
-
-                switch (gameState) {
-                    case X_TURN:
-                        shap = Shape.X;
-                        btn3.setText("0");
-                        break;
-                    case O_TURN:
-                        shap = Shape.O;
-                        btn3.setText("x");
-                        break;
-                    case X_WIN:
-                        Navigation.navigateTo(new WinScreen(), event);
-//                        a = new Alert(Alert.AlertType.INFORMATION);
-//                        a.setContentText("PlayerX win");
-//                        a.show();
-                        break;
-                    case O_WIN:
-                        Navigation.navigateTo(new WinScreen(), event);
-//                        a = new Alert(Alert.AlertType.INFORMATION);
-//                        a.setContentText("playerY win");
-//                        a.show();
-                        break;
-                    default:
-                        Navigation.navigateTo(new DrawScreen(), event);
-//                        a = new Alert(Alert.AlertType.INFORMATION);
-//                        a.setContentText("No one win");
-//                        a.show();
-                        break;
-                }
-                System.out.println(gameState.toString());
+                playState(btn3, gameState, event);
             }
         });
 
@@ -310,37 +198,7 @@ public class BordBase extends AnchorPane {
             @Override
             public void handle(ActionEvent event) {
                 GameState gameState = game.action(new Move("btn6", shap));
-                Alert a;
-
-                switch (gameState) {
-                    case X_TURN:
-                        shap = Shape.X;
-                        btn6.setText("0");
-                        break;
-                    case O_TURN:
-                        shap = Shape.O;
-                        btn6.setText("x");
-                        break;
-                    case X_WIN:
-                        Navigation.navigateTo(new WinScreen(), event);
-//                        a = new Alert(Alert.AlertType.INFORMATION);
-//                        a.setContentText("PlayerX win");
-//                        a.show();
-                        break;
-                    case O_WIN:
-                        Navigation.navigateTo(new WinScreen(), event);
-//                        a = new Alert(Alert.AlertType.INFORMATION);
-//                        a.setContentText("playerY win");
-//                        a.show();
-                        break;
-                    default:
-                        Navigation.navigateTo(new DrawScreen(), event);
-//                        a = new Alert(Alert.AlertType.INFORMATION);
-//                        a.setContentText("No one win");
-//                        a.show();
-                        break;
-                }
-                System.out.println(gameState.toString());
+                playState(btn6, gameState, event);
             }
         });
 
@@ -355,37 +213,7 @@ public class BordBase extends AnchorPane {
             @Override
             public void handle(ActionEvent event) {
                 GameState gameState = game.action(new Move("btn5", shap));
-                Alert a;
-
-                switch (gameState) {
-                    case X_TURN:
-                        shap = Shape.X;
-                        btn5.setText("0");
-                        break;
-                    case O_TURN:
-                        shap = Shape.O;
-                        btn5.setText("x");
-                        break;
-                    case X_WIN:
-                        Navigation.navigateTo(new WinScreen(), event);
-//                        a = new Alert(Alert.AlertType.INFORMATION);
-//                        a.setContentText("PlayerX win");
-//                        a.show();
-                        break;
-                    case O_WIN:
-                        Navigation.navigateTo(new WinScreen(), event);
-//                        a = new Alert(Alert.AlertType.INFORMATION);
-//                        a.setContentText("playerY win");
-//                        a.show();
-                        break;
-                    default:
-                        Navigation.navigateTo(new DrawScreen(), event);
-//                        a = new Alert(Alert.AlertType.INFORMATION);
-//                        a.setContentText("No one win");
-//                        a.show();
-                        break;
-                }
-                System.out.println(gameState.toString());
+                playState(btn5, gameState, event);
             }
         });
 
@@ -400,37 +228,7 @@ public class BordBase extends AnchorPane {
             @Override
             public void handle(ActionEvent event) {
                 GameState gameState = game.action(new Move("btn4", shap));
-                Alert a;
-
-                switch (gameState) {
-                    case X_TURN:
-                        shap = Shape.X;
-                        btn4.setText("0");
-                        break;
-                    case O_TURN:
-                        shap = Shape.O;
-                        btn4.setText("x");
-                        break;
-                    case X_WIN:
-                        Navigation.navigateTo(new WinScreen(), event);
-//                        a = new Alert(Alert.AlertType.INFORMATION);
-//                        a.setContentText("PlayerX win");
-//                        a.show();
-                        break;
-                    case O_WIN:
-                        Navigation.navigateTo(new WinScreen(), event);
-//                        a = new Alert(Alert.AlertType.INFORMATION);
-//                        a.setContentText("playerY win");
-//                        a.show();
-                        break;
-                    default:
-                        Navigation.navigateTo(new DrawScreen(), event);
-//                        a = new Alert(Alert.AlertType.INFORMATION);
-//                        a.setContentText("No one win");
-//                        a.show();
-                        break;
-                }
-                System.out.println(gameState.toString());
+                playState(btn4, gameState, event);
             }
         });
 
@@ -445,37 +243,7 @@ public class BordBase extends AnchorPane {
             @Override
             public void handle(ActionEvent event) {
                 GameState gameState = game.action(new Move("btn7", shap));
-                Alert a;
-
-                switch (gameState) {
-                    case X_TURN:
-                        shap = Shape.X;
-                        btn7.setText("0");
-                        break;
-                    case O_TURN:
-                        shap = Shape.O;
-                        btn7.setText("x");
-                        break;
-                    case X_WIN:
-                        Navigation.navigateTo(new WinScreen(), event);
-//                        a = new Alert(Alert.AlertType.INFORMATION);
-//                        a.setContentText("PlayerX win");
-//                        a.show();
-                        break;
-                    case O_WIN:
-                        Navigation.navigateTo(new WinScreen(), event);
-//                        a = new Alert(Alert.AlertType.INFORMATION);
-//                        a.setContentText("playerY win");
-//                        a.show();
-                        break;
-                    default:
-                        Navigation.navigateTo(new DrawScreen(), event);
-//                        a = new Alert(Alert.AlertType.INFORMATION);
-//                        a.setContentText("No one win");
-//                        a.show();
-                        break;
-                }
-                System.out.println(gameState.toString());
+                playState(btn7, gameState, event);
             }
         });
 
@@ -491,38 +259,7 @@ public class BordBase extends AnchorPane {
             public void handle(ActionEvent event) {
                 Alert a;
                 GameState gameState = game.action(new Move("btn8", shap));
-
-                switch (gameState) {
-                    case X_TURN:
-                        shap = Shape.X;
-                        btn8.setText("0");
-                        break;
-                    case O_TURN:
-                        shap = Shape.O;
-                        btn8.setText("x");
-                        break;
-                    case X_WIN:
-                        btn8.setText("x");
-                        Navigation.navigateTo(new WinScreen(), event);
-//                        a = new Alert(Alert.AlertType.INFORMATION);
-//                        a.setContentText("PlayerX win");
-//                        a.show();
-                        break;
-                    case O_WIN:
-                        btn8.setText("0");
-                        Navigation.navigateTo(new WinScreen(), event);
-//                        a = new Alert(Alert.AlertType.INFORMATION);
-//                        a.setContentText("playerY win");
-//                        a.show();
-                        break;
-                    default:
-                        Navigation.navigateTo(new DrawScreen(), event);
-//                        a = new Alert(Alert.AlertType.INFORMATION);
-//                        a.setContentText("No one win");
-//                        a.show();
-                        break;
-                }
-                System.out.println(gameState.toString());
+                playState(btn8, gameState, event);
             }
         });
 
@@ -550,7 +287,6 @@ public class BordBase extends AnchorPane {
         player1Name.setText(DataSaver.dataSaverInstance().getPlayer1Data());
         player1Name.setTextFill(javafx.scene.paint.Color.WHITE);
         player1Name.setFont(new Font("System Bold Italic", 25.0));
-        
 
         backArowPlayerName1.setFitHeight(26.0);
         backArowPlayerName1.setFitWidth(23.0);
@@ -617,6 +353,39 @@ public class BordBase extends AnchorPane {
         getChildren().add(label);
         getChildren().add(player1Score);
         getChildren().add(player2Score);
+
+    }
+
+    //play sate
+    public void playState(Button b, GameState gameState, ActionEvent event) {
+
+        switch (gameState) {
+            case X_TURN:
+                shap = Shape.X;
+                b.setText("o");
+                b.setStyle("-fx-font-size:34;"
+                        + " -fx-text-fill: #9C4F6E;"
+                        + "-fx-background-color: #3F2D73;"
+                        + "-fx-font-weight: bold ");
+                break;
+            case O_TURN:
+                shap = Shape.O;
+                b.setText("x");
+                b.setStyle("-fx-font-size:34;"
+                        + " -fx-text-fill: #BCB9E5;"
+                        + "-fx-background-color: #3F2D73;"
+                        + "-fx-font-weight: bold ");
+                break;
+            case X_WIN:
+                Navigation.navigateTo(new WinScreen(), event);
+                break;
+            case O_WIN:
+                Navigation.navigateTo(new WinScreen(), event);
+                break;
+            default:
+                Navigation.navigateTo(new DrawScreen(), event);
+                break;
+        }
 
     }
 }

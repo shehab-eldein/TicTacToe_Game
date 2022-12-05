@@ -22,6 +22,7 @@ public class TicTacToe_Client extends Application {
     @Override
     public void start(Stage stage) throws Exception {
         Navigation.navigateTo(new Start(), stage);
+        
     }
 
     /**

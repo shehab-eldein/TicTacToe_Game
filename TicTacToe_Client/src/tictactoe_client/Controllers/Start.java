@@ -54,9 +54,9 @@ public class Start extends AnchorPane {
         btnStart.setLayoutX(87.0);
         btnStart.setLayoutY(260.0);
         btnStart.setMnemonicParsing(false);
-        btnStart.setPrefHeight(42.0);
-        btnStart.setPrefWidth(105.0);
-        btnStart.setStyle("-fx-background-color: #FF5C9D;");
+        btnStart.setPrefHeight(46.0);
+        btnStart.setPrefWidth(184.0);
+        btnStart.setStyle("-fx-background-color: #291660; -fx-border-color: #ff5c9d;");
         btnStart.setText("Start");
         btnStart.setTextFill(javafx.scene.paint.Color.WHITE);
         btnStart.setFont(new Font("System Bold Italic", 23.0));
@@ -80,6 +80,8 @@ public class Start extends AnchorPane {
         getChildren().add(label);
         getChildren().add(btnStart);
         getChildren().add(label0);
+        
+        
 
     }
 }

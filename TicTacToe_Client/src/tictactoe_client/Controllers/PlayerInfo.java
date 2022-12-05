@@ -48,7 +48,7 @@ public  class PlayerInfo extends AnchorPane {
         labelPlayer1.setMinWidth(69);
         labelPlayer1.setPrefHeight(29.0);
         labelPlayer1.setPrefWidth(84.0);
-        labelPlayer1.setText("Player1:");
+        labelPlayer1.setText("Player1");
         labelPlayer1.setTextFill(javafx.scene.paint.Color.WHITE);
         labelPlayer1.setFont(new Font("System Bold", 20.0));
 
@@ -64,7 +64,7 @@ public  class PlayerInfo extends AnchorPane {
         labelPlayer2.setMinWidth(69);
         labelPlayer2.setPrefHeight(29.0);
         labelPlayer2.setPrefWidth(84.0);
-        labelPlayer2.setText("Player2:");
+        labelPlayer2.setText("Player2");
         labelPlayer2.setTextFill(javafx.scene.paint.Color.WHITE);
         labelPlayer2.setFont(new Font("System Bold", 20.0));
 
@@ -89,9 +89,9 @@ public  class PlayerInfo extends AnchorPane {
         btnStartGame.setLayoutX(111.0);
         btnStartGame.setLayoutY(296.0);
         btnStartGame.setMnemonicParsing(false);
-        btnStartGame.setPrefHeight(37.0);
-        btnStartGame.setPrefWidth(113.0);
-        btnStartGame.setStyle("-fx-background-color: #FF5C9D;");
+        btnStartGame.setPrefHeight(46.0);
+        btnStartGame.setPrefWidth(170.0);
+        btnStartGame.setStyle("-fx-background-color: #291660; -fx-border-color: #ff5c9d;");
         btnStartGame.setText("Start");
         btnStartGame.setTextFill(javafx.scene.paint.Color.WHITE);
         btnStartGame.setFont(new Font("System Bold Italic", 23.0));
@@ -140,6 +140,8 @@ public  class PlayerInfo extends AnchorPane {
         getChildren().add(label);
         getChildren().add(btnStartGame);
         getChildren().add(backArowPlayerName);
+        
+        
 
     }
 }

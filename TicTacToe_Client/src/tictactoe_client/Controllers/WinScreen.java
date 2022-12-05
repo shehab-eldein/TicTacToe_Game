@@ -92,7 +92,7 @@ public  class WinScreen extends AnchorPane {
         labelWinPlayerName.setText("PLayer Name");
         labelWinPlayerName.setTextFill(javafx.scene.paint.Color.valueOf("#ff5c9d"));
         labelWinPlayerName.setFont(new Font("System Italic", 15.0));
-        //game state 
+        
        
         getChildren().add(winVideo);
         getChildren().add(btnWinPlayAgain);
