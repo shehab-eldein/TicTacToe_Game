@@ -18,11 +18,14 @@
 *.zip
 *.tar.gz
 *.rar
+*.propeties
+*.html
+*.jnlp
 
 # virtual machine crash logs, see http://www.java.com/en/download/help/error_hotspot.xml
 hs_err_pid*
 replay_pid*
-/TicTacToe_Client/nbproject/private/
-/TicTacToe Game_Server/nbproject/private/
-/TicTacToe_Client/build/
-/TicTacToe_Client/dist/
+TicTacToe_Client/nbproject/private/
+TicTacToe Game_Server/nbproject/private/
+TicTacToe_Client/build/
+TicTacToe_Client/dist/
