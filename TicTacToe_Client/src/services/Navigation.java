@@ -44,4 +44,9 @@ public class Navigation {
         stage.setScene(scene);
         stage.show();
     }  
+    public static void stopMaxmize(){
+        stage.setScene(scene);
+        stage.resizableProperty().setValue(false);
+        stage.show();
+    }
 }
