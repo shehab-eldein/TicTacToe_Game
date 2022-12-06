@@ -1,6 +1,7 @@
 package tictactoe_client.Controllers;
 
 import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
@@ -48,6 +49,7 @@ public class ChooseMode extends AnchorPane {
         btnSingleMode.setFont(new Font("System Bold Italic", 20.0));
         btnSingleMode.getStyleClass().add("changeButtonStyle");
         this.getStylesheets().add("tictactoe_client/Views/style/style.css");
+        
         System.out.println();
 
         btnMultiMode.setLayoutX(44.0);

@@ -51,11 +51,11 @@ public class BordBase extends AnchorPane {
     protected final Label player1Score;
     protected final Label player2Score;
     protected Shape shap;
+    Game game;
 
     public BordBase() {
         this.getStylesheets().add("tictactoe_client/Views/style/style.css");
 
-        Game game;
         Player player1;
         Player player2;
         shap = Shape.X;
@@ -361,6 +361,7 @@ public class BordBase extends AnchorPane {
     //play sate
     public void playState(Button b, GameState gameState, ActionEvent event) {
         DataSaver dataSaver = DataSaver.dataSaverInstance();
+        Button a = null;
         switch (gameState) {
             case X_TURN:
                 shap = Shape.X;
@@ -373,10 +374,16 @@ public class BordBase extends AnchorPane {
             case O_TURN:
                 shap = Shape.O;
                 b.setText("x");
+                int x = game.aiTurn();
+                Button btn = handelButton(x);
+                String s = "btn" + x;
+
+                //  System.out.println(x);
                 b.getStyleClass().add("XStyle");
                 Player2Name.setStyle("-fx-text-fill:#46C464;");
                 player1Name.setStyle(" -fx-text-fill:#ffffff;"
                         + "    -fx-opacity: 0.5;");
+                playState(btn, game.action(new Move(s, shap)), event);
                 break;
             case X_WIN:
                 dataSaver.setwinnerData(dataSaver.getPlayer1Data());
@@ -391,6 +398,43 @@ public class BordBase extends AnchorPane {
                 break;
         }
         b.setDisable(true);
+
+    }
+
+    public Button handelButton(int a) {
+        Button x = null;
+        switch (a) {
+            case 0:
+                x = btn0;
+                break;
+            case 1:
+                x = btn1;
+                break;
+            case 2:
+                x = btn2;
+                break;
+            case 3:
+                x = btn3;
+                break;
+            case 4:
+                x = btn4;
+                break;
+            case 5:
+                x = btn5;
+                break;
+            case 6:
+                x = btn6;
+                break;
+            case 7:
+                x = btn7;
+                break;
+            case 8:
+                x = btn8;
+                break;
+
+        }
+
+        return x;
 
     }
 }

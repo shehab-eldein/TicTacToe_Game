@@ -46,14 +46,14 @@ public class Game {
         //OR
         //in text File
     }
-    int aiTurn() {
+
+    public int aiTurn() {
         int place = new EasyMode(board.getSquares()).getNextIndex();
         if (place != -1) {
-             return place;
+            return place;
         }
-           return -1;    
-                
-    } 
+        return -1;
 
-   
+    }
+
 }
