@@ -10,6 +10,7 @@ import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.text.Font;
 import javafx.stage.Stage;
+import services.DataSaver;
 import services.Navigation;
 
 public class ChooseMode extends AnchorPane {
@@ -49,8 +50,15 @@ public class ChooseMode extends AnchorPane {
         btnSingleMode.setFont(new Font("System Bold Italic", 20.0));
         btnSingleMode.getStyleClass().add("changeButtonStyle");
         this.getStylesheets().add("tictactoe_client/Views/style/style.css");
+
         
         System.out.println();
+
+        btnSingleMode.setOnAction((event)->{
+            DataSaver.dataSaverInstance().setModeData(btnSingleMode.getText());
+            Navigation.navigateTo(new PlayerInfo(), event);
+        });
+
 
         btnMultiMode.setLayoutX(44.0);
         btnMultiMode.setLayoutY(208.0);
@@ -68,8 +76,8 @@ public class ChooseMode extends AnchorPane {
       
         
         btnMultiMode.setOnAction((ActionEvent event) -> {
+            DataSaver.dataSaverInstance().setModeData(btnMultiMode.getText());
             Navigation.navigateTo(new PlayerInfo(), event);
-           
         });
 
         btnOnlineMode.setLayoutX(44.0);

@@ -59,9 +59,7 @@ public class BordBase extends AnchorPane {
         Player player1;
         Player player2;
         shap = Shape.X;
-        boolean shapeProp = true;
-//        Move  move = new Move("0",Shape.X);
-        GameState gameState;
+      
 
         gridPane = new GridPane();
         columnConstraints = new ColumnConstraints();
@@ -374,16 +372,16 @@ public class BordBase extends AnchorPane {
             case O_TURN:
                 shap = Shape.O;
                 b.setText("x");
-                int x = game.aiTurn();
-                Button btn = handelButton(x);
-                String s = "btn" + x;
-
                 //  System.out.println(x);
                 b.getStyleClass().add("XStyle");
                 Player2Name.setStyle("-fx-text-fill:#46C464;");
                 player1Name.setStyle(" -fx-text-fill:#ffffff;"
                         + "    -fx-opacity: 0.5;");
-                playState(btn, game.action(new Move(s, shap)), event);
+                if(DataSaver.dataSaverInstance().getModeData() == "Single Mode"){
+                    int blocId = game.getAiTurn();
+                    playState(getBordButtonByNumber(blocId), game.action(new Move("btn" + blocId, shap)), event);
+                }
+                
                 break;
             case X_WIN:
                 dataSaver.setwinnerData(dataSaver.getPlayer1Data());
@@ -401,40 +399,27 @@ public class BordBase extends AnchorPane {
 
     }
 
-    public Button handelButton(int a) {
-        Button x = null;
-        switch (a) {
+    private Button getBordButtonByNumber(int bordNumber){
+        switch(bordNumber){
             case 0:
-                x = btn0;
-                break;
+               return btn0;
             case 1:
-                x = btn1;
-                break;
+               return btn1;
             case 2:
-                x = btn2;
-                break;
+               return btn2;
             case 3:
-                x = btn3;
-                break;
+               return btn3;
             case 4:
-                x = btn4;
-                break;
+               return btn4;
             case 5:
-                x = btn5;
-                break;
+               return btn5;
             case 6:
-                x = btn6;
-                break;
+               return btn6;
             case 7:
-                x = btn7;
-                break;
+               return btn7;
             case 8:
-                x = btn8;
-                break;
-
+               return btn8;
         }
-
-        return x;
-
+        return null;
     }
 }

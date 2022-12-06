@@ -47,7 +47,7 @@ public class Game {
         //in text File
     }
 
-    public int aiTurn() {
+    public int getAiTurn() {
         int place = new EasyMode(board.getSquares()).getNextIndex();
         if (place != -1) {
             return place;
@@ -55,5 +55,7 @@ public class Game {
         return -1;
 
     }
+    
+   
 
 }
