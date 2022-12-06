@@ -29,3 +29,5 @@ TicTacToe_Client/nbproject/private/
 TicTacToe Game_Server/nbproject/private/
 TicTacToe_Client/build/
 TicTacToe_Client/dist/
+/TicTacToe Game_Server/build/
+/TicTacToe Game_Server/dist/

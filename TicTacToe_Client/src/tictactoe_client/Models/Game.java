@@ -34,7 +34,7 @@ public class Game {
         if (board.isValidMove(move)) {
             gameState = board.applyMove(move);
             // add move to history 
-           // history.add(move);
+            // history.add(move);
         } else {
             //not Valid Move
         }
@@ -54,5 +54,14 @@ public class Game {
            return -1;    
                 
     } 
+
+    int aiTurn() {
+
+        int place = new EasyMode(board.getSquares()).getNextIndex();
+        if (place != -1) {
+            return place;
+        }
+        return -1;
+    }
 
 }
