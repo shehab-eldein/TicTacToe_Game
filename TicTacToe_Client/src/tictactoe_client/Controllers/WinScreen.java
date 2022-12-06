@@ -9,6 +9,7 @@ import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
 import javafx.scene.media.MediaView;
 import javafx.scene.text.Font;
+import services.DataSaver;
 import services.Navigation;
 
 public  class WinScreen extends AnchorPane {
@@ -89,7 +90,7 @@ public  class WinScreen extends AnchorPane {
         labelWinPlayerName.setLayoutY(257.0);
         labelWinPlayerName.setPrefHeight(21.0);
         labelWinPlayerName.setPrefWidth(112.0);
-        labelWinPlayerName.setText("PLayer Name");
+        labelWinPlayerName.setText(DataSaver.dataSaverInstance().getwinnerData());
         labelWinPlayerName.setTextFill(javafx.scene.paint.Color.valueOf("#ff5c9d"));
         labelWinPlayerName.setFont(new Font("System Italic", 15.0));
         

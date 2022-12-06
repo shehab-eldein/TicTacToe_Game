@@ -61,7 +61,7 @@ public class BordBase extends AnchorPane {
         boolean shapeProp = true;
 //        Move  move = new Move("0",Shape.X);
         GameState gameState;
-       
+
         gridPane = new GridPane();
         columnConstraints = new ColumnConstraints();
         columnConstraints0 = new ColumnConstraints();
@@ -358,7 +358,7 @@ public class BordBase extends AnchorPane {
 
     //play sate
     public void playState(Button b, GameState gameState, ActionEvent event) {
-
+        DataSaver dataSaver =  DataSaver.dataSaverInstance();
         switch (gameState) {
             case X_TURN:
                 shap = Shape.X;
@@ -377,10 +377,11 @@ public class BordBase extends AnchorPane {
                         + "-fx-font-weight: bold ");
                 break;
             case X_WIN:
+                dataSaver.setwinnerData(dataSaver.getPlayer1Data());
                 Navigation.navigateTo(new WinScreen(), event);
-                
                 break;
             case O_WIN:
+                dataSaver.setwinnerData(dataSaver.getPlayer2Data());
                 Navigation.navigateTo(new WinScreen(), event);
                 break;
             default:
@@ -388,6 +389,7 @@ public class BordBase extends AnchorPane {
                 break;
         }
         b.setDisable(true);
-
+        
     }
 }
+

@@ -14,6 +14,7 @@ public class DataSaver {
     private static DataSaver dataSaverInstance;
     private String player1;
     private String player2;
+    private String winner;
 
     private DataSaver() {
 
@@ -33,11 +34,18 @@ public class DataSaver {
     public void setPlayer2Data(String data) {
         player2 = data;
     }
+    
+    public void setwinnerData(String data) {
+        winner = data;
+    }
 
     public String getPlayer1Data() {
         return player1;
     }
     public String getPlayer2Data() {
         return player2;
+    }
+    public String getwinnerData() {
+       return winner;
     }
 }
