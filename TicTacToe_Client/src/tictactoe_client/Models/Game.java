@@ -55,13 +55,5 @@ public class Game {
                 
     } 
 
-    int aiTurn() {
-
-        int place = new EasyMode(board.getSquares()).getNextIndex();
-        if (place != -1) {
-            return place;
-        }
-        return -1;
-    }
-
+   
 }
