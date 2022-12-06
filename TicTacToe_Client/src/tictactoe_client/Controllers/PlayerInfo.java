@@ -85,6 +85,8 @@ public  class PlayerInfo extends AnchorPane {
         label.setText("Tic Tac Toe");
         label.setTextFill(javafx.scene.paint.Color.WHITE);
         label.setFont(new Font("System Bold Italic", 38.0));
+        switchToSingleMode();
+
 
         btnStartGame.setLayoutX(111.0);
         btnStartGame.setLayoutY(296.0);
@@ -143,8 +145,12 @@ public  class PlayerInfo extends AnchorPane {
         getChildren().add(label);
         getChildren().add(btnStartGame);
         getChildren().add(backArowPlayerName);
-        
-        
-
+    }
+    public void switchToSingleMode(){
+        if (DataSaver.dataSaverInstance().getModeData() == "Single Mode"){
+            player2Name.setVisible(false);
+            player2Name.setText("Computer");
+            labelPlayer2.setVisible(false);
+        }
     }
 }
