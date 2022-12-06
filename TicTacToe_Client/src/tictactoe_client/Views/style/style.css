@@ -5,3 +5,31 @@
 .changeButtonStyle{
     -fx-background-color: #291660; -fx-border-color: #ff5c9d;
 }
+
+.OStyle{
+    -fx-font-size:33;
+    -fx-text-fill: #9C4F6E;
+    -fx-background-color: #3F2D73;
+    -fx-font-weight: bold 
+}
+
+.XStyle{
+    -fx-font-size:33;
+    -fx-text-fill: #BCB9E5;
+    -fx-background-color: #3F2D73;
+    -fx-font-weight: bold 
+}
+* :disabled {
+    -fx-opacity: 1;
+    -fx-background-color: #3F2D73;
+}
+
+.playerTurn{
+    -fx-opacity: 1;
+    -fx-text-fill:#ff5c9d;
+}
+
+.playerNotTurn{
+    -fx-text-fill:#ffffff;
+    -fx-opacity: 0.5;
+}

@@ -53,6 +53,7 @@ public class BordBase extends AnchorPane {
     protected Shape shap;
 
     public BordBase() {
+        this.getStylesheets().add("tictactoe_client/Views/style/style.css");
 
         Game game;
         Player player1;
@@ -287,6 +288,7 @@ public class BordBase extends AnchorPane {
         player1Name.setText(DataSaver.dataSaverInstance().getPlayer1Data());
         player1Name.setTextFill(javafx.scene.paint.Color.WHITE);
         player1Name.setFont(new Font("System Bold Italic", 25.0));
+        player1Name.setStyle("-fx-text-fill:#46C464;");
 
         backArowPlayerName1.setFitHeight(26.0);
         backArowPlayerName1.setFitWidth(23.0);
@@ -320,13 +322,13 @@ public class BordBase extends AnchorPane {
 
         player1Score.setLayoutX(146.0);
         player1Score.setLayoutY(53.0);
-        player1Score.setText("0");
+        player1Score.setText("x");
         player1Score.setTextFill(javafx.scene.paint.Color.WHITE);
         player1Score.setFont(new Font("System Bold", 26.0));
 
         player2Score.setLayoutX(402.0);
         player2Score.setLayoutY(53.0);
-        player2Score.setText("0");
+        player2Score.setText("o");
         player2Score.setTextFill(javafx.scene.paint.Color.WHITE);
         player2Score.setFont(new Font("System Bold", 26.0));
 
@@ -358,23 +360,23 @@ public class BordBase extends AnchorPane {
 
     //play sate
     public void playState(Button b, GameState gameState, ActionEvent event) {
-        DataSaver dataSaver =  DataSaver.dataSaverInstance();
+        DataSaver dataSaver = DataSaver.dataSaverInstance();
         switch (gameState) {
             case X_TURN:
                 shap = Shape.X;
                 b.setText("o");
-                b.setStyle("-fx-font-size:34;"
-                        + " -fx-text-fill: #9C4F6E;"
-                        + "-fx-background-color: #3F2D73;"
-                        + "-fx-font-weight: bold ");
+                b.getStyleClass().add("OStyle");
+                player1Name.setStyle("-fx-text-fill:#46C464;");
+                Player2Name.setStyle(" -fx-text-fill:#ffffff;"
+                        + "    -fx-opacity: 0.5;");
                 break;
             case O_TURN:
                 shap = Shape.O;
                 b.setText("x");
-                b.setStyle("-fx-font-size:34;"
-                        + " -fx-text-fill: #BCB9E5;"
-                        + "-fx-background-color: #3F2D73;"
-                        + "-fx-font-weight: bold ");
+                b.getStyleClass().add("XStyle");
+                Player2Name.setStyle("-fx-text-fill:#46C464;");
+                player1Name.setStyle(" -fx-text-fill:#ffffff;"
+                        + "    -fx-opacity: 0.5;");
                 break;
             case X_WIN:
                 dataSaver.setwinnerData(dataSaver.getPlayer1Data());
@@ -389,7 +391,6 @@ public class BordBase extends AnchorPane {
                 break;
         }
         b.setDisable(true);
-        
+
     }
 }
-

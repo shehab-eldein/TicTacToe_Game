@@ -24,6 +24,8 @@ public  class WinScreen extends AnchorPane {
     private  Media media;
 
     public WinScreen() {
+        this.getStylesheets().add("tictactoe_client/Views/style/style.css");
+
 
         winVideo = new MediaView();
         btnWinPlayAgain = new Button();
@@ -53,11 +55,12 @@ public  class WinScreen extends AnchorPane {
         btnWinPlayAgain.setMnemonicParsing(false);
         btnWinPlayAgain.setPrefHeight(38.0);
         btnWinPlayAgain.setPrefWidth(162.0);
-        btnWinPlayAgain.setStyle("-fx-border-color: #ff5c9d; -fx-background-color: #291660;");
+//        btnWinPlayAgain.setStyle("-fx-border-color: #ff5c9d; -fx-background-color: #291660;");
         btnWinPlayAgain.setText("play Again");
         btnWinPlayAgain.setTextFill(javafx.scene.paint.Color.WHITE);
         btnWinPlayAgain.setFont(new Font("System Bold Italic", 19.0));
         btnWinPlayAgain.setFont(new Font("System Bold Italic", 19.0));
+        btnWinPlayAgain.getStyleClass().add("changeButtonStyle");
         //play again
         btnWinPlayAgain.setOnAction((ActionEvent event) -> {
             Navigation.navigateTo(new BordBase(), event);
@@ -68,10 +71,11 @@ public  class WinScreen extends AnchorPane {
         btnWinExit.setMnemonicParsing(false);
         btnWinExit.setPrefHeight(38.0);
         btnWinExit.setPrefWidth(162.0);
-        btnWinExit.setStyle("-fx-border-color: #ff5c9d; -fx-background-color: #291660;");
+//        btnWinExit.setStyle("-fx-border-color: #ff5c9d; -fx-background-color: #291660;");
         btnWinExit.setText("Exit");
         btnWinExit.setTextFill(javafx.scene.paint.Color.WHITE);
         btnWinExit.setFont(new Font("System Bold Italic", 19.0));
+        btnWinExit.getStyleClass().add("changeButtonStyle");
         // exit game
         btnWinExit.setOnAction((ActionEvent event) -> {
            
