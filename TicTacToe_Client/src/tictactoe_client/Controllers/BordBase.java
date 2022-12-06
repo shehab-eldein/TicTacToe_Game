@@ -386,6 +386,7 @@ public class BordBase extends AnchorPane {
                 Navigation.navigateTo(new DrawScreen(), event);
                 break;
         }
+        b.setDisable(true);
 
     }
 }
