@@ -5,6 +5,7 @@
  */
 package tictactoe_client.Models;
 
+import ai.EasyMode;
 import java.util.ArrayList;
 import tictactoe_client.Enums.GameState;
 
@@ -45,5 +46,13 @@ public class Game {
         //OR
         //in text File
     }
+    int aiTurn() {
+        int place = new EasyMode(board.getSquares()).getNextIndex();
+        if (place != -1) {
+             return place;
+        }
+           return -1;    
+                
+    } 
 
 }

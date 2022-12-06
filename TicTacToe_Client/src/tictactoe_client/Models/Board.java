@@ -25,6 +25,10 @@ public class Board {
         return calculateGameState(move);
     }
 
+    public Shape[] getSquares() {
+        return squares;
+    }
+
     private GameState calculateGameState(Move move) {
         //clculation algorithm
         Shape shape = move.getShape();
