@@ -51,10 +51,13 @@ public class DrawScreen extends AnchorPane {
         btnDrawPlayAgain.setMnemonicParsing(false);
         btnDrawPlayAgain.setPrefHeight(38.0);
         btnDrawPlayAgain.setPrefWidth(162.0);
-        btnDrawPlayAgain.setStyle("-fx-border-color: #ff5c9d; -fx-background-color: #291660;");
         btnDrawPlayAgain.setText("play Again");
         btnDrawPlayAgain.setTextFill(javafx.scene.paint.Color.WHITE);
         btnDrawPlayAgain.setFont(new Font("System Bold Italic", 19.0));
+        btnDrawPlayAgain.getStyleClass().add("changeButtonStyle");
+        this.getStylesheets().add("tictactoe_client/Views/style/style.css");
+        System.out.println();
+
         btnDrawPlayAgain.setOnAction((ActionEvent event) -> {
             Navigation.navigateTo(new BordBase(), event);
         });
@@ -65,10 +68,13 @@ public class DrawScreen extends AnchorPane {
         btnDrawExit.setMnemonicParsing(false);
         btnDrawExit.setPrefHeight(38.0);
         btnDrawExit.setPrefWidth(162.0);
-        btnDrawExit.setStyle("-fx-border-color: #ff5c9d; -fx-background-color: #291660;");
         btnDrawExit.setText("Exit");
         btnDrawExit.setTextFill(javafx.scene.paint.Color.WHITE);
         btnDrawExit.setFont(new Font("System Bold Italic", 19.0));
+        btnDrawExit.getStyleClass().add("changeButtonStyle");
+        this.getStylesheets().add("tictactoe_client/Views/style/style.css");
+        System.out.println();
+
         btnDrawExit.setOnAction((ActionEvent event) -> {
            
            Navigation.navigateTo(new ChooseMode(), event); 

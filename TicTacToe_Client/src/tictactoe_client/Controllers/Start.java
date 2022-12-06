@@ -56,10 +56,13 @@ public class Start extends AnchorPane {
         btnStart.setMnemonicParsing(false);
         btnStart.setPrefHeight(46.0);
         btnStart.setPrefWidth(184.0);
-        btnStart.setStyle("-fx-background-color: #291660; -fx-border-color: #ff5c9d;");
         btnStart.setText("Start");
         btnStart.setTextFill(javafx.scene.paint.Color.WHITE);
         btnStart.setFont(new Font("System Bold Italic", 23.0));
+        btnStart.getStyleClass().add("changeButtonStyle");
+        this.getStylesheets().add("tictactoe_client/Views/style/style.css");
+        System.out.println();
+
         btnStart.setOnAction(new EventHandler<ActionEvent>() {
             
             @Override

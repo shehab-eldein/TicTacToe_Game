@@ -1,4 +1,7 @@
-#changeBackgroundColor:hover {
+.changeButtonStyle:hover {
 -fx-background-color:#ff5c9d;
 
+}
+.changeButtonStyle{
+    -fx-background-color: #291660; -fx-border-color: #ff5c9d;
 }

@@ -43,25 +43,27 @@ public class ChooseMode extends AnchorPane {
         btnSingleMode.setMnemonicParsing(false);
         btnSingleMode.setPrefHeight(46.0);
         btnSingleMode.setPrefWidth(184.0);
-        btnSingleMode.setStyle("-fx-background-color: #291660; -fx-border-color: #ff5c9d;");
         btnSingleMode.setText("Single Mode");
         btnSingleMode.setTextFill(javafx.scene.paint.Color.WHITE);
         btnSingleMode.setFont(new Font("System Bold Italic", 20.0));
+        btnSingleMode.getStyleClass().add("changeButtonStyle");
+        this.getStylesheets().add("tictactoe_client/Views/style/style.css");
+        System.out.println();
 
         btnMultiMode.setLayoutX(44.0);
         btnMultiMode.setLayoutY(208.0);
         btnMultiMode.setMnemonicParsing(false);
         btnMultiMode.setPrefHeight(46.0);
         btnMultiMode.setPrefWidth(184.0);
-        btnMultiMode.setStyle("-fx-background-color: #291660; -fx-border-color: #ff5c9d;");
         btnMultiMode.setText("Multi Mode");
         btnMultiMode.setTextFill(javafx.scene.paint.Color.WHITE);
         btnMultiMode.setFont(new Font("System Bold Italic", 20.0));
         
-        btnMultiMode.setId("changeBackgroundColor");
-        btnMultiMode.getStyleClass().add("changeBackgroundColor");
+       
+        btnMultiMode.getStyleClass().add("changeButtonStyle");
         this.getStylesheets().add("tictactoe_client/Views/style/style.css");
-        
+        System.out.println();
+      
         
         btnMultiMode.setOnAction((ActionEvent event) -> {
             Navigation.navigateTo(new PlayerInfo(), event);
@@ -73,10 +75,12 @@ public class ChooseMode extends AnchorPane {
         btnOnlineMode.setMnemonicParsing(false);
         btnOnlineMode.setPrefHeight(46.0);
         btnOnlineMode.setPrefWidth(184.0);
-        btnOnlineMode.setStyle("-fx-background-color: #291660; -fx-border-color: #ff5c9d;");
         btnOnlineMode.setText("Online Mode");
         btnOnlineMode.setTextFill(javafx.scene.paint.Color.WHITE);
         btnOnlineMode.setFont(new Font("System Bold Italic", 20.0));
+        btnOnlineMode.getStyleClass().add("changeButtonStyle");
+        this.getStylesheets().add("tictactoe_client/Views/style/style.css");
+        System.out.println();
 
         label.setLayoutX(31.0);
         label.setLayoutY(45.0);

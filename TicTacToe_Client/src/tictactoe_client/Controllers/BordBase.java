@@ -61,7 +61,7 @@ public class BordBase extends AnchorPane {
         boolean shapeProp = true;
 //        Move  move = new Move("0",Shape.X);
         GameState gameState;
-
+       
         gridPane = new GridPane();
         columnConstraints = new ColumnConstraints();
         columnConstraints0 = new ColumnConstraints();
@@ -378,6 +378,7 @@ public class BordBase extends AnchorPane {
                 break;
             case X_WIN:
                 Navigation.navigateTo(new WinScreen(), event);
+                
                 break;
             case O_WIN:
                 Navigation.navigateTo(new WinScreen(), event);

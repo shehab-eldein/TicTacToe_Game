@@ -91,10 +91,13 @@ public  class PlayerInfo extends AnchorPane {
         btnStartGame.setMnemonicParsing(false);
         btnStartGame.setPrefHeight(46.0);
         btnStartGame.setPrefWidth(170.0);
-        btnStartGame.setStyle("-fx-background-color: #291660; -fx-border-color: #ff5c9d;");
         btnStartGame.setText("Start");
         btnStartGame.setTextFill(javafx.scene.paint.Color.WHITE);
         btnStartGame.setFont(new Font("System Bold Italic", 23.0));
+        btnStartGame.getStyleClass().add("changeButtonStyle");
+        this.getStylesheets().add("tictactoe_client/Views/style/style.css");
+        System.out.println();
+
         btnStartGame.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent event) {
