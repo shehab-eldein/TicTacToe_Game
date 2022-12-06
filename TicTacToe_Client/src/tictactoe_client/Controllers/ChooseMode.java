@@ -56,7 +56,7 @@ public class ChooseMode extends AnchorPane {
 
         btnSingleMode.setOnAction((event)->{
             DataSaver.dataSaverInstance().setModeData(btnSingleMode.getText());
-            Navigation.navigateTo(new PlayerInfo(), event);
+            Navigation.navigateTo(new ChooseLevel(), event);
         });
 
 
