@@ -27,20 +27,22 @@ public class FileManger {
     public static void saveFile(String fileName, String data) throws IOException {
         openOutputStream(fileName);
         fileOutputStream.write(data.getBytes());
+        getFile(fileName).setReadable(false, true);
     }
 
-    public static String loadFile(String fileName) throws IOException {
+    public static String loadFile(String fileName) throws IOException{
         openInputStream(fileName);
         ArrayList<Byte> bytesList = new ArrayList();
         int data;
         data = fileInputStream.read();
         while (data != -1) {
             bytesList.add((byte) data);
-            data = fileInputStream.read();
+           data = fileInputStream.read();
         }
+
         if(bytesList.isEmpty())
             return "";
-        return new String(bytesListToArray(bytesList));
+       return new String(bytesListToArray(bytesList));
     }
     
     private static byte[] bytesListToArray(ArrayList<Byte> bytesList){
@@ -52,16 +54,15 @@ public class FileManger {
     }
 
     private static File getFile(String fileName) {
-        if(!createFolderIfNotExist())
-            return new File(System.getProperty("user.home")+"/tic_tac_toe_files",fileName+".txt");
-        
-        return null;
+        createFolderIfNotExist();
+        return new File(System.getProperty("user.home")+"/tic_tac_toe_files", fileName+".encrypted");
     }
     
     private static boolean createFolderIfNotExist(){
         File file = new File(System.getProperty("user.home")+"/tic_tac_toe_files");
         if(!file.exists()){
             file.mkdir();
+            
             return true;
         }
         return false;
