@@ -44,7 +44,6 @@ public class Navigation {
         stage.setScene(scene);
         stage.show();
         stage.setResizable(false);
-
     }  
    
 }
