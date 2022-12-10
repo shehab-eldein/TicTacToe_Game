@@ -63,7 +63,7 @@ public class ServerConnector implements Runnable {
 class ClientsHandler extends Thread {
 
     private final Vector<ClientsHandler> clientList;
-    private byte[] DataByteList;
+    private byte[] dataByteList;
     DataInputStream dataInputStream;
     PrintStream dataOutPutStream;
 
@@ -79,9 +79,8 @@ class ClientsHandler extends Thread {
         while (true) {
             try {
                 //open stream not handled it will be soon
-                dataInputStream.read(DataByteList);
-                System.out.println(new String(DataByteList));
-                sendMessageToClients(DataByteList);
+                System.out.println(dataInputStream.readLine());
+                sendMessageToClients(dataInputStream.readLine());
             } catch (IOException ex) {
                 ex.printStackTrace();
             }
@@ -90,9 +89,9 @@ class ClientsHandler extends Thread {
     }
 
     //not supported method in tic tac toe project
-    private void sendMessageToClients(byte[] data) {
+    private void sendMessageToClients(String data) {
         for (int clientIndex = 0; clientIndex < clientList.size(); clientIndex++) {
-            clientList.get(clientIndex).dataOutPutStream.println(new String(data));
+            clientList.get(clientIndex).dataOutPutStream.println(data);
         }
     }
 
