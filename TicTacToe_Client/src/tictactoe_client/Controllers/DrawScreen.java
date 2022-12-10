@@ -17,10 +17,9 @@ public class DrawScreen extends AnchorPane {
     protected final Button btnDrawPlayAgain;
     protected final Button btnDrawExit;
     protected final Label label;
-    private  File file;
+    private File file;
     private MediaPlayer mediaplayer;
-    private  Media media;
-
+    private Media media;
 
     public DrawScreen() {
 
@@ -41,10 +40,10 @@ public class DrawScreen extends AnchorPane {
         DrawVideo.setLayoutY(14.0);
         DrawVideo.setPreserveRatio(false);
         file = new File("src/tictactoe_client/Views/img/draw.mp4");
-        media = new Media(file.toURI().toString());  
+        media = new Media(file.toURI().toString());
         mediaplayer = new MediaPlayer(media);
         DrawVideo.setMediaPlayer(mediaplayer);
-        mediaplayer.play();
+        mediaplayer.setAutoPlay(true);
 
         btnDrawPlayAgain.setLayoutX(193.0);
         btnDrawPlayAgain.setLayoutY(290.0);
@@ -61,7 +60,6 @@ public class DrawScreen extends AnchorPane {
         btnDrawPlayAgain.setOnAction((ActionEvent event) -> {
             Navigation.navigateTo(new BordBase(), event);
         });
-        
 
         btnDrawExit.setLayoutX(193.0);
         btnDrawExit.setLayoutY(338.0);
@@ -76,15 +74,16 @@ public class DrawScreen extends AnchorPane {
         System.out.println();
 
         btnDrawExit.setOnAction((ActionEvent event) -> {
-           
-           Navigation.navigateTo(new ChooseMode(), event); 
-        });    
+
+            Navigation.navigateTo(new ChooseMode(), event);
+        });
 
         label.setLayoutX(182.0);
         label.setLayoutY(244.0);
         label.setPrefHeight(43.0);
         label.setPrefWidth(196.0);
-        label.setText("  Game Over");
+        label.setText("           Draw ");
+
         label.setTextFill(javafx.scene.paint.Color.WHITE);
         label.setFont(new Font("System Bold Italic", 23.0));
 
@@ -92,7 +91,6 @@ public class DrawScreen extends AnchorPane {
         getChildren().add(btnDrawPlayAgain);
         getChildren().add(btnDrawExit);
         getChildren().add(label);
-        
-         
+
     }
 }

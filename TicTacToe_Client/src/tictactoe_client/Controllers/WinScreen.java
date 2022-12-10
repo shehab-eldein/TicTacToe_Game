@@ -62,7 +62,7 @@ public  class WinScreen extends AnchorPane {
         btnWinPlayAgain.setFont(new Font("System Bold Italic", 19.0));
         btnWinPlayAgain.getStyleClass().add("changeButtonStyle");
         //play again
-        btnWinPlayAgain.setOnAction((ActionEvent event) -> {
+        btnWinPlayAgain.setOnAction((event) -> {
             Navigation.navigateTo(new BordBase(), event);
         });
 
@@ -77,7 +77,7 @@ public  class WinScreen extends AnchorPane {
         btnWinExit.setFont(new Font("System Bold Italic", 19.0));
         btnWinExit.getStyleClass().add("changeButtonStyle");
         // exit game
-        btnWinExit.setOnAction((ActionEvent event) -> {
+        btnWinExit.setOnAction(( event) -> {
            
             Navigation.navigateTo(new ChooseMode(), event); 
         });    

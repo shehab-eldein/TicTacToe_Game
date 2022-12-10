@@ -1,21 +1,18 @@
 package tictactoe_client.Controllers;
 
-import java.io.File;
 import java.io.IOException;
-import java.util.logging.Level;
-import java.util.logging.Logger;
+import java.net.Socket;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
-import javafx.scene.Node;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.text.Font;
-import javafx.stage.FileChooser;
-import javafx.stage.Stage;
-import services.FileManger;
+import services.ErrorMessageSender;
+
 import services.Navigation;
 
 public class Start extends AnchorPane {
@@ -24,6 +21,8 @@ public class Start extends AnchorPane {
     protected final Label label;
     protected final Button btnStart;
     protected final Label label0;
+    private GameHandler gameHandler;
+    private Socket mysocket;
 
     public Start() {
 
@@ -41,7 +40,7 @@ public class Start extends AnchorPane {
         imageView.setFitWidth(254.0);
         imageView.setLayoutX(307.0);
         imageView.setPickOnBounds(true);
-//        imageView.setImage(new Image(getClass().getResource("../start.png").toExternalForm()));
+        // imageView.setImage(new Image(getClass().getResource("../start.png").toExternalForm()));
         imageView.setImage(new Image("tictactoe_client/Views/img/start.png"));
         label.setLayoutX(21.0);
         label.setLayoutY(30.0);
@@ -61,14 +60,25 @@ public class Start extends AnchorPane {
         btnStart.setFont(new Font("System Bold Italic", 23.0));
         btnStart.getStyleClass().add("changeButtonStyle");
         this.getStylesheets().add("tictactoe_client/Views/style/style.css");
-        System.out.println();
 
-        btnStart.setOnAction(new EventHandler<ActionEvent>() {
-            
-            @Override
-            public void handle(ActionEvent event) {
-                Navigation.navigateTo(new ChooseMode(), event); 
+        btnStart.setOnAction((ActionEvent event) -> {
+            try {
+                gameHandler = new GameHandler((String message) -> {
+                    Alert a = new Alert(Alert.AlertType.INFORMATION);
+                    a.setContentText(message);
+                    a.show();
+                });
+                
+                String mymessage = "hii";
+                gameHandler.writeData(mymessage);
+            } catch (IOException ex) {
+                Alert a = new Alert(Alert.AlertType.INFORMATION);
+                a.setContentText("can't connect  try again ");
+                a.show();
+                
             }
+            
+            Navigation.navigateTo(new ChooseMode(), event);
         });
 
         label0.setLayoutX(72.0);
@@ -83,8 +93,6 @@ public class Start extends AnchorPane {
         getChildren().add(label);
         getChildren().add(btnStart);
         getChildren().add(label0);
-        
-        
 
     }
 }
