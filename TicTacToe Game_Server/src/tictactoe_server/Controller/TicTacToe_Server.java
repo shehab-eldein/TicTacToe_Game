@@ -25,7 +25,9 @@ public class TicTacToe_Server extends Application {
         Scene scene = new Scene(root);
         stage.setScene(scene);
         stage.show();
-        ServerConnector = new ServerConnector(new ServerSocket(5005, 100));
+        ServerConnector = new ServerConnector(new ServerSocket(5005, 100),(message)->{
+            System.out.println(message);
+        });
         ServerConnector.connect();
     }
 
