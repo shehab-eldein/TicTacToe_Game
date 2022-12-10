@@ -5,26 +5,28 @@
  */
 package tictactoe_server.Controller;
 
+import java.net.ServerSocket;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
+import tictactoe_server.Services.ServerConnector;
 
 /**
  *
  * @author DELL
  */
 public class TicTacToe_Server extends Application {
-    
+    private ServerConnector ServerConnector;
     @Override
     public void start(Stage stage) throws Exception {
         Parent root = new ServerScreenBase();
-        
         Scene scene = new Scene(root);
-        
         stage.setScene(scene);
         stage.show();
+        ServerConnector = new ServerConnector(new ServerSocket(5005, 100));
+        ServerConnector.connect();
     }
 
     /**
@@ -32,6 +34,13 @@ public class TicTacToe_Server extends Application {
      */
     public static void main(String[] args) {
         launch(args);
+    }
+
+    @Override
+    public void stop() throws Exception 
+    {
+        super.stop();
+        ServerConnector.disCounnect();
     }
     
 }
