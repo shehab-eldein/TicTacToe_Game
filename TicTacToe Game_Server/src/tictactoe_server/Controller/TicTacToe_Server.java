@@ -18,17 +18,17 @@ import tictactoe_server.Services.ServerConnector;
  * @author DELL
  */
 public class TicTacToe_Server extends Application {
-    private ServerConnector ServerConnector;
+    private ServerConnector serverConnector;
     @Override
     public void start(Stage stage) throws Exception {
         Parent root = new ServerScreenBase();
         Scene scene = new Scene(root);
         stage.setScene(scene);
         stage.show();
-        ServerConnector = new ServerConnector(new ServerSocket(5005, 100),(message)->{
+        serverConnector = new ServerConnector(new ServerSocket(5005),(message)->{
             System.out.println(message);
         });
-        ServerConnector.connect();
+        serverConnector.connect();
     }
 
     /**
@@ -42,7 +42,7 @@ public class TicTacToe_Server extends Application {
     public void stop() throws Exception 
     {
         super.stop();
-        ServerConnector.disCounnect();
+        serverConnector.disCounnect();
     }
     
 }

@@ -61,9 +61,7 @@ public class ServerConnector implements Runnable {
 
 //client handler version beta not supported it's just for trying
 class ClientsHandler extends Thread {
-
     private final Vector<ClientsHandler> clientList;
-    private byte[] dataByteList;
     DataInputStream dataInputStream;
     PrintStream dataOutPutStream;
 
@@ -72,6 +70,7 @@ class ClientsHandler extends Thread {
         this.dataInputStream = new DataInputStream(socket.getInputStream());
         this.dataOutPutStream = new PrintStream(socket.getOutputStream());
         clientList.add(this);
+        start();
     }
 
     @Override
@@ -79,7 +78,6 @@ class ClientsHandler extends Thread {
         while (true) {
             try {
                 //open stream not handled it will be soon
-                System.out.println(dataInputStream.readLine());
                 sendMessageToClients(dataInputStream.readLine());
             } catch (IOException ex) {
                 ex.printStackTrace();
