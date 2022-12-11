@@ -19,11 +19,13 @@ import tictactoe_server.Services.DBConnector;
 public class UserRepository {
 
     public static User create(User user) {
+        //deal with new user
         DBConnector.executeUpdate("Insert into Users(name,password)  values('" + user.getName() + "','" + user.getPass() + "')");
         return getByName(user.getName());
     }
 
     public static User getByName(String name) {
+        // deal with signin
         ResultSet resultSet = DBConnector.executeQuery("select * from Users where name ='" + name + "'");
         try {
             while (resultSet.next()) {
