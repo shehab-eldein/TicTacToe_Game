@@ -5,12 +5,8 @@
  */
 package tictactoe_server.Services;
 
-import java.io.DataInputStream;
 import java.io.IOException;
-import java.io.PrintStream;
 import java.net.ServerSocket;
-import java.net.Socket;
-import java.util.Vector;
 import java.util.function.Consumer;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -21,6 +17,7 @@ import java.util.logging.Logger;
  */
 public class ServerConnector implements Runnable {
 
+    private ClientHandler clientHandler;
     private final ServerSocket serverSock;
     private final Thread thread = new Thread(this);
     private boolean isServerConected = false;
@@ -35,13 +32,15 @@ public class ServerConnector implements Runnable {
     public void run() {
         while (isServerConected) {
             try {
-                new ClientsHandler(serverSock.accept());
+                clientHandler = new ClientHandler(serverSock.accept());
             } catch (IOException ex) {
                 error.accept(ex.getMessage());
                 try {
+                    clientHandler.closeSocket();
                     disCounnect();
                 } catch (IOException ex1) {
                     error.accept(ex.getMessage());
+
                 }
             }
         }
@@ -53,44 +52,10 @@ public class ServerConnector implements Runnable {
     }
 
     public void disCounnect() throws IOException {
-        isServerConected = false;
         serverSock.close();
-    }
-
-}
-
-//client handler version beta not supported it's just for trying
-class ClientsHandler extends Thread {
-    private final Vector<ClientsHandler> clientList;
-    DataInputStream dataInputStream;
-    PrintStream dataOutPutStream;
-
-    public ClientsHandler(Socket socket) throws IOException {
-        this.clientList = new Vector();
-        this.dataInputStream = new DataInputStream(socket.getInputStream());
-        this.dataOutPutStream = new PrintStream(socket.getOutputStream());
-        clientList.add(this);
-        start();
-    }
-
-    @Override
-    public void run() {
-        while (true) {
-            try {
-                //open stream not handled it will be soon
-                sendMessageToClients(dataInputStream.readLine());
-            } catch (IOException ex) {
-                ex.printStackTrace();
-            }
-
-        }
-    }
-
-    //not supported method in tic tac toe project
-    private void sendMessageToClients(String data) {
-        for (int clientIndex = 0; clientIndex < clientList.size(); clientIndex++) {
-            clientList.get(clientIndex).dataOutPutStream.println(data);
-        }
+        isServerConected = false;
+        System.out.println(thread.isAlive());
+        System.err.println(serverSock.isClosed());
     }
 
 }

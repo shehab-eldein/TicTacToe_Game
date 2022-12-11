@@ -1,5 +1,10 @@
 package tictactoe_server.Controller;
 
+import java.io.IOException;
+import java.net.ServerSocket;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javafx.application.Platform;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
@@ -8,6 +13,7 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.text.Font;
+import tictactoe_server.Services.ServerConnector;
 
 public class ServerScreenBase extends AnchorPane {
 
@@ -19,6 +25,7 @@ public class ServerScreenBase extends AnchorPane {
     protected final ScrollPane scrollList;
     protected final ListView listView;
     protected final Button btnStopServer;
+    private ServerConnector serverConnector;
 
     public ServerScreenBase() {
 
@@ -51,6 +58,16 @@ public class ServerScreenBase extends AnchorPane {
         btnStartServer.setText("Start");
         btnStartServer.setTextFill(javafx.scene.paint.Color.WHITE);
         btnStartServer.setFont(new Font("System Bold Italic", 20.0));
+        btnStartServer.setOnAction((event)->{
+            try {
+                serverConnector =  new ServerConnector(new ServerSocket(5005),(message)->{
+                    System.out.println(message);
+                });
+                serverConnector.connect();
+            } catch (IOException ex) {
+            }
+        });
+        
 
         label.setLayoutX(24.0);
         label.setLayoutY(23.0);
@@ -95,6 +112,14 @@ public class ServerScreenBase extends AnchorPane {
         btnStopServer.setText("Stop");
         btnStopServer.setTextFill(javafx.scene.paint.Color.WHITE);
         btnStopServer.setFont(new Font("System Bold Italic", 20.0));
+        btnStopServer.setOnAction((event) -> {
+            try {
+                serverConnector.disCounnect();
+            } catch (IOException ex) {
+                Logger.getLogger(ServerScreenBase.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        });
+        
 
         getChildren().add(imageView);
         getChildren().add(btnStartServer);

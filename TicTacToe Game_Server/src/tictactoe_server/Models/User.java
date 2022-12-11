@@ -13,11 +13,21 @@ public class User {
    private int id ;
    private String name;
    private String pass;
+   private int isSigned; 
 
-    public User(int id, String name, String pass) {
+    public User(int id, String name, String pass, int isSigned) {
         this.id = id;
         this.name = name;
         this.pass = pass;
+        this.isSigned = isSigned;
+    }
+
+    public int getIsSigned() {
+        return isSigned;
+    }
+
+    public void setIsSigned(int isSigned) {
+        this.isSigned = isSigned;
     }
    
 

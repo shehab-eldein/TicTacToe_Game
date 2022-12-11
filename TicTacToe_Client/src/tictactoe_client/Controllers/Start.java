@@ -70,7 +70,7 @@ public class Start extends AnchorPane {
                 });
                 gameHandler.start();
                 String mymessage = "hii";
-                gameHandler.writeData(mymessage);
+                gameHandler.writeData("1-hamed-123456-0");
             } catch (IOException ex) {
                 Alert a = new Alert(Alert.AlertType.INFORMATION);
                 a.setContentText("can't connect  try again ");
@@ -78,7 +78,7 @@ public class Start extends AnchorPane {
                 
             }
             
-            Navigation.navigateTo(new ChooseMode(), event);
+            //Navigation.navigateTo(new ChooseMode(), event);
         });
 
         label0.setLayoutX(72.0);
