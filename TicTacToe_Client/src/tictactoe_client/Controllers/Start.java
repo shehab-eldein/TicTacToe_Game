@@ -68,7 +68,7 @@ public class Start extends AnchorPane {
                     a.setContentText(message);
                     a.show();
                 });
-                
+                gameHandler.start();
                 String mymessage = "hii";
                 gameHandler.writeData(mymessage);
             } catch (IOException ex) {

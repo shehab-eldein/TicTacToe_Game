@@ -9,9 +9,6 @@ import java.io.DataInputStream;
 import java.io.IOException;
 import java.io.PrintStream;
 import java.net.Socket;
-import java.util.logging.Level;
-import java.util.logging.Logger;
-import javafx.scene.control.Alert;
 import services.ErrorMessageSender;
 
 /**
@@ -33,8 +30,7 @@ public class GameHandler extends Thread {
         socket = new Socket("127.0.0.1", 5005);
         dataInputstream = new DataInputStream(socket.getInputStream());
         printStream = new PrintStream(socket.getOutputStream());
-        
-
+       
     }
     
 
@@ -68,6 +64,8 @@ public class GameHandler extends Thread {
         }
 
     }
+
+   
 
     void disconnect() throws IOException {
         isRunning = false;
