@@ -37,14 +37,17 @@ public class SignInScreenController implements Initializable {
 
     private GameHandler gameHandler;
     private Socket mysocket;
-    @FXML
     private TextField userNameTextField;
-    @FXML
     private TextField passwordTextField;
-    @FXML
     private Button logInButton;
     @FXML
-    private Label createAccountButton;
+    private TextField signUpUserNameTextField;
+    @FXML
+    private TextField signUpPasswordTextField;
+    @FXML
+    private Button signUpButton;
+    @FXML
+    private Label logInAccoutnButton;
 
     /**
      * Initializes the controller class.
@@ -68,8 +71,19 @@ public class SignInScreenController implements Initializable {
     @FXML
     public void LogInButtonClick(ActionEvent event) {
         //Navigation.navigateTo(new Start(), event);
-        gameHandler.writeData("1-hamed-123456-0");
+
+        if (userNameTextField == null) {
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setContentText("Enter your Name");
+            alert.showAndWait();
+        } else if (passwordTextField == null) {
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setContentText("Enter your password");
+            alert.showAndWait();
+        } else {
+            gameHandler.writeData( userNameTextField.getText() + "-" + passwordTextField.getText() + "-1");
+        }
 
     }
-   
+
 }
