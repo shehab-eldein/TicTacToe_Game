@@ -15,6 +15,7 @@ import javafx.event.ActionEvent;
 import javafx.event.Event;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
@@ -81,7 +82,18 @@ public class SignInScreenController implements Initializable {
             alert.setContentText("Enter your password");
             alert.showAndWait();
         } else {
-            gameHandler.writeData( userNameTextField.getText() + "-" + passwordTextField.getText() + "-1");
+            gameHandler.writeData(userNameTextField.getText() + "-" + passwordTextField.getText() + "-1");
+
+        }
+
+    }
+
+    @FXML
+    public void createAcountClick(MouseEvent event) {
+        try {
+            Navigation.navigateTo(new FXMLLoader().load(tictactoe_client.TicTacToe_Client.class.getResource("Views/SignUPScreen.fxml")), event);
+        } catch (IOException ex) {
+            ex.printStackTrace();
         }
 
     }
