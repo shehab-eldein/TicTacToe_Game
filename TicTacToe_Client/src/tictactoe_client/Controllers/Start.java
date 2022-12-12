@@ -21,8 +21,7 @@ public class Start extends AnchorPane {
     protected final Label label;
     protected final Button btnStart;
     protected final Label label0;
-    private GameHandler gameHandler;
-    private Socket mysocket;
+    
 
     public Start() {
 
@@ -62,23 +61,7 @@ public class Start extends AnchorPane {
         this.getStylesheets().add("tictactoe_client/Views/style/style.css");
 
         btnStart.setOnAction((ActionEvent event) -> {
-            try {
-                gameHandler = new GameHandler((String message) -> {
-                    Alert a = new Alert(Alert.AlertType.INFORMATION);
-                    a.setContentText(message);
-                    a.show();
-                });
-                gameHandler.start();
-                String mymessage = "hii";
-                gameHandler.writeData("1-hamed-123456-0");
-            } catch (IOException ex) {
-                Alert a = new Alert(Alert.AlertType.INFORMATION);
-                a.setContentText("can't connect  try again ");
-                a.show();
-                
-            }
-            
-            //Navigation.navigateTo(new ChooseMode(), event);
+            Navigation.navigateTo(new ChooseMode(), event);
         });
 
         label0.setLayoutX(72.0);

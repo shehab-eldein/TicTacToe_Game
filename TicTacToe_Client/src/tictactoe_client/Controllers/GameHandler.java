@@ -30,7 +30,7 @@ public class GameHandler extends Thread {
         socket = new Socket("127.0.0.1", 5005);
         dataInputstream = new DataInputStream(socket.getInputStream());
         printStream = new PrintStream(socket.getOutputStream());
-       
+        start();
     }
     
 
@@ -51,14 +51,13 @@ public class GameHandler extends Thread {
 
             } catch (IOException ex) {
                 errorMessageSender.send(ex.getMessage());
-                if (!socket.isConnected()) {
-
+//                if (!socket.isConnected()) {
                     try {
                         disconnect();
                     } catch (IOException ex1) {
                        errorMessageSender.send(ex1.getMessage());
                     }
-                }
+//                }
             }
 
         }
@@ -67,7 +66,7 @@ public class GameHandler extends Thread {
 
    
 
-    void disconnect() throws IOException {
+    public void disconnect() throws IOException {
         isRunning = false;
         printStream.close();
         dataInputstream.close();
@@ -75,17 +74,14 @@ public class GameHandler extends Thread {
 
     }
 
-    GameHandler connect() throws IOException {
+    public GameHandler connect() throws IOException {
         GameHandler gameHandler = new GameHandler(errorMessageSender);
         gameHandler.start();
         return gameHandler;
     }
 
-    void writeData(String msg) {
-
+    public void writeData(String msg) {
         printStream.println(msg);
-        System.out.println("connected");
-
     }
     
 }

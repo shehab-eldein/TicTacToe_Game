@@ -1,7 +1,11 @@
 package tictactoe_client.Controllers;
 
+import java.io.IOException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
+import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
@@ -90,7 +94,14 @@ public class ChooseMode extends AnchorPane {
         btnOnlineMode.setFont(new Font("System Bold Italic", 20.0));
         btnOnlineMode.getStyleClass().add("changeButtonStyle");
         this.getStylesheets().add("tictactoe_client/Views/style/style.css");
-        System.out.println();
+        btnOnlineMode.setOnAction((event)->{
+            try {
+                Navigation.navigateTo(new FXMLLoader().load(tictactoe_client.TicTacToe_Client.class.getResource("Views/SignInScreen.fxml")), event);
+            } catch (IOException ex) {
+//                ex.printStackTrace();
+            }
+            
+        });
 
         label.setLayoutX(31.0);
         label.setLayoutY(45.0);
