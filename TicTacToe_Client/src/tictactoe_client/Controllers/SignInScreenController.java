@@ -73,14 +73,14 @@ public class SignInScreenController implements Initializable {
     public void LogInButtonClick(ActionEvent event) {
         //Navigation.navigateTo(new Start(), event);
 
-        if (userNameTextField == null) {
-            Alert alert = new Alert(Alert.AlertType.ERROR);
-            alert.setContentText("Enter your Name");
-            alert.showAndWait();
-        } else if (passwordTextField == null) {
-            Alert alert = new Alert(Alert.AlertType.ERROR);
-            alert.setContentText("Enter your password");
-            alert.showAndWait();
+        if (userNameTextField .getText().isEmpty()) {
+            Alerts.showAlert("Enter your name !", (e) -> {
+            });
+            
+        } else if (passwordTextField.getText().isEmpty()) {
+            Alerts.showAlert("Enter your password !", (e) -> {
+            });
+            
         } else {
             gameHandler.writeData(userNameTextField.getText() + "-" + passwordTextField.getText() + "-1");
 
