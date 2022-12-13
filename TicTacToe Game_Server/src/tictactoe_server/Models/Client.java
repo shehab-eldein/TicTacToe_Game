@@ -24,20 +24,16 @@ import tictactoe_server.Repositories.UserRepository;
  */
 //client handler version beta not supported it's just for trying
 public class Client extends Thread {
-    private final Vector<Client> clientList;
     private static boolean isStarted = false;
     private DataInputStream dataInputStream;
     private PrintStream dataOutPutStream;
     private User user;
+    private boolean isBusy;
+    private Socket socket;
+
 
     public Client(Socket socket) throws IOException {
-        clientList = new Vector();
-        dataInputStream = new DataInputStream(socket.getInputStream());
-        dataOutPutStream = new PrintStream(socket.getOutputStream());
-        clientList.add(this);
-        
-        isStarted = true;
-        start();
+       this.socket = socket; 
     }
 
     @Override
@@ -49,7 +45,6 @@ public class Client extends Thread {
                 user = splitRequest(data);
                 if(user.getIsSigned() == 0)
                     UserRepository.create(user);
-                //sendMessageToClients(splitRequest(data));
             } catch (IOException ex) {
                 try {
                     closeSocket();
@@ -61,14 +56,6 @@ public class Client extends Thread {
         }
     }
 
-    //not supported method in tic tac toe project
-    private void sendMessageToClients(User data) {
-//        System.out.println(data.getId());
-//        System.out.println(data.getName());
-//        System.out.println(data.getPass());
-//        System.out.println(data.getIsSigned());
-//        clientList.get(0).dataOutPutStream.println("server: aye aye captin");
-    }
     
     private User splitRequest(String data){
      List<String> queryList = Arrays.stream(data.split("\\-")) // split on comma
@@ -81,5 +68,26 @@ public class Client extends Thread {
         dataInputStream.close();
        dataOutPutStream.close();
        isStarted = false;
+    }
+    
+       public void StartSocket() throws IOException {
+        dataInputStream = new DataInputStream(socket.getInputStream());
+        dataOutPutStream = new PrintStream(socket.getOutputStream());
+        isStarted = true;
+        isBusy = false;
+        start();
+    }
+
+    public static boolean isIsStarted() {
+        return isStarted;
+    }
+
+    public boolean isIsBusy() {
+        return isBusy;
+    }
+    
+    
+    public boolean getIsStarted(){
+        return isStarted;
     }
 }
