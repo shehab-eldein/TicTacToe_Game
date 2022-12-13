@@ -1,0 +1,60 @@
+.LeftSideSignInBackground{
+    -fx-background-color: #3f2e74;
+    -fx-background-radius: 0 25 25 0;
+    
+}
+
+.RightSideSignInBackground{
+    -fx-background-color: #ffffff;
+    
+}
+
+.-Text {
+    -fx-font-family: TRON;
+    -fx-background-color: #3f2e74;
+    -fx-font-size: 12px;
+}
+.serverBackGround{ 
+    -fx-background-color: #3f2e74;
+}
+
+.serverInformationBackGround{ 
+    -fx-background-color: #ffffff;
+    -fx-background-radius: 0 25 25 0;
+}
+
+.SignIn-text-field {
+    -fx-padding:0 0 10px 0 ; 
+    -fx-text-fill:#3f2e74;
+    -fx-prompt-text-fill:#3f2e74; 
+    -fx-background-color: #3f2e74, #ffffff ;
+    -fx-alignment: center-left;   
+    -fx-background-insets: 0, 0 0 1 0 ;
+    -fx-background-radius: 0 ;
+}
+.signinButton{
+    -fx-background-color: #3f2e74;
+    -fx-background-radius: 50 50 50 50;
+}
+
+.signinButton:hover{
+    -fx-background-color: #a05373;
+    -fx-background-radius: 50 50 50 50;
+}
+
+.createAccount{
+    -fx-text-fill: #3f2e74;
+}
+
+.createAccount:hover{
+    -fx-text-fill: #a05373;
+}
+
+.signinImage{
+    -fx-background-image: url("../img/xo.jpeg");
+}
+
+.signInLable{
+    -fx-background-color: #3f2e74;
+    -fx-background-radius: 50 50 50 50;
+}

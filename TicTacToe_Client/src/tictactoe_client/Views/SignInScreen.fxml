@@ -77,7 +77,7 @@
                <font>
                   <Font size="15.0" />
                </font></TextField>
-            <Button fx:id="logInButton" layoutX="101.0" layoutY="298.0" mnemonicParsing="false" onAction="#LogInButtonClick" prefHeight="25.0" prefWidth="85.0" styleClass="signinButton" stylesheets="@Views/style/style.css" text="Login" textFill="WHITE">
+            <Button fx:id="logInButton" layoutX="101.0" layoutY="298.0" mnemonicParsing="false" onAction="#printFromTextField" prefHeight="25.0" prefWidth="85.0" styleClass="signinButton" stylesheets="@Views/style/style.css" text="Login" textFill="WHITE">
                <font>
                   <Font name="Calibri" size="15.0" />
                </font>

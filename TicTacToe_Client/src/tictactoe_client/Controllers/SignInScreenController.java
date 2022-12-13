@@ -64,10 +64,18 @@ public class SignInScreenController implements Initializable {
         }
     }
 
+//    @FXML
+//    public void LogInButtonClick(ActionEvent event) {
+//        //Navigation.navigateTo(new Start(), event);
+//        gameHandler.writeData("1-hamed-123456-0");
+//
+//    }
+    
     @FXML
-    public void LogInButtonClick(ActionEvent event) {
-        //Navigation.navigateTo(new Start(), event);
-        gameHandler.writeData("1-hamed-123456-0");
-
+    public void printFromTextField(ActionEvent event){
+        String name = userNameTextField.getText();
+        String password = passwordTextField.getText();
+        System.out.println(name);
+        System.out.println(name);
     }
 }
