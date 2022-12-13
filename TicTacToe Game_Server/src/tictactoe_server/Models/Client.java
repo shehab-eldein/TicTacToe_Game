@@ -90,4 +90,8 @@ public class Client extends Thread {
     public boolean getIsStarted(){
         return isStarted;
     }
+
+    public User getUser() {
+        return user;
+    }
 }

@@ -9,6 +9,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import tictactoe_server.Models.Client;
+import tictactoe_server.Models.User;
 
 
 /**
@@ -34,12 +35,12 @@ public class Communicator {
 
     public static void disconnectClosed() {
       for(Client client: clients) {
-            if(!client.isConnected(){
+            if(!client.getIsStarted()){
                 clients.remove(client);
-                client.s
+                
             }
         }
-        clients.removeIf(client -> !client.isConnected());
+        clients.removeIf(client -> !client.getIsStarted());
     }
 
     public static List<User> getUsers() {
