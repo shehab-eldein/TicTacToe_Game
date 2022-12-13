@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package tictactoe_server.Services;
+package tictactoe_server.Models;
 
 import java.io.DataInputStream;
 import java.io.IOException;
@@ -23,14 +23,14 @@ import tictactoe_server.Repositories.UserRepository;
  * @author hamed
  */
 //client handler version beta not supported it's just for trying
-class ClientHandler extends Thread {
-    private final Vector<ClientHandler> clientList;
+public class Client extends Thread {
+    private final Vector<Client> clientList;
     private static boolean isStarted = false;
     private DataInputStream dataInputStream;
     private PrintStream dataOutPutStream;
     private User user;
 
-    public ClientHandler(Socket socket) throws IOException {
+    public Client(Socket socket) throws IOException {
         clientList = new Vector();
         dataInputStream = new DataInputStream(socket.getInputStream());
         dataOutPutStream = new PrintStream(socket.getOutputStream());
