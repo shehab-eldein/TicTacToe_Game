@@ -6,14 +6,11 @@
 package tictactoe_client.Controllers;
 
 import java.io.IOException;
-import java.net.Socket;
 import java.net.URL;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javafx.event.ActionEvent;
-import javafx.event.Event;
-import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -23,24 +20,16 @@ import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
-import javafx.stage.WindowEvent;
 import services.Alerts;
 import services.Navigation;
-import tictactoe_client.Controllers.GameHandler;
-import tictactoe_client.Controllers.Start;
 
 /**
  * FXML Controller class
  *
- * @author hamed
+ * @author DELL
  */
-public class SignInScreenController implements Initializable {
+public class SignUPScreenController implements Initializable {
 
-    private GameHandler gameHandler;
-    private Socket mysocket;
-    private TextField userNameTextField;
-    private TextField passwordTextField;
-    private Button logInButton;
     @FXML
     private TextField signUpUserNameTextField;
     @FXML
@@ -49,6 +38,7 @@ public class SignInScreenController implements Initializable {
     private Button signUpButton;
     @FXML
     private Label logInAccoutnButton;
+    private GameHandler gameHandler;
 
     /**
      * Initializes the controller class.
@@ -56,42 +46,40 @@ public class SignInScreenController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         try {
-            // TODO
             gameHandler = new GameHandler((String message) -> {
                 Alerts.showAlert("The server is down!", (e) -> {
                     //Navigation.navigateTo(new ChooseMode(), (Stage) logInButton.getScene().getWindow());
                 });
             });
+
         } catch (IOException ex) {
             Alerts.showAlert("The server is down!", (e) -> {
-                Navigation.navigateTo(new ChooseMode(), (Stage) logInButton.getScene().getWindow());
+                //Navigation.navigateTo(new ChooseMode(), (Stage) signUpButton.getScene().getWindow());
             });
         }
     }
 
     @FXML
-    public void LogInButtonClick(ActionEvent event) {
-        //Navigation.navigateTo(new Start(), event);
-
-        if (userNameTextField .getText().isEmpty()) {
-            Alerts.showAlert("Enter your name !", (e) -> {
+    private void LogInButtonClick(ActionEvent event) {
+        if (signUpUserNameTextField.getText().isEmpty()) {
+            Alerts.showAlert("Please Enter User Name", (e) -> {
+                //Navigation.navigateTo(new ChooseMode(), (Stage) signUpButton.getScene().getWindow());
             });
-            
-        } else if (passwordTextField.getText().isEmpty()) {
-            Alerts.showAlert("Enter your password !", (e) -> {
+        } else if (signUpPasswordTextField.getText().isEmpty()) {
+            Alerts.showAlert("Please Enter Your Password", (e) -> {
+                //Navigation.navigateTo(new ChooseMode(), (Stage) signUpButton.getScene().getWindow());
             });
-            
         } else {
-            gameHandler.writeData(userNameTextField.getText() + "-" + passwordTextField.getText() + "-1");
+            gameHandler.writeData(signUpUserNameTextField.getText()
+                    + "-" + signUpPasswordTextField.getText() + "-0");
 
         }
-
     }
 
     @FXML
-    public void createAcountClick(MouseEvent event) {
+    public void logInAcountClick(MouseEvent event) {
         try {
-            Navigation.navigateTo(new FXMLLoader().load(tictactoe_client.TicTacToe_Client.class.getResource("Views/SignUPScreen.fxml")), event);
+            Navigation.navigateTo(new FXMLLoader().load(tictactoe_client.TicTacToe_Client.class.getResource("Views/SignInScreen.fxml")), event);
         } catch (IOException ex) {
             ex.printStackTrace();
         }
