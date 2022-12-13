@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package tictactoe_server.Services;
+package tictactoe_server.Models;
 
 import java.io.DataInputStream;
 import java.io.IOException;
@@ -12,10 +12,7 @@ import java.net.Socket;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Vector;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import java.util.stream.Collectors;
-import tictactoe_server.Models.User;
 import tictactoe_server.Repositories.UserRepository;
 
 /**
@@ -23,20 +20,17 @@ import tictactoe_server.Repositories.UserRepository;
  * @author hamed
  */
 //client handler version beta not supported it's just for trying
-class ClientHandler extends Thread {
-    private final Vector<ClientHandler> clientList;
+public class Client extends Thread {
+
     private static boolean isStarted = false;
     private DataInputStream dataInputStream;
     private PrintStream dataOutPutStream;
+    private final Socket socket;
     private User user;
+    private boolean isBusy;
 
-    public ClientHandler(Socket socket) throws IOException {
-        clientList = new Vector();
-        dataInputStream = new DataInputStream(socket.getInputStream());
-        dataOutPutStream = new PrintStream(socket.getOutputStream());
-        clientList.add(this);
-        isStarted = true;
-        start();
+    public Client(Socket socket) throws IOException {
+        this.socket = socket;
     }
 
     @Override
@@ -46,8 +40,9 @@ class ClientHandler extends Thread {
                 //open stream not handled it will be soon
                 String data = dataInputStream.readLine();
                 user = splitRequest(data);
-                if(user.getIsSigned() == 0)
+                if (user.getIsSigned() == 0) {
                     UserRepository.create(user);
+                }
                 //sendMessageToClients(splitRequest(data));
             } catch (IOException ex) {
                 try {
@@ -60,25 +55,25 @@ class ClientHandler extends Thread {
         }
     }
 
-    //not supported method in tic tac toe project
-    private void sendMessageToClients(User data) {
-//        System.out.println(data.getId());
-//        System.out.println(data.getName());
-//        System.out.println(data.getPass());
-//        System.out.println(data.getIsSigned());
-//        clientList.get(0).dataOutPutStream.println("server: aye aye captin");
-    }
-    
-    private User splitRequest(String data){
-     List<String> queryList = Arrays.stream(data.split("\\-")) // split on comma
+    private User splitRequest(String data) {
+        List<String> queryList = Arrays.stream(data.split("\\-")) // split on comma
                 .map(str -> str.trim()) // remove white-spaces
                 .collect(Collectors.toList()); // collect to List  
-        return new User(Integer.parseInt(queryList.get(0)), queryList.get(1), queryList.get(2),Integer.parseInt(queryList.get(3)));
+        return new User(Integer.parseInt(queryList.get(0)), queryList.get(1), queryList.get(2), Integer.parseInt(queryList.get(3)));
     }
 
-    public void closeSocket() throws IOException{
-        dataInputStream.close();
-       dataOutPutStream.close();
-       isStarted = false;
+    public void StartSocket() throws IOException {
+        dataInputStream = new DataInputStream(socket.getInputStream());
+        dataOutPutStream = new PrintStream(socket.getOutputStream());
+        isStarted = true;
+        isBusy = false;
+        start();
     }
+
+    public void closeSocket() throws IOException {
+        dataInputStream.close();
+        dataOutPutStream.close();
+        isStarted = false;
+    }
+
 }

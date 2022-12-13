@@ -10,6 +10,7 @@ import java.net.ServerSocket;
 import java.util.function.Consumer;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import tictactoe_server.Models.Client;
 
 /**
  *
@@ -17,7 +18,7 @@ import java.util.logging.Logger;
  */
 public class ServerConnector implements Runnable {
 
-    private ClientHandler clientHandler;
+    private Client clientHandler;
     private final ServerSocket serverSock;
     private final Thread thread = new Thread(this);
     private boolean isServerConected = false;
@@ -32,7 +33,7 @@ public class ServerConnector implements Runnable {
     public void run() {
         while (isServerConected) {
             try {
-                clientHandler = new ClientHandler(serverSock.accept());
+                clientHandler = new Client(serverSock.accept());
             } catch (IOException ex) {
                 error.accept(ex.getMessage());
                 try {
