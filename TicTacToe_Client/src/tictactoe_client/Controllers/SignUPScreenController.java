@@ -66,7 +66,7 @@ public class SignUPScreenController implements Initializable {
                 //Navigation.navigateTo(new ChooseMode(), (Stage) signUpButton.getScene().getWindow());
             });
         } else if (signUpPasswordTextField.getText().isEmpty()) {
-            Alerts.showAlert("Please Enter Your Email", (e) -> {
+            Alerts.showAlert("Please Enter Your Password", (e) -> {
                 //Navigation.navigateTo(new ChooseMode(), (Stage) signUpButton.getScene().getWindow());
             });
         } else {
