@@ -8,6 +8,8 @@ package tictactoe_client.Controllers;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -37,19 +39,51 @@ public class SignUPScreenController implements Initializable {
     @FXML
     private Label logInAccoutnButton;
     private GameHandler gameHandler;
+
     /**
      * Initializes the controller class.
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-         
-    }    
+        try {
+            gameHandler = new GameHandler((String message) -> {
+                Alerts.showAlert("The server is down!", (e) -> {
+                    //Navigation.navigateTo(new ChooseMode(), (Stage) logInButton.getScene().getWindow());
+                });
+            });
+
+        } catch (IOException ex) {
+            Alerts.showAlert("The server is down!", (e) -> {
+                //Navigation.navigateTo(new ChooseMode(), (Stage) signUpButton.getScene().getWindow());
+            });
+        }
+    }
 
     @FXML
     private void LogInButtonClick(ActionEvent event) {
-        
-        
+        if (signUpUserNameTextField == null) {
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setContentText("Enter your Name");
+            alert.showAndWait();
+        } else if (signUpPasswordTextField == null) {
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setContentText("Enter your password");
+            alert.showAndWait();
+        } else {
+            gameHandler.writeData(signUpUserNameTextField.getText()
+                    + "-" + signUpPasswordTextField.getText() + "-0");
+
+        }
     }
-    
-    
+
+    @FXML
+    public void logInAcountClick(MouseEvent event) {
+        try {
+            Navigation.navigateTo(new FXMLLoader().load(tictactoe_client.TicTacToe_Client.class.getResource("Views/SignInScreen.fxml")), event);
+        } catch (IOException ex) {
+            ex.printStackTrace();
+        }
+
+    }
+
 }

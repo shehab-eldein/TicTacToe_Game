@@ -82,7 +82,7 @@
                   <Font name="Calibri" size="15.0" />
                </font>
             </Button>
-            <Label fx:id="logInAccoutnButton" layoutX="106.0" layoutY="341.0" styleClass="createAccount" stylesheets="@Views/style/style.css" text="Log in Account" textFill="#3f2e74">
+            <Label fx:id="logInAccoutnButton" layoutX="106.0" layoutY="341.0" onMouseClicked="#logInAcountClick" styleClass="createAccount" stylesheets="@Views/style/style.css" text="Log in Account" textFill="#3f2e74">
                <font>
                   <Font name="Calibri" size="13.0" />
                </font>
