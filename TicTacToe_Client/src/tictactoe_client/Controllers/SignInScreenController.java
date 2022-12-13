@@ -38,17 +38,14 @@ public class SignInScreenController implements Initializable {
 
     private GameHandler gameHandler;
     private Socket mysocket;
+    @FXML
     private TextField userNameTextField;
+    @FXML
     private TextField passwordTextField;
+    @FXML
     private Button logInButton;
     @FXML
-    private TextField signUpUserNameTextField;
-    @FXML
-    private TextField signUpPasswordTextField;
-    @FXML
-    private Button signUpButton;
-    @FXML
-    private Label logInAccoutnButton;
+    private Label createAccountButton;
 
     /**
      * Initializes the controller class.
@@ -71,31 +68,16 @@ public class SignInScreenController implements Initializable {
 
     @FXML
     public void LogInButtonClick(ActionEvent event) {
-        //Navigation.navigateTo(new Start(), event);
-
-        if (userNameTextField .getText().isEmpty()) {
-            Alerts.showAlert("Enter your name !", (e) -> {
-            });
-            
-        } else if (passwordTextField.getText().isEmpty()) {
-            Alerts.showAlert("Enter your password !", (e) -> {
-            });
-            
-        } else {
-            gameHandler.writeData(userNameTextField.getText() + "-" + passwordTextField.getText() + "-1");
-
-        }
-
+        gameHandler.writeData(userNameTextField.getText() + "-" + passwordTextField.getText() + "-1");
     }
-
-    @FXML
-    public void createAcountClick(MouseEvent event) {
+    
+     @FXML
+    public void logInAcountClick(MouseEvent event) {
         try {
-            Navigation.navigateTo(new FXMLLoader().load(tictactoe_client.TicTacToe_Client.class.getResource("Views/SignUPScreen.fxml")), event);
+            Navigation.navigateTo(FXMLLoader.load(tictactoe_client.TicTacToe_Client.class.getResource("Views/SignUpScreen.fxml")), event);
         } catch (IOException ex) {
             ex.printStackTrace();
         }
-
     }
-
+    
 }

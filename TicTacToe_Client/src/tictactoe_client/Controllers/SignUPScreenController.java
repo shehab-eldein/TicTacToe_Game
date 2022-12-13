@@ -8,28 +8,24 @@ package tictactoe_client.Controllers;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
-import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.input.MouseEvent;
-import javafx.stage.Stage;
 import services.Alerts;
 import services.Navigation;
 
 /**
  * FXML Controller class
  *
- * @author DELL
+ * @author hamed
  */
-public class SignUPScreenController implements Initializable {
-
+public class SignUpScreenController implements Initializable {
+    private GameHandler gameHandler;
     @FXML
     private TextField signUpUserNameTextField;
     @FXML
@@ -38,7 +34,6 @@ public class SignUPScreenController implements Initializable {
     private Button signUpButton;
     @FXML
     private Label logInAccoutnButton;
-    private GameHandler gameHandler;
 
     /**
      * Initializes the controller class.
@@ -61,19 +56,8 @@ public class SignUPScreenController implements Initializable {
 
     @FXML
     private void LogInButtonClick(ActionEvent event) {
-        if (signUpUserNameTextField.getText().isEmpty()) {
-            Alerts.showAlert("Please Enter User Name", (e) -> {
-                //Navigation.navigateTo(new ChooseMode(), (Stage) signUpButton.getScene().getWindow());
-            });
-        } else if (signUpPasswordTextField.getText().isEmpty()) {
-            Alerts.showAlert("Please Enter Your Password", (e) -> {
-                //Navigation.navigateTo(new ChooseMode(), (Stage) signUpButton.getScene().getWindow());
-            });
-        } else {
-            gameHandler.writeData(signUpUserNameTextField.getText()
+       gameHandler.writeData(signUpUserNameTextField.getText()
                     + "-" + signUpPasswordTextField.getText() + "-0");
-
-        }
     }
 
     @FXML
@@ -86,4 +70,6 @@ public class SignUPScreenController implements Initializable {
 
     }
 
-}
+}  
+    
+
