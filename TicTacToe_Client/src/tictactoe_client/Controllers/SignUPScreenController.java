@@ -61,14 +61,14 @@ public class SignUPScreenController implements Initializable {
 
     @FXML
     private void LogInButtonClick(ActionEvent event) {
-        if (signUpUserNameTextField == null) {
-            Alert alert = new Alert(Alert.AlertType.ERROR);
-            alert.setContentText("Enter your Name");
-            alert.showAndWait();
-        } else if (signUpPasswordTextField == null) {
-            Alert alert = new Alert(Alert.AlertType.ERROR);
-            alert.setContentText("Enter your password");
-            alert.showAndWait();
+        if (signUpUserNameTextField.getText().isEmpty()) {
+            Alerts.showAlert("Please Enter User Name", (e) -> {
+                //Navigation.navigateTo(new ChooseMode(), (Stage) signUpButton.getScene().getWindow());
+            });
+        } else if (signUpPasswordTextField.getText().isEmpty()) {
+            Alerts.showAlert("Please Enter Your Email", (e) -> {
+                //Navigation.navigateTo(new ChooseMode(), (Stage) signUpButton.getScene().getWindow());
+            });
         } else {
             gameHandler.writeData(signUpUserNameTextField.getText()
                     + "-" + signUpPasswordTextField.getText() + "-0");
