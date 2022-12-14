@@ -21,12 +21,12 @@ public class UserRepository {
     public static User create(User user) {
         //deal with new user
         DBConnector.executeUpdate("Insert into Users(name,password)  values('" + user.getName() + "','" + user.getPass() + "')");
-        return getByName(user.getName());
+        return getByName(user.getName(),user.getPass());
     }
 
-    public static User getByName(String name) {
+    public static User getByName(String name,String password) {
         // deal with signin
-        ResultSet resultSet = DBConnector.executeQuery("select * from Users where name ='" + name + "'");
+        ResultSet resultSet = DBConnector.executeQuery("select * from Users where name ='" + name + "'password='"+password+"'");
         try {
             while (resultSet.next()) {
                return new User(resultSet.getInt("id"),resultSet.getString("name"),resultSet.getString("password"),0);

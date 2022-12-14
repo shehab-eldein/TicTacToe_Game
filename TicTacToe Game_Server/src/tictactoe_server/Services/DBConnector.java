@@ -59,7 +59,7 @@ public class DBConnector {
             // run query
             resultSet = pst.executeQuery();
             System.out.println("Result::::" + resultSet);
-            connection.close();
+            //connection.close();
         } catch (Exception e) {
             e.printStackTrace();
             System.out.println("Lose Connection");

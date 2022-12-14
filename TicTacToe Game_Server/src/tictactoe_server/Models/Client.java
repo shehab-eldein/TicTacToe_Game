@@ -17,6 +17,7 @@ import java.util.logging.Logger;
 import java.util.stream.Collectors;
 import tictactoe_server.Models.User;
 import tictactoe_server.Repositories.UserRepository;
+import tictactoe_server.Services.RequestHandler;
 
 /**
  *
@@ -42,9 +43,11 @@ public class Client extends Thread {
     public void run() {
         while (isStarted) {
             try {
-                //open stream not handled it will be soon
+                
                 String data = dataInputStream.readLine();
                 user = splitRequest(data);
+                RequestHandler.queryHandler(user, this);
+                
                 
             } catch (IOException ex) {
                 try {
@@ -56,6 +59,15 @@ public class Client extends Thread {
 
         }
     }
+
+    public DataInputStream getDataInputStream() {
+        return dataInputStream;
+    }
+
+    public PrintStream getDataOutPutStream() {
+        return dataOutPutStream;
+    }
+    
 
     
     private User splitRequest(String data){
