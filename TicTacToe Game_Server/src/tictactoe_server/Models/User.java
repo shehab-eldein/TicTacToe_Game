@@ -13,23 +13,23 @@ public class User {
    private int id ;
    private String name;
    private String pass;
-   private int isSigned; 
+   private int queryType; 
 
-    public User(int id, String name, String pass, int isSigned) {
+    public User(int id, String name, String pass, int queryType) {
         this.id = id;
         this.name = name;
         this.pass = pass;
-        this.isSigned = isSigned;
+        this.queryType = queryType;
     }
 
-    public int getIsSigned() {
-        return isSigned;
-    }
-
-    public void setIsSigned(int isSigned) {
-        this.isSigned = isSigned;
+    public int getQueryType() {
+        return queryType;
     }
    
+    public void setQueryType(int queryType) {
+        this.queryType = queryType;
+    }
+
 
     public int getId() {
         return id;

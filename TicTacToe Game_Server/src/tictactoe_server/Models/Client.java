@@ -24,6 +24,7 @@ import tictactoe_server.Repositories.UserRepository;
  */
 //client handler version beta not supported it's just for trying
 public class Client extends Thread {
+
     private static boolean isStarted = false;
     private DataInputStream dataInputStream;
     private PrintStream dataOutPutStream;
@@ -33,7 +34,8 @@ public class Client extends Thread {
 
 
     public Client(Socket socket) throws IOException {
-       this.socket = socket; 
+        this.socket = socket;
+        
     }
 
     @Override
@@ -43,8 +45,7 @@ public class Client extends Thread {
                 //open stream not handled it will be soon
                 String data = dataInputStream.readLine();
                 user = splitRequest(data);
-                if(user.getIsSigned() == 0)
-                    UserRepository.create(user);
+                
             } catch (IOException ex) {
                 try {
                     closeSocket();
@@ -58,19 +59,19 @@ public class Client extends Thread {
 
     
     private User splitRequest(String data){
-     List<String> queryList = Arrays.stream(data.split("\\-")) // split on comma
+        List<String> queryList = Arrays.stream(data.split("\\-")) // split on comma
                 .map(str -> str.trim()) // remove white-spaces
                 .collect(Collectors.toList()); // collect to List  
         return new User(Integer.parseInt(queryList.get(0)), queryList.get(1), queryList.get(2),Integer.parseInt(queryList.get(3)));
     }
 
-    public void closeSocket() throws IOException{
+    public void closeSocket() throws IOException {
         dataInputStream.close();
-       dataOutPutStream.close();
-       isStarted = false;
+        dataOutPutStream.close();
+        isStarted = false;
     }
-    
-       public void StartSocket() throws IOException {
+
+    public void StartSocket() throws IOException {
         dataInputStream = new DataInputStream(socket.getInputStream());
         dataOutPutStream = new PrintStream(socket.getOutputStream());
         isStarted = true;
@@ -85,9 +86,8 @@ public class Client extends Thread {
     public boolean isIsBusy() {
         return isBusy;
     }
-    
-    
-    public boolean getIsStarted(){
+
+    public boolean getIsStarted() {
         return isStarted;
     }
 
