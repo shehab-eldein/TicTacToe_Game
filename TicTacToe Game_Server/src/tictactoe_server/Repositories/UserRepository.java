@@ -26,7 +26,7 @@ public class UserRepository {
 
     public static User getByName(String name,String password) {
         // deal with signin
-        ResultSet resultSet = DBConnector.executeQuery("select * from Users where name ='" + name + "'password='"+password+"'");
+        ResultSet resultSet = DBConnector.executeQuery("select * from Users where name ='" + name + "'and password='"+password+"'");
         try {
             while (resultSet.next()) {
                return new User(resultSet.getInt("id"),resultSet.getString("name"),resultSet.getString("password"),0);

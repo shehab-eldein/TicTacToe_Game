@@ -17,6 +17,7 @@ import java.util.logging.Logger;
 import java.util.stream.Collectors;
 import tictactoe_server.Models.User;
 import tictactoe_server.Repositories.UserRepository;
+import tictactoe_server.Services.Communicator;
 import tictactoe_server.Services.RequestHandler;
 
 /**
@@ -36,6 +37,7 @@ public class Client extends Thread {
 
     public Client(Socket socket) throws IOException {
         this.socket = socket;
+        Communicator.addClient(this);
         
     }
 

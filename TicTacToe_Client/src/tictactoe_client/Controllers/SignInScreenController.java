@@ -58,7 +58,11 @@ public class SignInScreenController implements Initializable {
                 Alerts.showAlert("The server is down!", (e) -> {
                     //Navigation.navigateTo(new ChooseMode(), (Stage) logInButton.getScene().getWindow());
                 });
+            },(responseMessage)->{
+                //response action 
+                System.out.println(responseMessage);
             });
+            
         } catch (IOException ex) {
             Alerts.showAlert("The server is down!", (e) -> {
                 Navigation.navigateTo(new ChooseMode(), (Stage) logInButton.getScene().getWindow());
@@ -74,8 +78,8 @@ public class SignInScreenController implements Initializable {
             Alerts.showAlert("please Enter your password");
 
         } else {
-            gameHandler.writeData(userNameTextField.getText() + "-" +
-                    passwordTextField.getText() + "-1");
+            gameHandler.writeData("0-"+userNameTextField.getText() + "-" +
+                    passwordTextField.getText() + "-0");
         }
     }
 

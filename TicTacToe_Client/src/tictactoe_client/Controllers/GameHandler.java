@@ -9,6 +9,7 @@ import java.io.DataInputStream;
 import java.io.IOException;
 import java.io.PrintStream;
 import java.net.Socket;
+import java.util.function.Consumer;
 import services.ErrorMessageSender;
 
 /**
@@ -22,17 +23,17 @@ public class GameHandler extends Thread {
     private final PrintStream printStream;
     private boolean isRunning = true;
     private final ErrorMessageSender errorMessageSender;
+    private final Consumer<String> responseMessage;
 
-    public GameHandler(ErrorMessageSender errorMessageSender) throws IOException {
-        
-        this.errorMessageSender=errorMessageSender;
-        
+    public GameHandler(ErrorMessageSender errorMessageSender, Consumer reConsumer) throws IOException {
+
+        this.errorMessageSender = errorMessageSender;
+        responseMessage = reConsumer;
         socket = new Socket("127.0.0.1", 5005);
         dataInputstream = new DataInputStream(socket.getInputStream());
         printStream = new PrintStream(socket.getOutputStream());
         start();
     }
-    
 
     @Override
     public void run() {
@@ -45,26 +46,24 @@ public class GameHandler extends Thread {
 
                 if (str != null) {
                     if (!str.isEmpty()) {
-                        System.out.println(str);
+                       responseMessage.accept(str);
                     }
                 }
 
             } catch (IOException ex) {
                 errorMessageSender.send(ex.getMessage());
 //                if (!socket.isConnected()) {
-                    try {
-                        disconnect();
-                    } catch (IOException ex1) {
-                       errorMessageSender.send(ex1.getMessage());
-                    }
+                try {
+                    disconnect();
+                } catch (IOException ex1) {
+                    errorMessageSender.send(ex1.getMessage());
+                }
 //                }
             }
 
         }
 
     }
-
-   
 
     public void disconnect() throws IOException {
         isRunning = false;
@@ -75,7 +74,7 @@ public class GameHandler extends Thread {
     }
 
     public GameHandler connect() throws IOException {
-        GameHandler gameHandler = new GameHandler(errorMessageSender);
+        GameHandler gameHandler = new GameHandler(errorMessageSender,responseMessage);
         gameHandler.start();
         return gameHandler;
     }
@@ -83,5 +82,5 @@ public class GameHandler extends Thread {
     public void writeData(String msg) {
         printStream.println(msg);
     }
-    
+
 }

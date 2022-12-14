@@ -46,6 +46,8 @@ public class SignUpScreenController implements Initializable {
                 Alerts.showAlert("The server is down!", (e) -> {
                     //Navigation.navigateTo(new ChooseMode(), (Stage) logInButton.getScene().getWindow());
                 });
+            },(responseMessage)->{
+                //response action
             });
 
         } catch (IOException ex) {
