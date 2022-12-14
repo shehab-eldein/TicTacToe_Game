@@ -68,10 +68,17 @@ public class SignInScreenController implements Initializable {
 
     @FXML
     public void LogInButtonClick(ActionEvent event) {
-        gameHandler.writeData(userNameTextField.getText() + "-" + passwordTextField.getText() + "-1");
+        if (userNameTextField.getText().isEmpty()) {
+            Alerts.showAlert("please Enter your user name");
+        } else if (passwordTextField.getText().isEmpty()) {
+            Alerts.showAlert("please Enter your password");
+
+        } else {
+            gameHandler.writeData(userNameTextField.getText() + "-" + passwordTextField.getText() + "-1");
+        }
     }
-    
-     @FXML
+
+    @FXML
     public void logInAcountClick(MouseEvent event) {
         try {
             Navigation.navigateTo(FXMLLoader.load(tictactoe_client.TicTacToe_Client.class.getResource("Views/SignUPScreen.fxml")), event);
@@ -79,5 +86,5 @@ public class SignInScreenController implements Initializable {
             ex.printStackTrace();
         }
     }
-    
+
 }

@@ -25,6 +25,7 @@ import services.Navigation;
  * @author hamed
  */
 public class SignUpScreenController implements Initializable {
+
     private GameHandler gameHandler;
     @FXML
     private TextField signUpUserNameTextField;
@@ -56,8 +57,14 @@ public class SignUpScreenController implements Initializable {
 
     @FXML
     private void LogInButtonClick(ActionEvent event) {
-       gameHandler.writeData(signUpUserNameTextField.getText()
+        if (signUpUserNameTextField.getText().isEmpty()) {
+            Alerts.showAlert("Please Enter your user name");
+        } else if (signUpPasswordTextField.getText().isEmpty()) {
+            Alerts.showAlert("Please Enter your password");
+        } else {
+            gameHandler.writeData(signUpUserNameTextField.getText()
                     + "-" + signUpPasswordTextField.getText() + "-0");
+        }
     }
 
     @FXML
@@ -70,6 +77,4 @@ public class SignUpScreenController implements Initializable {
 
     }
 
-}  
-    
-
+}
