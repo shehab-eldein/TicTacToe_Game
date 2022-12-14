@@ -74,7 +74,7 @@ public class SignInScreenController implements Initializable {
      @FXML
     public void logInAcountClick(MouseEvent event) {
         try {
-            Navigation.navigateTo(FXMLLoader.load(tictactoe_client.TicTacToe_Client.class.getResource("Views/SignUpScreen.fxml")), event);
+            Navigation.navigateTo(FXMLLoader.load(tictactoe_client.TicTacToe_Client.class.getResource("Views/SignUPScreen.fxml")), event);
         } catch (IOException ex) {
             ex.printStackTrace();
         }
