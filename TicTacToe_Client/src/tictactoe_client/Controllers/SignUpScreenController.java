@@ -56,7 +56,7 @@ public class SignUpScreenController implements Initializable {
     }
 
     @FXML
-    private void LogInButtonClick(ActionEvent event) {
+    private void SignUPButtonClick(ActionEvent event) {
         if (signUpUserNameTextField.getText().isEmpty()) {
             Alerts.showAlert("Please Enter your user name");
         } else if (signUpPasswordTextField.getText().isEmpty()) {

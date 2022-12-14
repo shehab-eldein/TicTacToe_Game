@@ -74,7 +74,8 @@ public class SignInScreenController implements Initializable {
             Alerts.showAlert("please Enter your password");
 
         } else {
-            gameHandler.writeData(userNameTextField.getText() + "-" + passwordTextField.getText() + "-1");
+            gameHandler.writeData(userNameTextField.getText() + "-" +
+                    passwordTextField.getText() + "-1");
         }
     }
 
