@@ -49,6 +49,8 @@ public class SignInScreenController implements Initializable {
     private Button logInButton;
     @FXML
     private Label createAccountButton;
+    @FXML
+    private Label incorrectLable;
 
     /**
      * Initializes the controller class.
@@ -56,18 +58,21 @@ public class SignInScreenController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         try {
-            // TODO
-            gameHandler = new GameHandler((String message) -> {
+            gameHandler = GameHandler.getInstance((message) -> {
                 Alerts.showAlert("The server is down!", (e) -> {
-                    //Navigation.navigateTo(new ChooseMode(), (Stage) logInButton.getScene().getWindow());
+//                    //Navigation.navigateTo(new ChooseMode(), (Stage) logInButton.getScene().getWindow());
                 });
-            }, (responseMessage) -> {
-                //response action 
-                if(responseMessage.equals("1"))
+            }, (response) -> {
+                if (response.equals("1")) {
                     Platform.runLater(() -> Navigation.navigateTo(new BordBase(), stage));
-
+                    logInButton.setDisable(false);
+                } else {
+                    incorrectLable.setVisible(true);
+                    userNameTextField.clear();
+                    passwordTextField.clear();
+                    logInButton.setDisable(false);
+                }
             });
-
         } catch (IOException ex) {
             Alerts.showAlert("The server is down!", (e) -> {
                 Navigation.navigateTo(new ChooseMode(), stage);
@@ -78,15 +83,24 @@ public class SignInScreenController implements Initializable {
     @FXML
     public void LogInButtonClick(ActionEvent event) {
         stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+        incorrectLable.setVisible(false);
         if (userNameTextField.getText().isEmpty()) {
             Alerts.showAlert("please Enter your user name");
         } else if (passwordTextField.getText().isEmpty()) {
             Alerts.showAlert("please Enter your password");
 
         } else {
-            gameHandler.writeData("0-" + userNameTextField.getText() + "-"
+            try {
+                gameHandler.connect();
+                gameHandler.writeData("0-" + userNameTextField.getText() + "-"
                     + passwordTextField.getText() + "-0");
+                logInButton.setDisable(true);
+            } catch (IOException ex) {
+                Alerts.showAlert(ex.getMessage());
+            }
+            
         }
+
     }
 
     @FXML

@@ -16,24 +16,31 @@ import services.ErrorMessageSender;
  *
  * @author Esraa
  */
-public class GameHandler extends Thread {
+public class GameHandler implements Runnable {
 
-    private final Socket socket;
+    private static GameHandler instance;
+    private Socket socket;
     private final DataInputStream dataInputstream;
     private final PrintStream printStream;
     private boolean isRunning = true;
-    private final ErrorMessageSender errorMessageSender;
-    private final Consumer<String> responseMessage;
+    private  ErrorMessageSender errorMessageSender;
+    private  Consumer<String> responseMessage;
 
-    public GameHandler(ErrorMessageSender errorMessageSender, Consumer reConsumer) throws IOException {
-
+    private GameHandler(ErrorMessageSender errorMessageSender, Consumer reConsumer) throws IOException {
         this.errorMessageSender = errorMessageSender;
         responseMessage = reConsumer;
         socket = new Socket("127.0.0.1", 5005);
         dataInputstream = new DataInputStream(socket.getInputStream());
         printStream = new PrintStream(socket.getOutputStream());
-        start();
-        System.out.println(socket.getInputStream());
+    }
+
+    public static GameHandler getInstance(ErrorMessageSender errorMessageSender,Consumer<String> respose) throws IOException {
+        if (instance == null) {
+            instance = new GameHandler(errorMessageSender,respose);
+        }
+        instance.errorMessageSender=errorMessageSender;
+        instance.responseMessage=respose;
+        return instance;
     }
 
     @Override
@@ -44,10 +51,11 @@ public class GameHandler extends Thread {
             try {
 
                 String str = dataInputstream.readLine();
-  
+
                 if (str != null) {
                     if (!str.isEmpty()) {
-                       responseMessage.accept(str);
+                        responseMessage.accept(str);
+                        System.out.println(socket.getInputStream());
                     }
                 }
 
@@ -74,10 +82,11 @@ public class GameHandler extends Thread {
 
     }
 
-    public GameHandler connect() throws IOException {
-        GameHandler gameHandler = new GameHandler(errorMessageSender,responseMessage);
-        gameHandler.start();
-        return gameHandler;
+    public void connect() throws IOException {      
+        isRunning=true;
+        socket= new Socket("127.0.0.1", 5005);
+        new Thread(this).start();
+                
     }
 
     public void writeData(String msg) {

@@ -16,8 +16,7 @@ public class ResponseHandler {
     public static void response(Client client,String message){
         client.getDataOutPutStream().println(message);
         
-       
-        
+   
     }
     
 }

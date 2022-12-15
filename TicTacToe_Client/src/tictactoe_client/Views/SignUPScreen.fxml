@@ -112,6 +112,11 @@
                   <Image url="@img/x.png" />
                </image>
             </ImageView>
+            <Label fx:id="incorrectLable" layoutX="51.0" layoutY="132.0" prefHeight="18.0" prefWidth="185.0" stylesheets="@Views/style/style.css" text="Your data is wrong please try again" textFill="#e12727" visible="false">
+               <font>
+                  <Font name="Calibri" size="13.0" />
+               </font>
+            </Label>
          </children>
       </AnchorPane>
    </children>

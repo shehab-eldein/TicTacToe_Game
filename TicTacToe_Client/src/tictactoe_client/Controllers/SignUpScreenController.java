@@ -8,14 +8,19 @@ package tictactoe_client.Controllers;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Node;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.input.MouseEvent;
+import javafx.stage.Stage;
 import services.Alerts;
 import services.Navigation;
 
@@ -25,7 +30,7 @@ import services.Navigation;
  * @author hamed
  */
 public class SignUpScreenController implements Initializable {
-
+    private Stage stage;
     private GameHandler gameHandler;
     @FXML
     private TextField signUpUserNameTextField;
@@ -35,37 +40,55 @@ public class SignUpScreenController implements Initializable {
     private Button signUpButton;
     @FXML
     private Label logInAccoutnButton;
+    @FXML
+    private Label incorrectLable;
 
     /**
      * Initializes the controller class.
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        try {
-            gameHandler = new GameHandler((String message) -> {
+       try {
+            gameHandler = GameHandler.getInstance((message) -> {
                 Alerts.showAlert("The server is down!", (e) -> {
-                    //Navigation.navigateTo(new ChooseMode(), (Stage) logInButton.getScene().getWindow());
+//                    //Navigation.navigateTo(new ChooseMode(), (Stage) logInButton.getScene().getWindow());
                 });
-            },(responseMessage)->{
-                //response action
+            }, (response) -> {
+                if (response.equals("1")) {
+                    signUpButton.setDisable(false);
+                    Platform.runLater(() -> Navigation.navigateTo(new BordBase(), stage));
+                } else {
+                    incorrectLable.setVisible(true);
+                    signUpUserNameTextField.clear();
+                    signUpPasswordTextField.clear();
+                    signUpButton.setDisable(false);
+                }
             });
-
         } catch (IOException ex) {
             Alerts.showAlert("The server is down!", (e) -> {
-                //Navigation.navigateTo(new ChooseMode(), (Stage) signUpButton.getScene().getWindow());
+                Navigation.navigateTo(new ChooseMode(), stage);
             });
         }
     }
 
     @FXML
     private void SignUPButtonClick(ActionEvent event) {
+        stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+        incorrectLable.setVisible(false);
         if (signUpUserNameTextField.getText().isEmpty()) {
             Alerts.showAlert("Please Enter your user name");
         } else if (signUpPasswordTextField.getText().isEmpty()) {
             Alerts.showAlert("Please Enter your password");
         } else {
-            gameHandler.writeData(signUpUserNameTextField.getText()
-                    + "-" + signUpPasswordTextField.getText() + "-0");
+            try {
+                gameHandler.connect();
+                gameHandler.writeData("0-"+signUpUserNameTextField.getText()
+                    + "-" + signUpPasswordTextField.getText() + "-1");
+                signUpButton.setDisable(true);
+            } catch (IOException ex) {
+                Alerts.showAlert(ex.getMessage());
+            }
+            
         }
     }
 

@@ -20,7 +20,7 @@ public class RequestHandler {
                 logIn(user,client);
                 break;
             case 1:
-                signUP(user);
+                signUP(user,client);
         }
         
     }
@@ -30,9 +30,12 @@ public class RequestHandler {
        else
            ResponseHandler.response(client, "0"); 
     }
-    private static void signUP(User user){
-         UserRepository.create(user);
-        
+    private static void signUP(User user,Client client){
+         ;
+        if(UserRepository.create(user) != null)
+            ResponseHandler.response(client, "1");
+        else
+            ResponseHandler.response(client, "0");
     }
     
 }
