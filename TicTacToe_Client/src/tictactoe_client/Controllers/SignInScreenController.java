@@ -11,12 +11,14 @@ import java.net.URL;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.event.Event;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Node;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
@@ -38,6 +40,7 @@ public class SignInScreenController implements Initializable {
 
     private GameHandler gameHandler;
     private Socket mysocket;
+    private Stage stage;
     @FXML
     private TextField userNameTextField;
     @FXML
@@ -58,28 +61,31 @@ public class SignInScreenController implements Initializable {
                 Alerts.showAlert("The server is down!", (e) -> {
                     //Navigation.navigateTo(new ChooseMode(), (Stage) logInButton.getScene().getWindow());
                 });
-            },(responseMessage)->{
+            }, (responseMessage) -> {
                 //response action 
-                System.out.println(responseMessage);
+                if(responseMessage.equals("1"))
+                    Platform.runLater(() -> Navigation.navigateTo(new BordBase(), stage));
+
             });
-            
+
         } catch (IOException ex) {
             Alerts.showAlert("The server is down!", (e) -> {
-                Navigation.navigateTo(new ChooseMode(), (Stage) logInButton.getScene().getWindow());
+                Navigation.navigateTo(new ChooseMode(), stage);
             });
         }
     }
 
     @FXML
     public void LogInButtonClick(ActionEvent event) {
+        stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
         if (userNameTextField.getText().isEmpty()) {
             Alerts.showAlert("please Enter your user name");
         } else if (passwordTextField.getText().isEmpty()) {
             Alerts.showAlert("please Enter your password");
 
         } else {
-            gameHandler.writeData("0-"+userNameTextField.getText() + "-" +
-                    passwordTextField.getText() + "-0");
+            gameHandler.writeData("0-" + userNameTextField.getText() + "-"
+                    + passwordTextField.getText() + "-0");
         }
     }
 

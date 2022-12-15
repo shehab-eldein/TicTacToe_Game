@@ -8,6 +8,7 @@ package tictactoe_server.Services;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Vector;
 import tictactoe_server.Models.Client;
 import tictactoe_server.Models.User;
 
@@ -18,29 +19,25 @@ import tictactoe_server.Models.User;
  */
 public class Communicator {
     
-      private static List<Client> clients = new ArrayList<>();
+      private static Vector<Client> clients = new Vector<>();
 
     public static void addClient (Client client) throws IOException {
         clients.add(client);
-        client.StartSocket();
     }
 
     public static void reset() {
-        clients = new ArrayList<>();
+        clients = new Vector<>();
     }
 
     public static int getUserCount() {
         return clients.size();
     }
 
-    public static void disconnectClosed() {
+    public static void disconnectClosed() throws IOException {
       for(Client client: clients) {
-            if(!client.getIsStarted()){
-                clients.remove(client);
-                
-            }
+            client.closeSocket();
         }
-        clients.removeIf(client -> !client.getIsStarted());
+      clients.clear();
     }
 
     public static List<User> getUsers() {

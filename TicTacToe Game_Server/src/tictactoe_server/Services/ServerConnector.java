@@ -18,27 +18,26 @@ import tictactoe_server.Models.Client;
  */
 public class ServerConnector implements Runnable {
 
-    private Client clientHandler;
-    private final ServerSocket serverSock;
-    private final Thread thread = new Thread(this);
+    private ServerSocket serverSock;
     private boolean isServerConected = false;
     private Consumer<String> error;
+    private final int portNumber;
 
-    public ServerConnector(ServerSocket serverSock, Consumer error) throws IOException {
-        this.serverSock = serverSock;
+    public ServerConnector(int portNumber, Consumer error) throws IOException {
         this.error = error;
+        this.portNumber = portNumber;
     }
 
     @Override
     public void run() {
         while (isServerConected) {
             try {
-                clientHandler = new Client(serverSock.accept());
+                new Client(serverSock.accept());
             } catch (IOException ex) {
                 error.accept(ex.getMessage());
                 try {
-                    clientHandler.closeSocket();
                     disCounnect();
+                    serverSock = null;
                 } catch (IOException ex1) {
                     error.accept(ex.getMessage());
 
@@ -48,15 +47,15 @@ public class ServerConnector implements Runnable {
     }
 
     public void connect() throws IOException {
+        this.serverSock = new ServerSocket(portNumber);
         isServerConected = true;
-        thread.start();
+        new Thread(this).start();
     }
 
     public void disCounnect() throws IOException {
-        serverSock.close();
         isServerConected = false;
-        System.out.println(thread.isAlive());
-        System.err.println(serverSock.isClosed());
+        Communicator.disconnectClosed();
+        serverSock.close();
     }
 
 }

@@ -48,13 +48,7 @@ public class ServerScreenBase extends AnchorPane {
         imageView.setLayoutX(287.0);
         imageView.setPickOnBounds(true);
 //        imageView.setImage(new Image(getClass().getResource("../../../TicTacToe_Client/src/tictactoe_client/Views/img/start.png").toExternalForm()));
-        try {
-            serverConnector =  new ServerConnector(new ServerSocket(5005),(message)->{
-                System.out.println(message);
-            });
-        } catch (IOException ex) {
-            Logger.getLogger(ServerScreenBase.class.getName()).log(Level.SEVERE, null, ex);
-        }
+
         btnStartServer.setLayoutX(187.0);
         btnStartServer.setLayoutY(346.0);
         btnStartServer.setMnemonicParsing(false);

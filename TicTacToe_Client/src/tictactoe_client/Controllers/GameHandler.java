@@ -33,6 +33,7 @@ public class GameHandler extends Thread {
         dataInputstream = new DataInputStream(socket.getInputStream());
         printStream = new PrintStream(socket.getOutputStream());
         start();
+        System.out.println(socket.getInputStream());
     }
 
     @Override
@@ -43,7 +44,7 @@ public class GameHandler extends Thread {
             try {
 
                 String str = dataInputstream.readLine();
-
+  
                 if (str != null) {
                     if (!str.isEmpty()) {
                        responseMessage.accept(str);

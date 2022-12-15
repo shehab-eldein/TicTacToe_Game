@@ -17,7 +17,7 @@
                   <Font name="System Bold Italic" size="17.0" />
                </font>
             </Label>
-            <Button fx:id="startServerButton" layoutX="43.0" layoutY="361.0" mnemonicParsing="false" onAction="#startServerButtonClicked" prefHeight="38.0" prefWidth="90.0" styleClass="signinButton" stylesheets="@../style/style.css" text="Start" textFill="WHITE">
+            <Button fx:id="startServerButton" layoutX="92.0" layoutY="359.0" mnemonicParsing="false" onAction="#startServerButtonClicked" prefHeight="38.0" prefWidth="90.0" styleClass="signinButton" stylesheets="@../style/style.css" text="Start" textFill="WHITE">
                <font>
                   <Font name="System Bold Italic" size="15.0" />
                </font>
@@ -37,17 +37,12 @@
                   <Font name="System Bold" size="16.0" />
                </font>
             </Label>
-            <Button fx:id="stopServerButton" layoutX="143.0" layoutY="360.0" mnemonicParsing="false" onAction="#stopServerButtonClicked" prefHeight="38.0" prefWidth="90.0" styleClass="signinButton" stylesheets="@../style/style.css" text="Stop" textFill="WHITE">
-               <font>
-                  <Font name="System Bold Italic" size="15.0" />
-               </font>
-            </Button>
-            <ImageView fitHeight="17.0" fitWidth="16.0" layoutX="137.0" layoutY="426.0" pickOnBounds="true" preserveRatio="true">
+            <ImageView fitHeight="17.0" fitWidth="16.0" layoutX="135.0" layoutY="426.0" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@../style/o.png" />
                </image>
             </ImageView>
-            <ImageView fitHeight="17.0" fitWidth="16.0" layoutX="121.0" layoutY="426.0" pickOnBounds="true" preserveRatio="true">
+            <ImageView fitHeight="17.0" fitWidth="16.0" layoutX="119.0" layoutY="426.0" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@../style/x.png" />
                </image>

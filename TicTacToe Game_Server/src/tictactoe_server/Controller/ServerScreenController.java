@@ -33,8 +33,6 @@ public class ServerScreenController implements Initializable {
     @FXML
     private Label serverStatusLable;
     @FXML
-    private Button stopServerButton;
-    @FXML
     private PieChart UsersPieChart;
     private ServerConnector serverConnector;
 
@@ -44,8 +42,7 @@ public class ServerScreenController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         try {
-            serverConnector = new ServerConnector(new ServerSocket(5005), (message) -> {
-                System.out.println(message);
+            serverConnector = new ServerConnector(5005, (message) -> {
             });
         } catch (IOException ex) {
             Logger.getLogger(ServerScreenBase.class.getName()).log(Level.SEVERE, null, ex);
@@ -54,23 +51,21 @@ public class ServerScreenController implements Initializable {
 
     @FXML
     public void startServerButtonClicked(ActionEvent event) {
-        try {
-            serverConnector.connect();
-            serverStatusLable.setText("On");
+        try {     
+            if(startServerButton.getText().equals("Start")){
+                serverConnector.connect();
+                serverStatusLable.setText("On");
+                startServerButton.setText("Stop");
+            }else{
+                serverConnector.disCounnect();
+                serverStatusLable.setText("Off");
+                startServerButton.setText("Start");
+            }
+
         } catch (IOException ex) {
             serverStatusLable.setText("Off");
         }
     }
     
-    
-    @FXML
-    public void stopServerButtonClicked(ActionEvent event) {
-        try {
-            serverConnector.disCounnect();
-            serverStatusLable.setText("Off");
-        } catch (IOException ex) {
-            serverStatusLable.setText("On");
-        }
-    }
 
 }

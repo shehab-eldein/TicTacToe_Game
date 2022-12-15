@@ -27,7 +27,7 @@ import tictactoe_server.Services.RequestHandler;
 //client handler version beta not supported it's just for trying
 public class Client extends Thread {
 
-    private static boolean isStarted = false;
+    private static boolean isStarted = true;
     private DataInputStream dataInputStream;
     private PrintStream dataOutPutStream;
     private User user;
@@ -37,8 +37,9 @@ public class Client extends Thread {
 
     public Client(Socket socket) throws IOException {
         this.socket = socket;
+        StartSocket();
+        start();
         Communicator.addClient(this);
-        
     }
 
     @Override
@@ -49,8 +50,6 @@ public class Client extends Thread {
                 String data = dataInputStream.readLine();
                 user = splitRequest(data);
                 RequestHandler.queryHandler(user, this);
-                
-                
             } catch (IOException ex) {
                 try {
                     closeSocket();
@@ -62,9 +61,6 @@ public class Client extends Thread {
         }
     }
 
-    public DataInputStream getDataInputStream() {
-        return dataInputStream;
-    }
 
     public PrintStream getDataOutPutStream() {
         return dataOutPutStream;
@@ -90,7 +86,6 @@ public class Client extends Thread {
         dataOutPutStream = new PrintStream(socket.getOutputStream());
         isStarted = true;
         isBusy = false;
-        start();
     }
 
     public static boolean isIsStarted() {
