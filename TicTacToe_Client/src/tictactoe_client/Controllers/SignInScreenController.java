@@ -116,7 +116,7 @@ public class SignInScreenController implements Initializable {
 
         } else {
             gameHandler.writeData("0-" + userNameTextField.getText() + "-"
-                    + passwordTextField.getText() + "-0");
+                    + passwordTextField.getText());
             logInButton.setDisable(true);
             connectingLable.setVisible(true);
 

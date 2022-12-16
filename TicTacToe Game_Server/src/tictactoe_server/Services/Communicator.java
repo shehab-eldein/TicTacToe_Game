@@ -12,16 +12,15 @@ import java.util.Vector;
 import tictactoe_server.Models.Client;
 import tictactoe_server.Models.User;
 
-
 /**
  *
  * @author DELL
  */
 public class Communicator {
-    
-      private static Vector<Client> clients = new Vector<>();
 
-    public static void addClient (Client client) throws IOException {
+    private static Vector<Client> clients = new Vector<>();
+
+    public static void addClient(Client client) throws IOException {
         clients.add(client);
     }
 
@@ -34,14 +33,14 @@ public class Communicator {
     }
 
     public static void disconnectClosed() throws IOException {
-      for(Client client: clients) {
+        for (Client client : clients) {
             client.closeSocket();
         }
-      clients.clear();
+        clients.clear();
     }
 
     public static List<User> getUsers(Client user) {
-    List<User> users = new ArrayList<>();
+        List<User> users = new ArrayList<>();
         for(Client client: clients) {
             if(!user.getUser().getName().equals(client.getUser().getName()))
                 users.add(client.getUser());

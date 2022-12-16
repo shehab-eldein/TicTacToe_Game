@@ -58,7 +58,11 @@ public class SignUpScreenController implements Initializable {
                 });
             }, (response) -> {
                 if (response.equals("1")) {
-                    Platform.runLater(() -> Navigation.navigateTo(new BordBase(), stage));
+                    try {
+                        Navigation.navigateTo(FXMLLoader.load(tictactoe_client.TicTacToe_Client.class.getResource("Views/ChoosePlayers.fxml")), stage);
+                    } catch (IOException ex) {
+                       ex.printStackTrace();
+                    }
                     signUpButton.setDisable(false);
                 } else if (response.equals("-1")) {
                     connectingLable.setVisible(false);
@@ -100,8 +104,8 @@ public class SignUpScreenController implements Initializable {
         } else if (signUpPasswordTextField.getText().isEmpty()) {
             Alerts.showAlert("Please Enter your password");
         } else {
-            gameHandler.writeData("0-" + signUpUserNameTextField.getText()
-                    + "-" + signUpPasswordTextField.getText() + "-1");
+            gameHandler.writeData("1-" + signUpUserNameTextField.getText()
+                    + "-" + signUpPasswordTextField.getText());
             signUpButton.setDisable(true);
             connectingLable.setVisible(true);
 

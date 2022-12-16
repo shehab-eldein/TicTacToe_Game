@@ -24,7 +24,7 @@
             </Label>
          </children>
       </AnchorPane>
-      <ListView fx:id="onlinePlayersListView" layoutX="266.0" layoutY="147.0" prefHeight="211.0" prefWidth="410.0" />
+      <ListView fx:id="onlinePlayersListView" editable="true" layoutX="266.0" layoutY="147.0" prefHeight="211.0" prefWidth="410.0" />
       <ImageView fitHeight="26.0" fitWidth="16.0" layoutX="443.0" layoutY="423.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@img/x.png" />
@@ -60,7 +60,7 @@
             <Image url="@img/success.png" />
          </image>
       </ImageView>
-      <Button fx:id="askUserButton" layoutX="536.0" layoutY="372.0" mnemonicParsing="false" onAction="#ask" prefHeight="25.0" prefWidth="64.0" styleClass="signinButton" stylesheets="@style/style.css" text="Ask" textFill="WHITE" />
+      <Button fx:id="askUserButton" layoutX="536.0" layoutY="372.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="64.0" styleClass="signinButton" stylesheets="@style/style.css" text="Ask" textFill="WHITE" />
       <Button fx:id="playButton" disable="true" layoutX="610.0" layoutY="372.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="64.0" styleClass="signinButton" stylesheets="@style/style.css" text="Play" textFill="WHITE" />
    </children>
 </AnchorPane>

@@ -16,12 +16,13 @@ import tictactoe_server.Models.User;
 public class RequestStringHandler {
     
     public static String collect(List<User> clients){
-        if(clients.isEmpty())
+        if(clients == null)
             return "-1";
         String request = "";
         int index = 1;
         for(User client : clients){
-            request += (index +" "+ client.getName() + "-");
+            request += (client.getName() + "-");
+            index++;
         }
         return request;
     }

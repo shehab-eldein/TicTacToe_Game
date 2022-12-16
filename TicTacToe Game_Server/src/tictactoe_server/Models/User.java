@@ -10,30 +10,17 @@ package tictactoe_server.Models;
  * @author DELL
  */
 public class User {
-   private int id ;
    private String name;
    private String pass;
-   private int queryType; 
 
-    public User(int id, String name, String pass, int queryType) {
-        this.id = id;
+    public User(String name, String pass) {
         this.name = name;
         this.pass = pass;
-        this.queryType = queryType;
     }
 
-    public int getQueryType() {
-        return queryType;
-    }
    
-    public void setQueryType(int queryType) {
-        this.queryType = queryType;
-    }
 
-
-    public int getId() {
-        return id;
-    }
+   
 
     public String getName() {
         return name;
@@ -43,9 +30,6 @@ public class User {
         return pass;
     }
 
-    public void setId(int id) {
-        this.id = id;
-    }
 
     public void setName(String name) {
         this.name = name;

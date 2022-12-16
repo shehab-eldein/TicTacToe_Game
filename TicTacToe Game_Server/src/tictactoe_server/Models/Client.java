@@ -31,6 +31,8 @@ public class Client extends Thread {
     private DataInputStream dataInputStream;
     private PrintStream dataOutPutStream;
     private User user;
+    private int requestCode;
+    private String request; 
     private boolean isBusy;
     private Socket socket;
 
@@ -39,7 +41,6 @@ public class Client extends Thread {
         this.socket = socket;
         StartSocket();
         start();
-        Communicator.addClient(this);
     }
 
     @Override
@@ -47,8 +48,8 @@ public class Client extends Thread {
         while (isStarted) {
             try {
                 
-                String data = dataInputStream.readLine();
-                user = splitRequest(data);
+                request = dataInputStream.readLine();
+                setRequestCode(request);
                 RequestHandler.queryHandler(this);
             } catch (IOException ex) {
                 try {
@@ -65,14 +66,8 @@ public class Client extends Thread {
     public PrintStream getDataOutPutStream() {
         return dataOutPutStream;
     }
-    
-
-    
-    private User splitRequest(String data){
-        List<String> queryList = Arrays.stream(data.split("\\-")) // split on comma
-                .map(str -> str.trim()) // remove white-spaces
-                .collect(Collectors.toList()); // collect to List  
-        return new User(Integer.parseInt(queryList.get(0)), queryList.get(1), queryList.get(2),Integer.parseInt(queryList.get(3)));
+    private void setRequestCode(String data){
+       requestCode = Integer.parseInt(data.charAt(0) + "");
     }
 
     public void closeSocket() throws IOException {
@@ -102,5 +97,16 @@ public class Client extends Thread {
 
     public User getUser() {
         return user;
+    }
+    
+    public void setUser(User user) {
+        this.user = user;
+    }
+    public int getRequestCode() {
+        return requestCode;
+    }
+
+    public String getRequest() {
+        return request;
     }
 }
