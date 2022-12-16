@@ -22,6 +22,8 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
 import services.Alerts;
+import services.Navigation;
+import services.StageSaver;
 import tictactoe_client.Controllers.GameHandler;
 
 /**
@@ -66,6 +68,11 @@ public class ChoosePlayersController implements Initializable {
                                     + " wants to play with You", (accept) -> {
                                         System.out.println("accept");
                                         gameHandler.writeData("5-" + splitRequest(response).get(1));
+                                        Platform.runLater(() -> {
+
+                                            Navigation.navigateTo(new BordBase(), StageSaver.getStageSeverInstance().getStage());
+
+                                        });
 
                                     }, (reject) -> {
 
@@ -79,13 +86,15 @@ public class ChoosePlayersController implements Initializable {
                     } else if (splitRequest(response).get(0).equals("5")) {
                         Platform.runLater(() -> {
 
+                            Navigation.navigateTo(new BordBase(), StageSaver.getStageSeverInstance().getStage());
+
                         });
 
                     } else if (splitRequest(response).get(0).equals("6")) {
                         Platform.runLater(() -> {
-                              Alerts.showAlert(splitRequest(response).get(1)+" reject your request", (message)->{
-                              
-                              });
+                            Alerts.showAlert(splitRequest(response).get(1) + " reject your request", (message) -> {
+
+                            });
                         });
 
                     } else {

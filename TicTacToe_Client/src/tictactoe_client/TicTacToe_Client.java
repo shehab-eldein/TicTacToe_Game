@@ -11,6 +11,7 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 import services.Navigation;
+import services.StageSaver;
 import tictactoe_client.Controllers.Start;
 
 /**
@@ -22,6 +23,8 @@ public class TicTacToe_Client extends Application {
     @Override
     public void start(Stage stage) throws Exception {
         Navigation.navigateTo(new Start(), stage);
+        StageSaver stageSever=StageSaver.getStageSeverInstance();
+        stageSever.setStage(stage);
    
     }
 
