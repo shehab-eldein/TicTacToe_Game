@@ -80,5 +80,6 @@ public class ChoosePlayersController implements Initializable {
     @FXML
     public void ask() {
         System.out.println(onlinePlayersListView.getSelectionModel().getSelectedItem());
+        gameHandler.writeData("3-" +onlinePlayersListView.getSelectionModel().getSelectedItem());
     }
 }
