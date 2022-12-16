@@ -34,6 +34,9 @@ public class RequestHandler {
             case 2:
                 getActivePlayers(client);
                 break;
+            case 3:
+                sendGameRequest(client);
+                break;
         }
 
     }
@@ -79,5 +82,18 @@ public class RequestHandler {
                 .collect(Collectors.toList()); // collect to List  
 
         return new User(queryList.get(1), queryList.get(2));
+    }
+
+    private static String splitUserName(String data) {
+        List<String> queryList = Arrays.stream(data.split("\\-")) // split on comma
+                .map(str -> str.trim()) // remove white-spaces
+                .collect(Collectors.toList()); // collect to List  
+
+        return queryList.get(1);
+    }
+
+    private static void sendGameRequest(Client client) {
+      ResponseHandler.response(Communicator.getClientByName(splitUserName(client.getRequest())), 
+            "4-"+  client.getName());
     }
 }
