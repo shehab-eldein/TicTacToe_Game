@@ -58,11 +58,15 @@ public class SignUpScreenController implements Initializable {
                 });
             }, (response) -> {
                 if (response.equals("1")) {
-                    try {
-                        Navigation.navigateTo(FXMLLoader.load(tictactoe_client.TicTacToe_Client.class.getResource("Views/ChoosePlayers.fxml")), stage);
-                    } catch (IOException ex) {
-                       ex.printStackTrace();
-                    }
+
+                    Platform.runLater(() -> {
+                        try {
+                            Navigation.navigateTo(FXMLLoader.load(tictactoe_client.TicTacToe_Client.class.getResource("Views/ChoosePlayers.fxml")), stage);
+                        } catch (IOException ex) {
+                            Logger.getLogger(SignUpScreenController.class.getName()).log(Level.SEVERE, null, ex);
+                        }
+                    });
+
                     signUpButton.setDisable(false);
                 } else if (response.equals("-1")) {
                     connectingLable.setVisible(false);

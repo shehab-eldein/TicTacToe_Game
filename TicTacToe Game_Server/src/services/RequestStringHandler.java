@@ -19,10 +19,8 @@ public class RequestStringHandler {
         if(clients == null)
             return "-1";
         String request = "";
-        int index = 1;
         for(User client : clients){
             request += (client.getName() + "-");
-            index++;
         }
         return request;
     }

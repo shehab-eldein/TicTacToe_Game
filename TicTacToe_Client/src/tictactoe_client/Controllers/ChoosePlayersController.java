@@ -56,7 +56,8 @@ public class ChoosePlayersController implements Initializable {
                 gameHandler = GameHandler.getInstance((message) -> {
                     System.out.println(message);
                 }, (response) -> {
-                    usersName = response;
+                    ObservableList<String> names = FXCollections.observableArrayList(splitRequest(response));
+                    onlinePlayersListView.setItems(names);
                 });
                 gameHandler.connect();
                 gameHandler.writeData("2");
@@ -65,12 +66,6 @@ public class ChoosePlayersController implements Initializable {
                 ex.printStackTrace();
             }
 
-            //clients = splitRequest("Rafeef-Esam-Ali-Almahy");
-            clients = splitRequest(usersName);
-            System.err.println(clients.get(0));
-
-            ObservableList<String> names = FXCollections.observableArrayList(clients);
-            onlinePlayersListView.setItems(names);
         });
 
     }
