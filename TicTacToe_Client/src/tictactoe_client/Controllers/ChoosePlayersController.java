@@ -77,6 +77,7 @@ public class ChoosePlayersController implements Initializable {
         return queryList;
     }
 
+    @FXML
     public void ask() {
         System.out.println(onlinePlayersListView.getSelectionModel().getSelectedItem());
     }
