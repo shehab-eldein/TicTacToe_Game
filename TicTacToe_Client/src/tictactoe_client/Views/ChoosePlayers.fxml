@@ -60,7 +60,7 @@
             <Image url="@img/success.png" />
          </image>
       </ImageView>
-      <Button fx:id="askUserButton" layoutX="536.0" layoutY="372.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="64.0" styleClass="signinButton" stylesheets="@style/style.css" text="Ask" textFill="WHITE" />
+      <Button fx:id="askUserButton" layoutX="536.0" layoutY="372.0" mnemonicParsing="false" onAction="#ask" prefHeight="25.0" prefWidth="64.0" styleClass="signinButton" stylesheets="@style/style.css" text="Ask" textFill="WHITE" />
       <Button fx:id="playButton" disable="true" layoutX="610.0" layoutY="372.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="64.0" styleClass="signinButton" stylesheets="@style/style.css" text="Play" textFill="WHITE" />
    </children>
 </AnchorPane>
