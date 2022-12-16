@@ -5,6 +5,10 @@
  */
 package tictactoe_server.Services;
 
+import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import services.RequestStringHandler;
 import tictactoe_server.Models.Client;
 import tictactoe_server.Models.User;
 import tictactoe_server.Repositories.UserRepository;
@@ -14,28 +18,43 @@ import tictactoe_server.Repositories.UserRepository;
  * @author Esraa
  */
 public class RequestHandler {
-    public static void queryHandler(User user,Client client){
-        switch(user.getQueryType()){
+    public static void queryHandler(Client client){
+        switch(client.getUser().getQueryType()){
             case 0:
-                logIn(user,client);
+                logIn(client);
                 break;
             case 1:
-                signUP(user,client);
+                signUP(client);
+                break;
+            case 2:
+                getActivePlayers(client);
+                break;   
         }
         
     }
-    private static  void  logIn(User user,Client client){
-       if(UserRepository.getByName(user.getName(),user.getPass())!=null)
-           ResponseHandler.response(client, "1");
-       else
-           ResponseHandler.response(client, "0"); 
+    private static  void  logIn(Client client){
+        try {
+            if(UserRepository.getByName(client.getUser().getName(),client.getUser().getPass())!=null)
+                ResponseHandler.response(client, "1");
+            
+            else 
+                ResponseHandler.response(client, "0");
+        } catch (SQLException ex) {
+            ResponseHandler.response(client, "-1");
+        }
     }
-    private static void signUP(User user,Client client){
-         ;
-        if(UserRepository.create(user) != null)
-            ResponseHandler.response(client, "1");
-        else
-            ResponseHandler.response(client, "0");
+    private static void signUP(Client client){
+        try {
+            if(UserRepository.create(client.getUser()) != null)
+                ResponseHandler.response(client, "1");
+            else
+                ResponseHandler.response(client, "0");
+        } catch (SQLException ex) {
+            ResponseHandler.response(client, "-1");
+        }
     }
     
+    private static void getActivePlayers(Client client){
+        ResponseHandler.response(client, RequestStringHandler.collect(Communicator.getUsers(client)));
+    }
 }

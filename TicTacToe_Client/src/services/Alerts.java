@@ -19,9 +19,8 @@ public class Alerts {
     
     public static void showAlert(String message, Consumer consumer){
         alert.setContentText(message);
-        if(alert.showAndWait().get().getButtonData()==ButtonBar.ButtonData.OK_DONE)
+        if(alert.showAndWait().get().getButtonData()==ButtonBar.ButtonData.OK_DONE){}
             consumer.accept(null);
-        alert.show();
     }
     
     public static void showAlert(String message){

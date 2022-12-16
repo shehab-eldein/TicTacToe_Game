@@ -18,22 +18,18 @@ import tictactoe_server.Services.DBConnector;
  */
 public class UserRepository {
 
-    public static User create(User user) {
+    public static User create(User user) throws SQLException {
         //deal with new user
         DBConnector.executeUpdate("Insert into Users(name,password)  values('" + user.getName() + "','" + user.getPass() + "')");
         return getByName(user.getName(),user.getPass());
     }
 
-    public static User getByName(String name,String password) {
+    public static User getByName(String name,String password) throws SQLException {
         // deal with signin
         ResultSet resultSet = DBConnector.executeQuery("select * from Users where name ='" + name + "'and password='"+password+"'");
-        try {
-            while (resultSet.next()) {
+        while (resultSet.next()) {
                return new User(resultSet.getInt("id"),resultSet.getString("name"),resultSet.getString("password"),0);
             }
-        } catch (SQLException ex) {
-            Logger.getLogger(UserRepository.class.getName()).log(Level.SEVERE, null, ex);
-        }
         return null;
     }
 }

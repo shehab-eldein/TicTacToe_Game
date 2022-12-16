@@ -51,6 +51,8 @@ public class SignInScreenController implements Initializable {
     private Label createAccountButton;
     @FXML
     private Label incorrectLable;
+    @FXML
+    private Label connectingLable;
 
     /**
      * Initializes the controller class.
@@ -64,9 +66,26 @@ public class SignInScreenController implements Initializable {
                 });
             }, (response) -> {
                 if (response.equals("1")) {
-                    Platform.runLater(() -> Navigation.navigateTo(new BordBase(), stage));
+                    Platform.runLater(() -> {
+                        try {
+                            Navigation.navigateTo(FXMLLoader.load(tictactoe_client.TicTacToe_Client.class.getResource("Views/ChoosePlayers.fxml")), stage);
+                        } catch (IOException ex) {
+                            ex.printStackTrace();
+                        }
+                    });
                     logInButton.setDisable(false);
-                } else {
+                } else if (response.equals("-1")) {
+                    connectingLable.setVisible(false);
+                    Platform.runLater(() -> {
+                        Alerts.showAlert("The server is down!", (e) -> {
+                            userNameTextField.clear();
+                            passwordTextField.clear();
+                            logInButton.setDisable(false);
+                        });
+                    });
+
+                } else if (response.equals("0")) {
+                    connectingLable.setVisible(true);
                     incorrectLable.setVisible(true);
                     userNameTextField.clear();
                     passwordTextField.clear();
@@ -82,6 +101,12 @@ public class SignInScreenController implements Initializable {
 
     @FXML
     public void LogInButtonClick(ActionEvent event) {
+        if (stage == null) {
+            try {
+                gameHandler.connect();
+            } catch (IOException ex) {
+            }
+        }
         stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
         incorrectLable.setVisible(false);
         if (userNameTextField.getText().isEmpty()) {
@@ -90,15 +115,11 @@ public class SignInScreenController implements Initializable {
             Alerts.showAlert("please Enter your password");
 
         } else {
-            try {
-                gameHandler.connect();
-                gameHandler.writeData("0-" + userNameTextField.getText() + "-"
+            gameHandler.writeData("0-" + userNameTextField.getText() + "-"
                     + passwordTextField.getText() + "-0");
-                logInButton.setDisable(true);
-            } catch (IOException ex) {
-                Alerts.showAlert(ex.getMessage());
-            }
-            
+            logInButton.setDisable(true);
+            connectingLable.setVisible(true);
+
         }
 
     }

@@ -40,12 +40,12 @@ public class Communicator {
       clients.clear();
     }
 
-    public static List<User> getUsers() {
+    public static List<User> getUsers(Client user) {
     List<User> users = new ArrayList<>();
         for(Client client: clients) {
-            users.add(client.getUser());
+            if(!user.getUser().getName().equals(client.getUser().getName()))
+                users.add(client.getUser());
         }
         return users;
-       // return clients.stream().map(Client::getUser).collect(Collectors.toList());
     }
 }

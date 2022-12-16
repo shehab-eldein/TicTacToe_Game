@@ -53,6 +53,11 @@
                   <Image url="@img/o.png" />
                </image>
             </ImageView>
+            <ImageView fitHeight="89.0" fitWidth="82.0" layoutX="45.0" layoutY="70.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@img/x.png" />
+               </image>
+            </ImageView>
          </children></AnchorPane>
       <AnchorPane layoutX="414.0" prefHeight="450.0" prefWidth="287.0" styleClass="RightSideSignInBackground" stylesheets="@style/style.css">
          <children>
@@ -108,6 +113,11 @@
                </image>
             </ImageView>
             <Label fx:id="incorrectLable" layoutX="36.0" layoutY="134.0" stylesheets="@Views/style/style.css" text="Your usarname and password is incorrect" textFill="#e12727" visible="false">
+               <font>
+                  <Font name="Calibri" size="13.0" />
+               </font>
+            </Label>
+            <Label fx:id="connectingLable" layoutX="99.0" layoutY="134.0" stylesheets="@Views/style/style.css" text="Connecting...." textFill="#e12727" visible="false">
                <font>
                   <Font name="Calibri" size="13.0" />
                </font>

@@ -117,6 +117,11 @@
                   <Font name="Calibri" size="13.0" />
                </font>
             </Label>
+            <Label fx:id="connectingLable" layoutX="100.0" layoutY="133.0" stylesheets="@Views/style/style.css" text="Connecting...." textFill="#e12727" visible="false">
+               <font>
+                  <Font name="Calibri" size="13.0" />
+               </font>
+            </Label>
          </children>
       </AnchorPane>
    </children>

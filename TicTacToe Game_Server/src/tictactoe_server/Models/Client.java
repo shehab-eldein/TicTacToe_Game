@@ -49,7 +49,7 @@ public class Client extends Thread {
                 
                 String data = dataInputStream.readLine();
                 user = splitRequest(data);
-                RequestHandler.queryHandler(user, this);
+                RequestHandler.queryHandler(this);
             } catch (IOException ex) {
                 try {
                     closeSocket();

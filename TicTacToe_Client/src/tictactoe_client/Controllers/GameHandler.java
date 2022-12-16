@@ -55,7 +55,6 @@ public class GameHandler implements Runnable {
                 if (str != null) {
                     if (!str.isEmpty()) {
                         responseMessage.accept(str);
-                        System.out.println(socket.getInputStream());
                     }
                 }
 

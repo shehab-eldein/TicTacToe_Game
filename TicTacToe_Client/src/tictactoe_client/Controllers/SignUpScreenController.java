@@ -30,6 +30,7 @@ import services.Navigation;
  * @author hamed
  */
 public class SignUpScreenController implements Initializable {
+
     private Stage stage;
     private GameHandler gameHandler;
     @FXML
@@ -42,22 +43,35 @@ public class SignUpScreenController implements Initializable {
     private Label logInAccoutnButton;
     @FXML
     private Label incorrectLable;
+    @FXML
+    private Label connectingLable;
 
     /**
      * Initializes the controller class.
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-       try {
+        try {
             gameHandler = GameHandler.getInstance((message) -> {
                 Alerts.showAlert("The server is down!", (e) -> {
 //                    //Navigation.navigateTo(new ChooseMode(), (Stage) logInButton.getScene().getWindow());
                 });
             }, (response) -> {
                 if (response.equals("1")) {
-                    signUpButton.setDisable(false);
                     Platform.runLater(() -> Navigation.navigateTo(new BordBase(), stage));
-                } else {
+                    signUpButton.setDisable(false);
+                } else if (response.equals("-1")) {
+                    connectingLable.setVisible(false);
+                    Platform.runLater(() -> {
+                        Alerts.showAlert("The server is down!", (e) -> {
+                            signUpUserNameTextField.clear();
+                            signUpPasswordTextField.clear();
+                            signUpButton.setDisable(false);
+                        });
+                    });
+
+                } else if (response.equals("0")) {
+                    connectingLable.setVisible(true);
                     incorrectLable.setVisible(true);
                     signUpUserNameTextField.clear();
                     signUpPasswordTextField.clear();
@@ -73,6 +87,12 @@ public class SignUpScreenController implements Initializable {
 
     @FXML
     private void SignUPButtonClick(ActionEvent event) {
+        if (stage == null) {
+            try {
+                gameHandler.connect();
+            } catch (IOException ex) {
+            }
+        }
         stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
         incorrectLable.setVisible(false);
         if (signUpUserNameTextField.getText().isEmpty()) {
@@ -80,15 +100,11 @@ public class SignUpScreenController implements Initializable {
         } else if (signUpPasswordTextField.getText().isEmpty()) {
             Alerts.showAlert("Please Enter your password");
         } else {
-            try {
-                gameHandler.connect();
-                gameHandler.writeData("0-"+signUpUserNameTextField.getText()
+            gameHandler.writeData("0-" + signUpUserNameTextField.getText()
                     + "-" + signUpPasswordTextField.getText() + "-1");
-                signUpButton.setDisable(true);
-            } catch (IOException ex) {
-                Alerts.showAlert(ex.getMessage());
-            }
-            
+            signUpButton.setDisable(true);
+            connectingLable.setVisible(true);
+
         }
     }
 

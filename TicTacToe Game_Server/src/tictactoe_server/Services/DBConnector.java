@@ -20,50 +20,35 @@ import org.apache.derby.jdbc.ClientDriver;
  */
 public class DBConnector {
 
-    private static Connection startConnection() {
+    private static Connection startConnection() throws SQLException {
         //driver
         //connect DB
         Connection connection = null;
-        try {
-            DriverManager.registerDriver(new ClientDriver());
-            connection = DriverManager.getConnection("jdbc:derby://localhost:1527/TicTacToe_Server", "root", "root");
-        } catch (SQLException ex) {
-            Logger.getLogger(DBConnector.class.getName()).log(Level.SEVERE, null, ex);
-        }
+        DriverManager.registerDriver(new ClientDriver());
+        connection = DriverManager.getConnection("jdbc:derby://localhost:1527/TicTacToe_Server", "root", "root");
         System.out.println("Connected to DataBase");
         return connection;
     }
 
-    public static void executeUpdate(String query) {
-        try {
-
-            // write query
-            Connection connection = startConnection();
-            PreparedStatement pst = connection.prepareStatement(query);
-            // run query
-            int rs = pst.executeUpdate();
-            System.out.println("Result::::" + rs);
-            connection.close();
-           
-        } catch (Exception e) {
-            e.printStackTrace();
-            System.out.println("Lose Connection");
-        }
+    public static void executeUpdate(String query) throws SQLException {
+        // write query
+        Connection connection = startConnection();
+        PreparedStatement pst = connection.prepareStatement(query);
+        // run query
+        int rs = pst.executeUpdate();
+        System.out.println("Result::::" + rs);
+        connection.close();
     }
-     public static ResultSet executeQuery(String query) {
-         ResultSet resultSet = null;
-        try {
-            // write query
-            Connection connection = startConnection();
-            PreparedStatement pst = connection.prepareStatement(query);
-            // run query
-            resultSet = pst.executeQuery();
-            System.out.println("Result::::" + resultSet);
-            //connection.close();
-        } catch (Exception e) {
-            e.printStackTrace();
-            System.out.println("Lose Connection");
-        }
+
+    public static ResultSet executeQuery(String query) throws SQLException {
+        ResultSet resultSet = null;
+        // write query
+        Connection connection = startConnection();
+        PreparedStatement pst = connection.prepareStatement(query);
+        // run query
+        resultSet = pst.executeQuery();
+        System.out.println("Result::::" + resultSet);
+        //connection.close();
         return resultSet;
     }
 }

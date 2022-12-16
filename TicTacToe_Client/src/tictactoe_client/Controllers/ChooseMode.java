@@ -24,6 +24,7 @@ public class ChooseMode extends AnchorPane {
     protected final Button btnMultiMode;
     protected final Button btnOnlineMode;
     protected final Label label;
+     private GameHandler gameHandler;
    
     public ChooseMode() {
 

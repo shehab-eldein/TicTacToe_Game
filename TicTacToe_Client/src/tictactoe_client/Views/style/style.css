@@ -70,6 +70,11 @@
     -fx-background-radius: 50 50 50 50;
 }
 
+.signinButton:disabled{
+    -fx-background-color: #948cbc;
+    -fx-background-radius: 50 50 50 50;
+}
+
 .createAccount{
     -fx-text-fill: #3f2e74;
 }
@@ -85,4 +90,11 @@
 .signInLable{
     -fx-background-color: #3f2e74;
     -fx-background-radius: 50 50 50 50;
+}
+.back{
+    -fx-text-fill: #ffffff;
+}
+
+.back:hover{
+    -fx-text-fill: #a05373;
 }
