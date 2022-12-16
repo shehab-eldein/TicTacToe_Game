@@ -65,12 +65,29 @@ public class ChoosePlayersController implements Initializable {
                             Alerts.showRequestAlert(splitRequest(response).get(1)
                                     + " wants to play with You", (accept) -> {
                                         System.out.println("accept");
+                                        gameHandler.writeData("5-" + splitRequest(response).get(1));
+
                                     }, (reject) -> {
-         
+
                                         System.out.println("reject");
+                                        gameHandler.writeData("6-" + splitRequest(response).get(1));
+
                                     });
 
                         });
+
+                    } else if (splitRequest(response).get(0).equals("5")) {
+                        Platform.runLater(() -> {
+
+                        });
+
+                    } else if (splitRequest(response).get(0).equals("6")) {
+                        Platform.runLater(() -> {
+                              Alerts.showAlert(splitRequest(response).get(1)+" reject your request", (message)->{
+                              
+                              });
+                        });
+
                     } else {
                         ObservableList<String> names = FXCollections.observableArrayList(splitRequest(response));
                         onlinePlayersListView.setItems(names);

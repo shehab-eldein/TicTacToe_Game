@@ -40,9 +40,10 @@ public class RequestHandler {
             case 5:
                 sendRequestGameStatus(client, "5");
                 break;
-            case -5:
-                sendRequestGameStatus(client, "-5");
+            case 6:
+                sendRequestGameStatus(client, "6");
                 break;
+                
         }
 
     }
