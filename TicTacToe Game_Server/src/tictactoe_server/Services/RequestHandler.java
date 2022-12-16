@@ -68,7 +68,6 @@ public class RequestHandler {
     }
 
     private static void getActivePlayers(Client client) {
-        System.out.println(RequestStringHandler.collect(Communicator.getUsers(client)));
         ResponseHandler.response(client, RequestStringHandler.collect(Communicator.getUsers(client)));
     }
 
@@ -93,7 +92,8 @@ public class RequestHandler {
     }
 
     private static void sendGameRequest(Client client) {
-      ResponseHandler.response(Communicator.getClientByName(splitUserName(client.getRequest())), 
-            "4-"+  client.getName());
+        String reques = "4-" + client.getUser().getName();
+        ResponseHandler.response(Communicator.getClientByName(splitUserName(client.getRequest())),
+                reques);
     }
 }

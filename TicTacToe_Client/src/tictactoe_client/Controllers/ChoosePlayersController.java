@@ -58,17 +58,18 @@ public class ChoosePlayersController implements Initializable {
                 gameHandler = GameHandler.getInstance((message) -> {
                     System.out.println(message);
                 }, (response) -> {
-
+                    System.out.println(response);
                     if (splitRequest(response).get(0).equals("4")) {
-                        Alerts.showAlert(splitRequest(response).get(1) + " wants to play with You", (consumer) -> {
-                            gameHandler.writeData("5");
+                        Platform.runLater(() -> {
+                            Alerts.showAlert(splitRequest(response).get(1) + " wants to play with You", (consumer) -> {
+                                gameHandler.writeData("5");
+                            });
                         });
                     } else {
                         ObservableList<String> names = FXCollections.observableArrayList(splitRequest(response));
                         onlinePlayersListView.setItems(names);
                     }
                 });
-                gameHandler.connect();
                 gameHandler.writeData("2");
 
             } catch (IOException ex) {
@@ -88,7 +89,6 @@ public class ChoosePlayersController implements Initializable {
 
     @FXML
     public void ask() {
-        System.out.println(onlinePlayersListView.getSelectionModel().getSelectedItem());
         gameHandler.writeData("3-" + onlinePlayersListView.getSelectionModel().getSelectedItem());
     }
 
