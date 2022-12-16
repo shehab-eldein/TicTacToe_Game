@@ -46,6 +46,7 @@ public class ChoosePlayersController implements Initializable {
     private GameHandler gameHandler;
     private static List<String> clients = new ArrayList<>();
     private String usersName = "";
+    String requestResponse;
 
     /**
      * Initializes the controller class.
@@ -61,9 +62,14 @@ public class ChoosePlayersController implements Initializable {
                     System.out.println(response);
                     if (splitRequest(response).get(0).equals("4")) {
                         Platform.runLater(() -> {
-                            Alerts.showAlert(splitRequest(response).get(1) + " wants to play with You", (consumer) -> {
-                                gameHandler.writeData("5");
-                            });
+                            Alerts.showRequestAlert(splitRequest(response).get(1)
+                                    + " wants to play with You", (accept) -> {
+                                        System.out.println("accept");
+                                    }, (reject) -> {
+         
+                                        System.out.println("reject");
+                                    });
+
                         });
                     } else {
                         ObservableList<String> names = FXCollections.observableArrayList(splitRequest(response));

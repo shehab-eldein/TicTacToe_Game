@@ -37,6 +37,12 @@ public class RequestHandler {
             case 3:
                 sendGameRequest(client);
                 break;
+            case 5:
+                sendRequestGameStatus(client, "5");
+                break;
+            case -5:
+                sendRequestGameStatus(client, "-5");
+                break;
         }
 
     }
@@ -93,6 +99,12 @@ public class RequestHandler {
 
     private static void sendGameRequest(Client client) {
         String reques = "4-" + client.getUser().getName();
+        ResponseHandler.response(Communicator.getClientByName(splitUserName(client.getRequest())),
+                reques);
+    }
+
+    private static void sendRequestGameStatus(Client client, String code) {
+        String reques = code + "-" + client.getUser().getName();
         ResponseHandler.response(Communicator.getClientByName(splitUserName(client.getRequest())),
                 reques);
     }
