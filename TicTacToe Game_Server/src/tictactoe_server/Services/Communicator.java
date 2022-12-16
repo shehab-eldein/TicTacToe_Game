@@ -41,10 +41,23 @@ public class Communicator {
 
     public static List<User> getUsers(Client user) {
         List<User> users = new ArrayList<>();
-        for(Client client: clients) {
-            if(!user.getUser().getName().equals(client.getUser().getName()))
+        for (Client client : clients) {
+            if (!user.getUser().getName().equals(client.getUser().getName())) {
                 users.add(client.getUser());
+            }
         }
         return users;
+    }
+
+    public static Client getClientByName(String name) {
+        for (Client client : clients) {
+            if (client.getUser().getName().equals(name)) {
+                return client;
+            }
+
+        }
+
+        return null;
+
     }
 }
