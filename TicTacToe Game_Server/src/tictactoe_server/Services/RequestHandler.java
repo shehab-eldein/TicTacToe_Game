@@ -45,7 +45,13 @@ public class RequestHandler {
                 break;
              case 7:
                 sendMove(client);
-                break; 
+                break;
+                //todo 8 game interupted
+             case 9:
+                 endGame(client);
+                 break;
+                 
+                 
         }
 
     }
@@ -118,7 +124,9 @@ public class RequestHandler {
         ResponseHandler.response(client1, request1);
         ResponseHandler.response(client2, request2);
         client1.setIsBusy(true);
+        client1.setOpponentName(client2.getUser().getName());
         client2.setIsBusy(true);
+        client2.setOpponentName(client1.getUser().getName());
     }
     
     private static void sendRejectGame(Client client) {
@@ -131,5 +139,9 @@ public class RequestHandler {
      String move = client.getRequest().split("-")[2];
       ResponseHandler.response(Communicator.getClientByName(splitUserName(client.getRequest())),
                 "7-"+move);
+    }
+    private static void endGame(Client client) {
+        client.setIsBusy(false);
+        client.setOpponentName(null);
     }
 }

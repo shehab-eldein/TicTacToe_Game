@@ -33,10 +33,7 @@ public class Communicator {
     }
 
     public static void disconnectClosed() throws IOException {
-        for (Client client : clients) {
-            client.closeSocket();
-        }
-        clients.clear();
+        clients.removeIf(client -> !client.isStarted());
     }
 
     public static List<User> getUsers(Client user) {

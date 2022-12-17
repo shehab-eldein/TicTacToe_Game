@@ -35,7 +35,7 @@ public class Client extends Thread {
     private String request; 
     private boolean isBusy = false;
     private Socket socket;
-
+    private String opponentName;
 
     public Client(Socket socket) throws IOException {
         this.socket = socket;
@@ -47,19 +47,23 @@ public class Client extends Thread {
     public void run() {
         while (isStarted) {
             try {
-                
                 request = dataInputStream.readLine();
                 setRequestCode(request);
                 RequestHandler.queryHandler(this);
             } catch (IOException ex) {
                 try {
                     closeSocket();
+                    isStarted = false;
                 } catch (IOException ex1) {
                     ex1.printStackTrace();
                 }
             }
 
         }
+    }
+
+    public boolean isStarted() {
+        return isStarted;
     }
 
 
@@ -110,5 +114,9 @@ public class Client extends Thread {
 
     public String getRequest() {
         return request;
+    }
+    
+    public void setOpponentName(String opponentName) {
+        this.opponentName = opponentName;
     }
 }

@@ -44,6 +44,8 @@ public class TicTacToe_Client extends Application {
     public void stop() throws Exception {
         GameHandler gameHandler = GameHandler.getInstance((error)->{}, (response)->{});
         gameHandler.disconnect();
+        System.exit(0);
+        super.stop(); 
     }
     
 }

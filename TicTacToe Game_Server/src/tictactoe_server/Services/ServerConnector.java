@@ -63,7 +63,7 @@ public class ServerConnector implements Runnable {
     }
 
     public void disCounnect() throws IOException {
-        Communicator.disconnectClosed();
+        Communicator.reset();
         isServerConected = false;
         serverSock.close();
     }

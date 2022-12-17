@@ -34,6 +34,8 @@ public class TicTacToe_Server extends Application {
     public void stop() throws Exception 
     {
         ServerConnector.getServerConnectorInstance(5005, (message)->{}).disCounnect();
+        System.exit(0);
+        super.stop(); 
     }
     
 }
