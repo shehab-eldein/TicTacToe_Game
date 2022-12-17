@@ -25,6 +25,9 @@ import services.Alerts;
 import services.Navigation;
 import services.StageSaver;
 import tictactoe_client.Controllers.GameHandler;
+import tictactoe_client.Enums.PlayerType;
+import tictactoe_client.Enums.Shape;
+import tictactoe_client.Models.Player;
 
 /**
  * FXML Controller class
@@ -49,6 +52,7 @@ public class ChoosePlayersController implements Initializable {
     private static List<String> clients = new ArrayList<>();
     private String usersName = "";
     String requestResponse;
+    Thread reloadUsers;
 
     /**
      * Initializes the controller class.
@@ -68,11 +72,11 @@ public class ChoosePlayersController implements Initializable {
                                     + " wants to play with You", (accept) -> {
                                         System.out.println("accept");
                                         gameHandler.writeData("5-" + splitRequest(response).get(1));
-                                        Platform.runLater(() -> {
-
-                                            Navigation.navigateTo(new BordBase(), StageSaver.getStageSeverInstance().getStage());
-
-                                        });
+//                                        Platform.runLater(() -> {
+//
+//                                            Navigation.navigateTo(new BordBase(), StageSaver.getStageSeverInstance().getStage());
+//
+//                                        });
 
                                     }, (reject) -> {
 
@@ -85,8 +89,20 @@ public class ChoosePlayersController implements Initializable {
 
                     } else if (splitRequest(response).get(0).equals("5")) {
                         Platform.runLater(() -> {
-
-                            Navigation.navigateTo(new BordBase(), StageSaver.getStageSeverInstance().getStage());
+                            String myName = splitRequest(response).get(1);
+                            String opponentName = splitRequest(response).get(2);
+                            String myShape = splitRequest(response).get(3);
+                            Player player1;
+                            Player player2;
+                            if(myShape.equals("X")){
+                               player1 = new Player(myName, PlayerType.HUMAN, Shape.X);
+                               player2 = new Player(opponentName, PlayerType.SERVER, Shape.O);
+                            }else{
+                               player1 = new Player(opponentName, PlayerType.SERVER, Shape.X);
+                               player2 = new Player(myName, PlayerType.HUMAN, Shape.O);
+                            }
+                            reloadUsers.interrupt();
+                            Navigation.navigateTo(new BordBase(player1, player2), StageSaver.getStageSeverInstance().getStage());
 
                         });
 
@@ -109,7 +125,18 @@ public class ChoosePlayersController implements Initializable {
                         onlinePlayersListView.setItems(names);
                     }
                 });
-                gameHandler.writeData("2");
+                
+                reloadUsers = new Thread(() -> {
+                    while(true){
+                        try{
+                            gameHandler.writeData("2");
+                            Thread.sleep(10000);
+                        } catch(Exception e) {
+                            e.printStackTrace();
+                        }
+                    }
+                });
+                reloadUsers.start();
 
             } catch (IOException ex) {
                 ex.printStackTrace();
@@ -119,7 +146,7 @@ public class ChoosePlayersController implements Initializable {
 
     }
 
-    private List splitRequest(String data) {
+    private List<String> splitRequest(String data) {
         List<String> queryList = Arrays.stream(data.split("\\-"))
                 .map(str -> str.trim()) // remove white-spaces// split on comma
                 .collect(Collectors.toList()); // collect to List  

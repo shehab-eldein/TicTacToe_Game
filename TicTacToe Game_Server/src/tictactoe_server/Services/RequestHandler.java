@@ -38,12 +38,14 @@ public class RequestHandler {
                 sendGameRequest(client);
                 break;
             case 5:
-                sendRequestGameStatus(client, "5");
+                sendAcceptGame(client);
                 break;
             case 6:
-                sendRequestGameStatus(client, "6");
+                sendRejectGame(client);
                 break;
-
+             case 7:
+                sendMove(client);
+                break; 
         }
 
     }
@@ -108,15 +110,26 @@ public class RequestHandler {
         }
     }
 
-    private static void sendRequestGameStatus(Client client, String code) {
-        String reques = code + "-" + client.getUser().getName();
-        Client clientResponsed = Communicator.getClientByName(splitUserName(client.getRequest()));
-        ResponseHandler.response(clientResponsed, reques);
-
-        if (code.equals("5")) {
-            client.setIsBusy(true);
-            clientResponsed.setIsBusy(true);
-        }
-
+    private static void sendAcceptGame(Client client) {
+        Client client1 = client;
+        Client client2 = Communicator.getClientByName(splitUserName(client.getRequest()));
+        String request1 = "5-" + client1.getUser().getName() + "-" + client2.getUser().getName() + "-" + "X";
+        String request2 = "5-" + client2.getUser().getName() + "-" + client1.getUser().getName() + "-" + "O";
+        ResponseHandler.response(client1, request1);
+        ResponseHandler.response(client2, request2);
+        client1.setIsBusy(true);
+        client2.setIsBusy(true);
+    }
+    
+    private static void sendRejectGame(Client client) {
+        String reques = "6-" + client.getUser().getName();
+        ResponseHandler.response(Communicator.getClientByName(splitUserName(client.getRequest())),
+                reques);
+    }
+    
+    private static void sendMove (Client client) {
+     String move = client.getRequest().split("-")[2];
+      ResponseHandler.response(Communicator.getClientByName(splitUserName(client.getRequest())),
+                "7-"+move);
     }
 }

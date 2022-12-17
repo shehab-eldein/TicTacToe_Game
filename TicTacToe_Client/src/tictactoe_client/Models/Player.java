@@ -23,5 +23,12 @@ public class Player {
         this.shape = shape;
     }
     
+    public String getName() {
+        return this.name;
+    }
+
+    public PlayerType getType() {
+        return type;
+    }
     
  }
