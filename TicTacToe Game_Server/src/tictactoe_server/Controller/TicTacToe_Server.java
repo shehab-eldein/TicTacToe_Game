@@ -10,6 +10,7 @@ import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.stage.Stage;
 import services.Navigation;
+import tictactoe_server.Services.ServerConnector;
 
 
 /**
@@ -32,8 +33,7 @@ public class TicTacToe_Server extends Application {
     @Override
     public void stop() throws Exception 
     {
-  
-        super.stop();
+        ServerConnector.getServerConnectorInstance(5005, (message)->{}).disCounnect();
     }
     
 }

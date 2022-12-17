@@ -97,6 +97,13 @@ public class ChoosePlayersController implements Initializable {
                             });
                         });
 
+                    } else if (splitRequest(response).get(0).equals("404")) {
+                        Platform.runLater(() -> {
+                            Alerts.showAlert(splitRequest(response).get(1) + " is already in another game", (message) -> {
+
+                            });
+                        });
+
                     } else {
                         ObservableList<String> names = FXCollections.observableArrayList(splitRequest(response));
                         onlinePlayersListView.setItems(names);

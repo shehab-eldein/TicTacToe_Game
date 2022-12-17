@@ -18,14 +18,24 @@ import tictactoe_server.Models.Client;
  */
 public class ServerConnector implements Runnable {
 
+    private static ServerConnector instance;
     private ServerSocket serverSock;
     private boolean isServerConected = false;
     private Consumer<String> error;
-    private final int portNumber;
+    private int portNumber;
 
-    public ServerConnector(int portNumber, Consumer error) throws IOException {
+    private ServerConnector(int portNumber, Consumer error) throws IOException {
         this.error = error;
         this.portNumber = portNumber;
+    }
+
+    public static ServerConnector getServerConnectorInstance(int portNumber, Consumer error) throws IOException {
+        if (instance == null) {
+            instance = new ServerConnector(portNumber, error);
+        }
+        instance.portNumber = portNumber;
+        instance.error = error;
+        return instance;
     }
 
     @Override
@@ -53,8 +63,8 @@ public class ServerConnector implements Runnable {
     }
 
     public void disCounnect() throws IOException {
-        isServerConected = false;
         Communicator.disconnectClosed();
+        isServerConected = false;
         serverSock.close();
     }
 

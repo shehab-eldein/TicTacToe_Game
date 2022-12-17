@@ -5,13 +5,18 @@
  */
 package tictactoe_client;
 
+import java.io.IOException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javafx.application.Application;
+import javafx.application.Platform;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 import services.Navigation;
 import services.StageSaver;
+import tictactoe_client.Controllers.GameHandler;
 import tictactoe_client.Controllers.Start;
 
 /**
@@ -25,7 +30,6 @@ public class TicTacToe_Client extends Application {
         Navigation.navigateTo(new Start(), stage);
         StageSaver stageSever=StageSaver.getStageSeverInstance();
         stageSever.setStage(stage);
-   
     }
 
     /**
@@ -38,7 +42,8 @@ public class TicTacToe_Client extends Application {
 
     @Override
     public void stop() throws Exception {
-        
+        GameHandler gameHandler = GameHandler.getInstance((error)->{}, (response)->{});
+        gameHandler.disconnect();
     }
     
 }

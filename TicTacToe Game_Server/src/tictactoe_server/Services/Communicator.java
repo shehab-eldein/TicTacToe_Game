@@ -54,9 +54,7 @@ public class Communicator {
             if (client.getUser().getName().equals(name)) {
                 return client;
             }
-
         }
         return null;
-
     }
 }

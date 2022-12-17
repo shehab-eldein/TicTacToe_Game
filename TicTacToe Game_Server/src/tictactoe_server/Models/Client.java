@@ -33,7 +33,7 @@ public class Client extends Thread {
     private User user;
     private int requestCode;
     private String request; 
-    private boolean isBusy;
+    private boolean isBusy = false;
     private Socket socket;
 
 
@@ -73,6 +73,7 @@ public class Client extends Thread {
     public void closeSocket() throws IOException {
         dataInputStream.close();
         dataOutPutStream.close();
+        socket.close();
         isStarted = false;
     }
 
@@ -83,11 +84,12 @@ public class Client extends Thread {
         isBusy = false;
     }
 
-    public static boolean isIsStarted() {
-        return isStarted;
+    public void setIsBusy(boolean isBusy) {
+        this.isBusy = isBusy;
     }
 
-    public boolean isIsBusy() {
+    
+    public boolean getIsBusy() {
         return isBusy;
     }
 

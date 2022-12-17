@@ -85,7 +85,7 @@ public class SignInScreenController implements Initializable {
                     });
 
                 } else if (response.equals("0")) {
-                    connectingLable.setVisible(true);
+                    connectingLable.setVisible(false);
                     incorrectLable.setVisible(true);
                     userNameTextField.clear();
                     passwordTextField.clear();

@@ -42,10 +42,10 @@ public class ServerScreenController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         try {
-            serverConnector = new ServerConnector(5005, (message) -> {
+            serverConnector = ServerConnector.getServerConnectorInstance(5005, (message) -> {
             });
         } catch (IOException ex) {
-            Logger.getLogger(ServerScreenBase.class.getName()).log(Level.SEVERE, null, ex);
+ 
         }
     }
 

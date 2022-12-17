@@ -80,6 +80,7 @@ public class GameHandler implements Runnable {
         socket.close();
 
     }
+    
 
     public void connect() throws IOException {      
         isRunning=true;

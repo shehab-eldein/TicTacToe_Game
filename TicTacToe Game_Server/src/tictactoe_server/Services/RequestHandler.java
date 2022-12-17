@@ -43,7 +43,7 @@ public class RequestHandler {
             case 6:
                 sendRequestGameStatus(client, "6");
                 break;
-                
+
         }
 
     }
@@ -100,13 +100,23 @@ public class RequestHandler {
 
     private static void sendGameRequest(Client client) {
         String reques = "4-" + client.getUser().getName();
-        ResponseHandler.response(Communicator.getClientByName(splitUserName(client.getRequest())),
-                reques);
+        Client clientResponsed = Communicator.getClientByName(splitUserName(client.getRequest()));
+        if (!clientResponsed.getIsBusy()) {
+            ResponseHandler.response(clientResponsed, reques);
+        }else{
+            ResponseHandler.response(client, "404-"+clientResponsed.getUser().getName());
+        }
     }
 
     private static void sendRequestGameStatus(Client client, String code) {
         String reques = code + "-" + client.getUser().getName();
-        ResponseHandler.response(Communicator.getClientByName(splitUserName(client.getRequest())),
-                reques);
+        Client clientResponsed = Communicator.getClientByName(splitUserName(client.getRequest()));
+        ResponseHandler.response(clientResponsed, reques);
+
+        if (code.equals("5")) {
+            client.setIsBusy(true);
+            clientResponsed.setIsBusy(true);
+        }
+
     }
 }
