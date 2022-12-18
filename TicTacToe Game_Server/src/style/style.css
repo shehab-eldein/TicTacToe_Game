@@ -1,12 +1,12 @@
 .LeftSideSignInBackground{
     -fx-background-color: #3f2e74;
     -fx-background-radius: 0 25 25 0;
-    
+
 }
 
 .RightSideSignInBackground{
     -fx-background-color: #ffffff;
-    
+
 }
 
 .-Text {
@@ -58,3 +58,6 @@
     -fx-background-color: #3f2e74;
     -fx-background-radius: 50 50 50 50;
 }
+.data0.chart-pie { -fx-pie-color: #3f2e74; }
+.data1.chart-pie { -fx-pie-color: #ffffff; }
+.chart-pie-label {-fx-fill: #ffffff;}

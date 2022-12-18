@@ -124,6 +124,11 @@
                   <Font size="15.0" />
                </font>
             </PasswordField>
+            <Label fx:id="areadyLoggedLable" layoutX="64.0" layoutY="140.0" stylesheets="@Views/style/style.css" text="This user is already logged in !" textFill="#e12727" visible="false">
+               <font>
+                  <Font name="Calibri" size="13.0" />
+               </font>
+            </Label>
          </children>
       </AnchorPane>
    </children>

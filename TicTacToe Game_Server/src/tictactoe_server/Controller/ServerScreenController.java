@@ -11,9 +11,13 @@ import java.net.URL;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javafx.application.Platform;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.geometry.Side;
 import javafx.scene.chart.PieChart;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
@@ -36,38 +40,43 @@ public class ServerScreenController implements Initializable {
     @FXML
     private PieChart UsersPieChart;
     private ServerConnector serverConnector;
-   
+
     /**
      * Initializes the controller class.
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        
+
         try {
             serverConnector = ServerConnector.getServerConnectorInstance(5005, (message) -> {
             });
         } catch (IOException ex) {
             ex.printStackTrace();
         }
-       
+
     }
 
     @FXML
     public void startServerButtonClicked(ActionEvent event) {
-        try {     
-            if(startServerButton.getText().equals("Start")){
+        try {
+            if (startServerButton.getText().equals("Start")) {
                 serverConnector.connect();
                 serverStatusLable.setText("On");
                 startServerButton.setText("Stop");
-            }else{
+                UsersPieChart.setVisible(true);
+                PieChart.Data online = new PieChart.Data("online", 30);
+                PieChart.Data offline = new PieChart.Data("offline", 20);
+                ObservableList<PieChart.Data> pieChartData = FXCollections.observableArrayList(online, offline);
+                UsersPieChart.setData(pieChartData);
+            } else {
                 serverConnector.disCounnect();
                 serverStatusLable.setText("Off");
                 startServerButton.setText("Start");
+                UsersPieChart.setVisible(false);
             }
         } catch (IOException ex) {
             serverStatusLable.setText("Off");
         }
     }
-    
 
 }

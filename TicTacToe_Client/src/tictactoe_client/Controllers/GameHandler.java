@@ -22,7 +22,8 @@ public class GameHandler implements Runnable {
     private Socket socket;
     private final DataInputStream dataInputstream;
     private final PrintStream printStream;
-    private boolean isRunning = true;
+    private boolean isRunning = false;
+    private boolean isInGame = false;
     private  ErrorMessageSender errorMessageSender;
     private  Consumer<String> responseMessage;
 
@@ -92,5 +93,19 @@ public class GameHandler implements Runnable {
     public void writeData(String msg) {
         printStream.println(msg);
     }
+
+    public boolean getIsRunning() {
+        return isRunning;
+    }
+
+    public void setIsInGame(boolean inGame) {
+        this.isInGame = inGame;
+    }
+
+    public boolean getIsInGame() {
+        return isInGame;
+    }
+    
+    
 
 }

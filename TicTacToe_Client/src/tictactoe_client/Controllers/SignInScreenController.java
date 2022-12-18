@@ -55,6 +55,8 @@ public class SignInScreenController implements Initializable {
     private Label incorrectLable;
     @FXML
     private Label connectingLable;
+    @FXML
+    private Label areadyLoggedLable;
 
     /**
      * Initializes the controller class.
@@ -89,7 +91,16 @@ public class SignInScreenController implements Initializable {
 
                 } else if (response.equals("0")) {
                     connectingLable.setVisible(false);
+                    areadyLoggedLable.setVisible(false);
                     incorrectLable.setVisible(true);
+                    userNameTextField.clear();
+                    passwordTextField.clear();
+                    logInButton.setDisable(false);
+                }
+                 else if (response.equals("409")) {
+                    connectingLable.setVisible(false);
+                    areadyLoggedLable.setVisible(true);
+                    incorrectLable.setVisible(false);
                     userNameTextField.clear();
                     passwordTextField.clear();
                     logInButton.setDisable(false);

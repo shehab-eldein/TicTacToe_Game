@@ -46,7 +46,9 @@ public class RequestHandler {
             case 7:
                 sendMove(client);
                 break;
-            //todo 8 game interupted
+            case 8:
+                sendEndGameRequest(client);
+                break;
             case 9:
                 endGame(client);
                 break;
@@ -57,11 +59,15 @@ public class RequestHandler {
 
     private static void logIn(Client client) throws IOException {
         try {
-            if (UserRepository.getByName(client.getUser().getName(), client.getUser().getPass()) != null) {
-                ResponseHandler.response(client, "1");
-                Communicator.addClient(client);
-            } else {
-                ResponseHandler.response(client, "0");
+            if (Communicator.getClientByName(client.getUser().getName()) == null) {
+                if (UserRepository.getByName(client.getUser().getName(), client.getUser().getPass()) != null) {
+                    ResponseHandler.response(client, "1");
+                    Communicator.addClient(client);
+                } else {
+                    ResponseHandler.response(client, "0");
+                }
+            }else{
+               ResponseHandler.response(client, "409"); 
             }
         } catch (SQLException ex) {
             ResponseHandler.response(client, "-1");
@@ -77,7 +83,7 @@ public class RequestHandler {
                 } else {
                     ResponseHandler.response(client, "0");
                 }
-            }else{
+            } else {
                 ResponseHandler.response(client, "407");
             }
 
@@ -160,4 +166,12 @@ public class RequestHandler {
         client.setIsBusy(false);
         client.setOpponentName(null);
     }
+
+    private static void sendEndGameRequest(Client client) {
+        Client clientResponsed = Communicator.getClientByName(splitUserName(client.getRequest()));
+        ResponseHandler.response(clientResponsed, "408-" + client.getUser().getName());
+        Communicator.removeClient(client);
+
+    }
+
 }

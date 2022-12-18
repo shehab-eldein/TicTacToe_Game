@@ -54,6 +54,6 @@
             <Font name="Berlin Sans FB Demi Bold" size="32.0" />
          </font>
       </Label>
-      <PieChart layoutX="348.0" layoutY="73.0" prefHeight="304.0" prefWidth="289.0" />
+      <PieChart fx:id="UsersPieChart" layoutX="319.0" layoutY="70.0" prefHeight="350.0" prefWidth="350.0" />
    </children>
 </AnchorPane>

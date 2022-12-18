@@ -92,6 +92,7 @@ public class ChoosePlayersController implements Initializable {
                             String myShape = splitRequest(response).get(3);
                             Player player1;
                             Player player2;
+                            DataSaver.dataSaverInstance().setPlayer2Data(opponentName);
                             if (myShape.equals("X")) {
                                 player1 = new Player(myName, PlayerType.HUMAN, Shape.X);
                                 player2 = new Player(opponentName, PlayerType.SERVER, Shape.O);
@@ -99,6 +100,7 @@ public class ChoosePlayersController implements Initializable {
                                 player1 = new Player(opponentName, PlayerType.SERVER, Shape.X);
                                 player2 = new Player(myName, PlayerType.HUMAN, Shape.O);
                             }
+                            gameHandler.setIsInGame(true);
                             Navigation.navigateTo(new BordBase(player1, player2), StageSaver.getStageSeverInstance().getStage());
                         });
 
