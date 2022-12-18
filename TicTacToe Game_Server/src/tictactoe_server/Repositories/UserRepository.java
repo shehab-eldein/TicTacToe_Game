@@ -21,21 +21,28 @@ public class UserRepository {
     public static User create(User user) throws SQLException {
         //deal with new user
         DBConnector.executeUpdate("Insert into Users(name,password)  values('" + user.getName() + "','" + user.getPass() + "')");
-        return getByName(user.getName(),user.getPass());
+        return getByName(user.getName(), user.getPass());
     }
 
-    public static User getByName(String name,String password) throws SQLException {
+    public static User getByName(String name, String password) throws SQLException {
         // deal with signin
-        ResultSet resultSet = DBConnector.executeQuery("select * from Users where name ='" + name + "'and password='"+password+"'");
+        ResultSet resultSet = DBConnector.executeQuery("select * from Users where name ='" + name + "'and password='" + password + "'");
         while (resultSet.next()) {
-               return new User(resultSet.getString("name"),resultSet.getString("password"));
-            }
+            return new User(resultSet.getString("name"), resultSet.getString("password"));
+        }
         return null;
     }
-    
+
     public static boolean checkUniqeName(String name) throws SQLException {
-        if(DBConnector.executeQuery("select 1 from Users where name ='" + name + "'").next())
+        if (DBConnector.executeQuery("select 1 from Users where name ='" + name + "'").next()) {
             return false;
+        }
         return true;
     }
+
+    public static ResultSet getUsersCount() throws SQLException {
+        return DBConnector.executeQuery("select count(*) from Users ");
+
+    }
+    
 }
