@@ -28,6 +28,7 @@ import javafx.stage.Stage;
 import javafx.stage.WindowEvent;
 import services.Alerts;
 import services.Navigation;
+import services.StageSaver;
 import tictactoe_client.Controllers.GameHandler;
 import tictactoe_client.Controllers.Start;
 
@@ -40,7 +41,6 @@ public class SignInScreenController implements Initializable {
 
     private GameHandler gameHandler;
     private Socket mysocket;
-    private Stage stage;
     @FXML
     private TextField userNameTextField;
     @FXML
@@ -68,7 +68,7 @@ public class SignInScreenController implements Initializable {
                 if (response.equals("1")) {
                     Platform.runLater(() -> {
                         try {
-                            Navigation.navigateTo(FXMLLoader.load(tictactoe_client.TicTacToe_Client.class.getResource("Views/ChoosePlayers.fxml")), stage);
+                            Navigation.navigateTo(FXMLLoader.load(tictactoe_client.TicTacToe_Client.class.getResource("Views/ChoosePlayers.fxml")), StageSaver.getStageSeverInstance().getStage());
                         } catch (IOException ex) {
                             ex.printStackTrace();
                         }
@@ -94,20 +94,13 @@ public class SignInScreenController implements Initializable {
             });
         } catch (IOException ex) {
             Alerts.showAlert("The server is down!", (e) -> {
-                Navigation.navigateTo(new ChooseMode(), stage);
+                Navigation.navigateTo(new ChooseMode(), StageSaver.getStageSeverInstance().getStage());
             });
         }
     }
 
     @FXML
     public void LogInButtonClick(ActionEvent event) {
-        if (stage == null) {
-            try {
-                gameHandler.connect();
-            } catch (IOException ex) {
-            }
-        }
-        stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
         incorrectLable.setVisible(false);
         if (userNameTextField.getText().isEmpty()) {
             Alerts.showAlert("please Enter your user name");

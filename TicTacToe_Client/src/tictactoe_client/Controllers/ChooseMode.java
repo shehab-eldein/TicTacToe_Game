@@ -98,7 +98,7 @@ public class ChooseMode extends AnchorPane {
         btnOnlineMode.setOnAction((event)->{
             try {
                 DataSaver.dataSaverInstance().setModeData(btnOnlineMode.getText());
-                Navigation.navigateTo(new FXMLLoader().load(tictactoe_client.TicTacToe_Client.class.getResource("Views/SignInScreen.fxml")), event);
+                Navigation.navigateTo(new FXMLLoader().load(tictactoe_client.TicTacToe_Client.class.getResource("Views/ConnectingSplashScreen.fxml")), event);
             } catch (IOException ex) {
 //                ex.printStackTrace();
             }

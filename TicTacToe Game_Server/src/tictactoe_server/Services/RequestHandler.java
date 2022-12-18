@@ -32,7 +32,7 @@ public class RequestHandler {
                 signUP(client);
                 break;
             case 2:
-                getActivePlayers(client);
+                getAllActivePlayers();
                 break;
             case 3:
                 sendGameRequest(client);
@@ -43,15 +43,14 @@ public class RequestHandler {
             case 6:
                 sendRejectGame(client);
                 break;
-             case 7:
+            case 7:
                 sendMove(client);
                 break;
-                //todo 8 game interupted
-             case 9:
-                 endGame(client);
-                 break;
-                 
-                 
+            //todo 8 game interupted
+            case 9:
+                endGame(client);
+                break;
+         
         }
 
     }
@@ -86,6 +85,18 @@ public class RequestHandler {
         ResponseHandler.response(client, RequestStringHandler.collect(Communicator.getUsers(client)));
     }
 
+    public static void getAllActivePlayers() {
+        List<Client> clients = Communicator.getClients();
+        for (Client aClient : clients) {
+            if(clients.size() == 1){
+                ResponseHandler.response(aClient, "405");
+            }
+            else{
+                getActivePlayers(aClient);
+            }
+        }
+    }
+
     private static void setUserData(Client client) {
         client.setUser(splitRequest(client.getRequest()));
     }
@@ -111,8 +122,8 @@ public class RequestHandler {
         Client clientResponsed = Communicator.getClientByName(splitUserName(client.getRequest()));
         if (!clientResponsed.getIsBusy()) {
             ResponseHandler.response(clientResponsed, reques);
-        }else{
-            ResponseHandler.response(client, "404-"+clientResponsed.getUser().getName());
+        } else {
+            ResponseHandler.response(client, "404-" + clientResponsed.getUser().getName());
         }
     }
 
@@ -128,18 +139,19 @@ public class RequestHandler {
         client2.setIsBusy(true);
         client2.setOpponentName(client1.getUser().getName());
     }
-    
+
     private static void sendRejectGame(Client client) {
         String reques = "6-" + client.getUser().getName();
         ResponseHandler.response(Communicator.getClientByName(splitUserName(client.getRequest())),
                 reques);
     }
-    
-    private static void sendMove (Client client) {
-     String move = client.getRequest().split("-")[2];
-      ResponseHandler.response(Communicator.getClientByName(splitUserName(client.getRequest())),
-                "7-"+move);
+
+    private static void sendMove(Client client) {
+        String move = client.getRequest().split("-")[2];
+        ResponseHandler.response(Communicator.getClientByName(splitUserName(client.getRequest())),
+                "7-" + move);
     }
+
     private static void endGame(Client client) {
         client.setIsBusy(false);
         client.setOpponentName(null);

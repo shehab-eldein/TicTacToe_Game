@@ -36,34 +36,20 @@ public class ServerScreenController implements Initializable {
     @FXML
     private PieChart UsersPieChart;
     private ServerConnector serverConnector;
-    
-    Thread closeConnections;
-
+   
     /**
      * Initializes the controller class.
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
+        
         try {
             serverConnector = ServerConnector.getServerConnectorInstance(5005, (message) -> {
-            });
-            closeConnections = new Thread(() -> {
-                while (true) {             
-                    try{
-                        try {
-                            Communicator.disconnectClosed();
-                            Thread.sleep(100);
-                        } catch (InterruptedException ex) {
-                            ex.printStackTrace();
-                        }
-                    } catch (IOException e) {
-                        e.printStackTrace();
-                    }
-                }
             });
         } catch (IOException ex) {
             ex.printStackTrace();
         }
+       
     }
 
     @FXML
@@ -73,14 +59,11 @@ public class ServerScreenController implements Initializable {
                 serverConnector.connect();
                 serverStatusLable.setText("On");
                 startServerButton.setText("Stop");
-                closeConnections.start();
             }else{
                 serverConnector.disCounnect();
                 serverStatusLable.setText("Off");
                 startServerButton.setText("Start");
-                closeConnections.interrupt();
             }
-
         } catch (IOException ex) {
             serverStatusLable.setText("Off");
         }

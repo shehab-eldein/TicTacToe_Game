@@ -51,8 +51,7 @@ public class ChoosePlayersController implements Initializable {
     private GameHandler gameHandler;
     private static List<String> clients = new ArrayList<>();
     private String usersName = "";
-    String requestResponse;
-    Thread reloadUsers;
+    private boolean isRun = true;
 
     /**
      * Initializes the controller class.
@@ -65,6 +64,7 @@ public class ChoosePlayersController implements Initializable {
                 gameHandler = GameHandler.getInstance((message) -> {
                     System.out.println(message);
                 }, (response) -> {
+
                     System.out.println(response);
                     if (splitRequest(response).get(0).equals("4")) {
                         Platform.runLater(() -> {
@@ -72,12 +72,6 @@ public class ChoosePlayersController implements Initializable {
                                     + " wants to play with You", (accept) -> {
                                         System.out.println("accept");
                                         gameHandler.writeData("5-" + splitRequest(response).get(1));
-//                                        Platform.runLater(() -> {
-//
-//                                            Navigation.navigateTo(new BordBase(), StageSaver.getStageSeverInstance().getStage());
-//
-//                                        });
-
                                     }, (reject) -> {
 
                                         System.out.println("reject");
@@ -94,16 +88,14 @@ public class ChoosePlayersController implements Initializable {
                             String myShape = splitRequest(response).get(3);
                             Player player1;
                             Player player2;
-                            if(myShape.equals("X")){
-                               player1 = new Player(myName, PlayerType.HUMAN, Shape.X);
-                               player2 = new Player(opponentName, PlayerType.SERVER, Shape.O);
-                            }else{
-                               player1 = new Player(opponentName, PlayerType.SERVER, Shape.X);
-                               player2 = new Player(myName, PlayerType.HUMAN, Shape.O);
+                            if (myShape.equals("X")) {
+                                player1 = new Player(myName, PlayerType.HUMAN, Shape.X);
+                                player2 = new Player(opponentName, PlayerType.SERVER, Shape.O);
+                            } else {
+                                player1 = new Player(opponentName, PlayerType.SERVER, Shape.X);
+                                player2 = new Player(myName, PlayerType.HUMAN, Shape.O);
                             }
-                            reloadUsers.interrupt();
                             Navigation.navigateTo(new BordBase(player1, player2), StageSaver.getStageSeverInstance().getStage());
-
                         });
 
                     } else if (splitRequest(response).get(0).equals("6")) {
@@ -120,23 +112,21 @@ public class ChoosePlayersController implements Initializable {
                             });
                         });
 
-                    } else {
-                        ObservableList<String> names = FXCollections.observableArrayList(splitRequest(response));
-                        onlinePlayersListView.setItems(names);
+                    }else if(splitRequest(response).get(0).equals("405")) {
+                        Platform.runLater(() -> {
+                            ObservableList<String> names = FXCollections.observableArrayList("");
+                            onlinePlayersListView.setItems(names);
+                        });
+                    }
+                    else {
+                        Platform.runLater(() -> {
+                            ObservableList<String> names = FXCollections.observableArrayList(splitRequest(response));
+                            onlinePlayersListView.setItems(names);
+                        });
+
                     }
                 });
-                
-                reloadUsers = new Thread(() -> {
-                    while(true){
-                        try{
-                            gameHandler.writeData("2");
-                            Thread.sleep(10000);
-                        } catch(Exception e) {
-                            e.printStackTrace();
-                        }
-                    }
-                });
-                reloadUsers.start();
+                gameHandler.writeData("2");
 
             } catch (IOException ex) {
                 ex.printStackTrace();

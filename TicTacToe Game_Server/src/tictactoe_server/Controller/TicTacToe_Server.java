@@ -5,22 +5,21 @@
  */
 package tictactoe_server.Controller;
 
-
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.stage.Stage;
 import services.Navigation;
 import tictactoe_server.Services.ServerConnector;
 
-
 /**
  *
  * @author DELL
  */
 public class TicTacToe_Server extends Application {
+
     @Override
-    public void start(Stage stage) throws Exception {   
-        Navigation.navigateTo(new FXMLLoader().load(getClass().getClassLoader().getResource("Views/ServerScreen.fxml")), stage);        
+    public void start(Stage stage) throws Exception {
+        Navigation.navigateTo(new FXMLLoader().load(getClass().getClassLoader().getResource("Views/ServerScreen.fxml")), stage);
     }
 
     /**
@@ -31,11 +30,12 @@ public class TicTacToe_Server extends Application {
     }
 
     @Override
-    public void stop() throws Exception 
-    {
-        ServerConnector.getServerConnectorInstance(5005, (message)->{}).disCounnect();
-        System.exit(0);
-        super.stop(); 
+    public void stop() throws Exception {
+        ServerConnector sever = ServerConnector.getServerConnectorInstance(5005, (message) -> {
+        });
+        if (sever.getIsServerConected()) {
+            sever.disCounnect();
+        }
     }
-    
+
 }

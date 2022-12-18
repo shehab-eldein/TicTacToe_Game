@@ -43,22 +43,29 @@ public class Client extends Thread {
         start();
     }
 
-    @Override
+       @Override
     public void run() {
         while (isStarted) {
             try {
+                
                 request = dataInputStream.readLine();
-                setRequestCode(request);
-                RequestHandler.queryHandler(this);
+                if (request != null) {
+                    setRequestCode(request);
+                    RequestHandler.queryHandler(this);
+                }else{
+                    isStarted = false;
+                    Communicator.removeClient(this);
+                    RequestHandler.getAllActivePlayers();
+                    
+                }
             } catch (IOException ex) {
                 try {
                     closeSocket();
-                    isStarted = false;
                 } catch (IOException ex1) {
-                    ex1.printStackTrace();
+                    isStarted = false;
+                    
                 }
             }
-
         }
     }
 

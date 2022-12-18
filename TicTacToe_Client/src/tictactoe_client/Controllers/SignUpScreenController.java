@@ -23,6 +23,7 @@ import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
 import services.Alerts;
 import services.Navigation;
+import services.StageSaver;
 
 /**
  * FXML Controller class
@@ -61,7 +62,7 @@ public class SignUpScreenController implements Initializable {
 
                     Platform.runLater(() -> {
                         try {
-                            Navigation.navigateTo(FXMLLoader.load(tictactoe_client.TicTacToe_Client.class.getResource("Views/ChoosePlayers.fxml")), stage);
+                            Navigation.navigateTo(FXMLLoader.load(tictactoe_client.TicTacToe_Client.class.getResource("Views/ChoosePlayers.fxml")), StageSaver.getStageSeverInstance().getStage());
                         } catch (IOException ex) {
                             Logger.getLogger(SignUpScreenController.class.getName()).log(Level.SEVERE, null, ex);
                         }
@@ -95,13 +96,6 @@ public class SignUpScreenController implements Initializable {
 
     @FXML
     private void SignUPButtonClick(ActionEvent event) {
-        if (stage == null) {
-            try {
-                gameHandler.connect();
-            } catch (IOException ex) {
-            }
-        }
-        stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
         incorrectLable.setVisible(false);
         if (signUpUserNameTextField.getText().isEmpty()) {
             Alerts.showAlert("Please Enter your user name");

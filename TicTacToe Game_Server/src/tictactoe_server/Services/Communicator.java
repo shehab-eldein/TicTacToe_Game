@@ -32,8 +32,15 @@ public class Communicator {
         return clients.size();
     }
 
-    public static void disconnectClosed() throws IOException {
+    public static void disconnectClosed(){
         clients.removeIf(client -> !client.isStarted());
+    }
+    
+    public static void terminateSockets() throws IOException{
+        for (Client client : clients) {
+            client.closeSocket();
+        }
+        clients.clear();
     }
 
     public static List<User> getUsers(Client user) {
@@ -45,6 +52,10 @@ public class Communicator {
         }
         return users;
     }
+    
+    public static List<Client> getClients() {
+        return clients;
+    }
 
     public static Client getClientByName(String name) {
         for (Client client : clients) {
@@ -53,5 +64,9 @@ public class Communicator {
             }
         }
         return null;
+    }
+    
+    public static void removeClient(Client client){
+        clients.remove(client);
     }
 }

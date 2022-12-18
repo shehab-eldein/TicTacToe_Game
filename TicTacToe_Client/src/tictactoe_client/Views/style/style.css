@@ -98,3 +98,13 @@
 .back:hover{
     -fx-text-fill: #a05373;
 }
+
+
+.connectingLable{
+    -fx-font-size:20;
+    -fx-text-fill: #ffffff;
+}
+.connectingPercent{
+    -fx-font-size:20;
+    -fx-text-fill: #a05373;
+}
