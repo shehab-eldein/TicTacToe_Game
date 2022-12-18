@@ -40,9 +40,10 @@ public class UserRepository {
         return true;
     }
 
-    public static ResultSet getUsersCount() throws SQLException {
-        return DBConnector.executeQuery("select count(*) from Users ");
-
+    public static int getUsersCount() throws SQLException {
+        ResultSet resultSet =DBConnector.executeQuery("select count(*) \"count\" from Users ");
+        resultSet.first();       
+        return resultSet.getInt("count");
     }
     
 }

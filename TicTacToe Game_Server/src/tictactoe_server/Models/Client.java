@@ -78,7 +78,7 @@ public class Client extends Thread {
         return dataOutPutStream;
     }
     private void setRequestCode(String data){
-       requestCode = Integer.parseInt(data.charAt(0) + "");
+       requestCode = Integer.parseInt(data.split("\\-")[0] + "");
     }
 
     public void closeSocket() throws IOException {

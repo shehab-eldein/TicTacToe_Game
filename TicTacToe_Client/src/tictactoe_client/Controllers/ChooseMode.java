@@ -24,8 +24,8 @@ public class ChooseMode extends AnchorPane {
     protected final Button btnMultiMode;
     protected final Button btnOnlineMode;
     protected final Label label;
-     private GameHandler gameHandler;
-   
+    private GameHandler gameHandler;
+
     public ChooseMode() {
 
         imageView = new ImageView();
@@ -33,7 +33,7 @@ public class ChooseMode extends AnchorPane {
         btnMultiMode = new Button();
         btnOnlineMode = new Button();
         label = new Label();
-        
+
         setId("AnchorPane");
         setPrefHeight(409.0);
         setPrefWidth(560.0);
@@ -56,14 +56,12 @@ public class ChooseMode extends AnchorPane {
         btnSingleMode.getStyleClass().add("changeButtonStyle");
         this.getStylesheets().add("tictactoe_client/Views/style/style.css");
 
-        
         System.out.println();
 
-        btnSingleMode.setOnAction((event)->{
+        btnSingleMode.setOnAction((event) -> {
             DataSaver.dataSaverInstance().setModeData(btnSingleMode.getText());
             Navigation.navigateTo(new ChooseLevel(), event);
         });
-
 
         btnMultiMode.setLayoutX(44.0);
         btnMultiMode.setLayoutY(208.0);
@@ -73,13 +71,11 @@ public class ChooseMode extends AnchorPane {
         btnMultiMode.setText("Multi Mode");
         btnMultiMode.setTextFill(javafx.scene.paint.Color.WHITE);
         btnMultiMode.setFont(new Font("System Bold Italic", 20.0));
-        
-       
+
         btnMultiMode.getStyleClass().add("changeButtonStyle");
         this.getStylesheets().add("tictactoe_client/Views/style/style.css");
         System.out.println();
-      
-        
+
         btnMultiMode.setOnAction((ActionEvent event) -> {
             DataSaver.dataSaverInstance().setModeData(btnMultiMode.getText());
             Navigation.navigateTo(new PlayerInfo(), event);
@@ -95,14 +91,14 @@ public class ChooseMode extends AnchorPane {
         btnOnlineMode.setFont(new Font("System Bold Italic", 20.0));
         btnOnlineMode.getStyleClass().add("changeButtonStyle");
         this.getStylesheets().add("tictactoe_client/Views/style/style.css");
-        btnOnlineMode.setOnAction((event)->{
+        btnOnlineMode.setOnAction((event) -> {
             try {
-                DataSaver.dataSaverInstance().setModeData(btnOnlineMode.getText());
+                DataSaver.dataSaverInstance().setModeData("Online Mode");
                 Navigation.navigateTo(new FXMLLoader().load(tictactoe_client.TicTacToe_Client.class.getResource("Views/ConnectingSplashScreen.fxml")), event);
             } catch (IOException ex) {
 //                ex.printStackTrace();
             }
-            
+
         });
 
         label.setLayoutX(31.0);
@@ -118,9 +114,6 @@ public class ChooseMode extends AnchorPane {
         getChildren().add(btnMultiMode);
         getChildren().add(btnOnlineMode);
         getChildren().add(label);
-        
-        
-       
 
     }
 }

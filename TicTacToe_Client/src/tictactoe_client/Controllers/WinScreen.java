@@ -1,7 +1,11 @@
 package tictactoe_client.Controllers;
 
 import java.io.File;
+import java.io.IOException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javafx.event.ActionEvent;
+import javafx.fxml.FXMLLoader;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.layout.AnchorPane;
@@ -12,20 +16,19 @@ import javafx.scene.text.Font;
 import services.DataSaver;
 import services.Navigation;
 
-public  class WinScreen extends AnchorPane {
+public class WinScreen extends AnchorPane {
 
     protected final MediaView winVideo;
     protected final Button btnWinPlayAgain;
     protected final Button btnWinExit;
     protected final Label label;
     protected final Label labelWinPlayerName;
-    private  File file;
+    private File file;
     private MediaPlayer mediaplayer;
-    private  Media media;
+    private Media media;
 
     public WinScreen() {
         this.getStylesheets().add("tictactoe_client/Views/style/style.css");
-
 
         winVideo = new MediaView();
         btnWinPlayAgain = new Button();
@@ -45,7 +48,7 @@ public  class WinScreen extends AnchorPane {
         winVideo.setLayoutY(14.0);
         winVideo.setPreserveRatio(false);
         file = new File("src/tictactoe_client/Views/img/win.mp4");
-        media = new Media(file.toURI().toString());  
+        media = new Media(file.toURI().toString());
         mediaplayer = new MediaPlayer(media);
         winVideo.setMediaPlayer(mediaplayer);
         mediaplayer.play();
@@ -63,7 +66,19 @@ public  class WinScreen extends AnchorPane {
         btnWinPlayAgain.getStyleClass().add("changeButtonStyle");
         //play again
         btnWinPlayAgain.setOnAction((event) -> {
-            Navigation.navigateTo(new BordBase(), event);
+            if (DataSaver.dataSaverInstance().getModeData() == "Online Mode") {
+                try {
+                    Navigation.navigateTo(FXMLLoader.load(tictactoe_client.TicTacToe_Client.class.getResource("Views/ChoosePlayers.fxml")), event);
+
+                    System.out.println("online");
+                } catch (IOException ex) {
+                    ex.printStackTrace();
+                }
+                Navigation.navigateTo(new BordBase(), event);
+
+            } else {
+                Navigation.navigateTo(new BordBase(), event);
+            }
         });
 
         btnWinExit.setLayoutX(193.0);
@@ -77,10 +92,10 @@ public  class WinScreen extends AnchorPane {
         btnWinExit.setFont(new Font("System Bold Italic", 19.0));
         btnWinExit.getStyleClass().add("changeButtonStyle");
         // exit game
-        btnWinExit.setOnAction(( event) -> {
-           
-            Navigation.navigateTo(new ChooseMode(), event); 
-        });    
+        btnWinExit.setOnAction((event) -> {
+
+            Navigation.navigateTo(new ChooseMode(), event);
+        });
 
         label.setLayoutX(180.0);
         label.setLayoutY(255.0);
@@ -97,8 +112,7 @@ public  class WinScreen extends AnchorPane {
         labelWinPlayerName.setText(DataSaver.dataSaverInstance().getwinnerData());
         labelWinPlayerName.setTextFill(javafx.scene.paint.Color.valueOf("#ff5c9d"));
         labelWinPlayerName.setFont(new Font("System Italic", 15.0));
-        
-       
+
         getChildren().add(winVideo);
         getChildren().add(btnWinPlayAgain);
         getChildren().add(btnWinExit);
@@ -106,5 +120,5 @@ public  class WinScreen extends AnchorPane {
         getChildren().add(labelWinPlayerName);
 
     }
-    
+
 }
