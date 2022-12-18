@@ -22,11 +22,13 @@ import javafx.scene.Node;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
 import javafx.stage.WindowEvent;
 import services.Alerts;
+import services.DataSaver;
 import services.Navigation;
 import services.StageSaver;
 import tictactoe_client.Controllers.GameHandler;
@@ -44,7 +46,7 @@ public class SignInScreenController implements Initializable {
     @FXML
     private TextField userNameTextField;
     @FXML
-    private TextField passwordTextField;
+    private PasswordField passwordTextField;
     @FXML
     private Button logInButton;
     @FXML
@@ -69,6 +71,7 @@ public class SignInScreenController implements Initializable {
                     Platform.runLater(() -> {
                         try {
                             Navigation.navigateTo(FXMLLoader.load(tictactoe_client.TicTacToe_Client.class.getResource("Views/ChoosePlayers.fxml")), StageSaver.getStageSeverInstance().getStage());
+                            DataSaver.dataSaverInstance().setPlayer1Data(userNameTextField.getText());
                         } catch (IOException ex) {
                             ex.printStackTrace();
                         }

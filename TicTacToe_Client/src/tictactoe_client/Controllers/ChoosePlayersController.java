@@ -22,6 +22,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
 import services.Alerts;
+import services.DataSaver;
 import services.Navigation;
 import services.StageSaver;
 import tictactoe_client.Controllers.GameHandler;
@@ -37,7 +38,11 @@ import tictactoe_client.Models.Player;
 public class ChoosePlayersController implements Initializable {
 
     @FXML
-    private Label backButton;
+    private Label logOutButton;
+    @FXML
+    private Label UserNameLable;
+    @FXML
+    private Label scoreLable;
     @FXML
     private ListView<String> onlinePlayersListView;
     @FXML
@@ -65,7 +70,6 @@ public class ChoosePlayersController implements Initializable {
                     System.out.println(message);
                 }, (response) -> {
 
-                    System.out.println(response);
                     if (splitRequest(response).get(0).equals("4")) {
                         Platform.runLater(() -> {
                             Alerts.showRequestAlert(splitRequest(response).get(1)
@@ -127,6 +131,7 @@ public class ChoosePlayersController implements Initializable {
                     }
                 });
                 gameHandler.writeData("2");
+                UserNameLable.setText(DataSaver.dataSaverInstance().getPlayer1Data());
 
             } catch (IOException ex) {
                 ex.printStackTrace();

@@ -18,10 +18,12 @@ import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
 import services.Alerts;
+import services.DataSaver;
 import services.Navigation;
 import services.StageSaver;
 
@@ -37,7 +39,7 @@ public class SignUpScreenController implements Initializable {
     @FXML
     private TextField signUpUserNameTextField;
     @FXML
-    private TextField signUpPasswordTextField;
+    private PasswordField signUpPasswordTextField;
     @FXML
     private Button signUpButton;
     @FXML
@@ -63,6 +65,7 @@ public class SignUpScreenController implements Initializable {
                     Platform.runLater(() -> {
                         try {
                             Navigation.navigateTo(FXMLLoader.load(tictactoe_client.TicTacToe_Client.class.getResource("Views/ChoosePlayers.fxml")), StageSaver.getStageSeverInstance().getStage());
+                            DataSaver.dataSaverInstance().setPlayer1Data(signUpUserNameTextField.getText());
                         } catch (IOException ex) {
                             Logger.getLogger(SignUpScreenController.class.getName()).log(Level.SEVERE, null, ex);
                         }

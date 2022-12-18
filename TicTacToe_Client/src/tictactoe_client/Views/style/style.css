@@ -108,3 +108,12 @@
     -fx-font-size:20;
     -fx-text-fill: #a05373;
 }
+
+.username{
+    -fx-font-size:15;
+    -fx-text-fill: #a05373;
+}
+.data{
+    -fx-font-size:15;
+    -fx-text-fill: #3f2e74;
+}
