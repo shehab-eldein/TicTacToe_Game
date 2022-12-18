@@ -112,7 +112,7 @@
                   <Image url="@img/x.png" />
                </image>
             </ImageView>
-            <Label fx:id="incorrectLable" layoutX="51.0" layoutY="132.0" prefHeight="18.0" prefWidth="185.0" stylesheets="@Views/style/style.css" text="Your data is wrong please try again" textFill="#e12727" visible="false">
+            <Label fx:id="incorrectLable" layoutX="58.0" layoutY="131.0" prefHeight="18.0" prefWidth="171.0" stylesheets="@Views/style/style.css" text="The user name is already exist! " textFill="#e12727" visible="false">
                <font>
                   <Font name="Calibri" size="13.0" />
                </font>

@@ -50,7 +50,7 @@ public class RequestHandler {
             case 9:
                 endGame(client);
                 break;
-         
+
         }
 
     }
@@ -70,12 +70,17 @@ public class RequestHandler {
 
     private static void signUP(Client client) throws IOException {
         try {
-            if (UserRepository.create(client.getUser()) != null) {
-                ResponseHandler.response(client, "1");
-                Communicator.addClient(client);
-            } else {
-                ResponseHandler.response(client, "0");
+            if (UserRepository.checkUniqeName(client.getUser().getName())) {
+                if (UserRepository.create(client.getUser()) != null) {
+                    ResponseHandler.response(client, "1");
+                    Communicator.addClient(client);
+                } else {
+                    ResponseHandler.response(client, "0");
+                }
+            }else{
+                ResponseHandler.response(client, "407");
             }
+
         } catch (SQLException ex) {
             ResponseHandler.response(client, "-1");
         }
@@ -88,10 +93,9 @@ public class RequestHandler {
     public static void getAllActivePlayers() {
         List<Client> clients = Communicator.getClients();
         for (Client aClient : clients) {
-            if(clients.size() == 1){
+            if (clients.size() == 1) {
                 ResponseHandler.response(aClient, "405");
-            }
-            else{
+            } else {
                 getActivePlayers(aClient);
             }
         }

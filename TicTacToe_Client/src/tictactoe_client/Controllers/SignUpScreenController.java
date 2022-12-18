@@ -79,6 +79,13 @@ public class SignUpScreenController implements Initializable {
                         });
                     });
 
+                } else if (response.equals("407")) {
+                    Platform.runLater(() -> {
+                        connectingLable.setVisible(false);
+                        incorrectLable.setVisible(true);
+                        signUpUserNameTextField.clear();
+                        signUpButton.setDisable(false);
+                    });
                 } else if (response.equals("0")) {
                     connectingLable.setVisible(true);
                     incorrectLable.setVisible(true);

@@ -32,4 +32,10 @@ public class UserRepository {
             }
         return null;
     }
+    
+    public static boolean checkUniqeName(String name) throws SQLException {
+        if(DBConnector.executeQuery("select 1 from Users where name ='" + name + "'").next())
+            return false;
+        return true;
+    }
 }
