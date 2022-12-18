@@ -12,6 +12,7 @@ import java.net.Socket;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Vector;
+import java.util.function.Consumer;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import java.util.stream.Collectors;
@@ -36,9 +37,11 @@ public class Client extends Thread {
     private boolean isBusy = false;
     private Socket socket;
     private String opponentName;
+    private Consumer<String> onlineClientsCount;
 
-    public Client(Socket socket) throws IOException {
+    public Client(Socket socket,Consumer clientCount) throws IOException {
         this.socket = socket;
+        this.onlineClientsCount=clientCount;
         StartSocket();
         start();
     }
@@ -52,6 +55,7 @@ public class Client extends Thread {
                 if (request != null) {
                     setRequestCode(request);
                     RequestHandler.queryHandler(this);
+                   onlineClientsCount.accept(request);
                 }else{
                     isStarted = false;
                     Communicator.removeClient(this);

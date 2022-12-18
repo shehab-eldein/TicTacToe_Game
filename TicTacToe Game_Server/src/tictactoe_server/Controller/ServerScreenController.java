@@ -8,6 +8,7 @@ package tictactoe_server.Controller;
 import java.io.IOException;
 import java.net.ServerSocket;
 import java.net.URL;
+import java.sql.SQLException;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -21,6 +22,7 @@ import javafx.geometry.Side;
 import javafx.scene.chart.PieChart;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import tictactoe_server.Repositories.UserRepository;
 import tictactoe_server.Services.Communicator;
 import tictactoe_server.Services.ServerConnector;
 
@@ -40,6 +42,8 @@ public class ServerScreenController implements Initializable {
     @FXML
     private PieChart UsersPieChart;
     private ServerConnector serverConnector;
+    private PieChart.Data online;
+    private PieChart.Data offline;
 
     /**
      * Initializes the controller class.
@@ -49,6 +53,22 @@ public class ServerScreenController implements Initializable {
 
         try {
             serverConnector = ServerConnector.getServerConnectorInstance(5005, (message) -> {
+            }, (count) -> {
+                System.out.println("count ");
+                Platform.runLater(() -> {
+                    try {
+
+                        online = new PieChart.Data("online", Communicator.getUserCount());
+                        offline = new PieChart.Data("offline", UserRepository.getUsersCount() - Communicator.getUserCount());
+                        ObservableList<PieChart.Data> pieChartData = FXCollections.observableArrayList(online, offline);
+                        UsersPieChart.setData(pieChartData);
+                        //System.out.println("count ");
+                    } catch (SQLException ex) {
+                        ex.printStackTrace();
+                    }
+
+                });
+
             });
         } catch (IOException ex) {
             ex.printStackTrace();
@@ -64,10 +84,7 @@ public class ServerScreenController implements Initializable {
                 serverStatusLable.setText("On");
                 startServerButton.setText("Stop");
                 UsersPieChart.setVisible(true);
-                PieChart.Data online = new PieChart.Data("online", 30);
-                PieChart.Data offline = new PieChart.Data("offline", 20);
-                ObservableList<PieChart.Data> pieChartData = FXCollections.observableArrayList(online, offline);
-                UsersPieChart.setData(pieChartData);
+
             } else {
                 serverConnector.disCounnect();
                 serverStatusLable.setText("Off");

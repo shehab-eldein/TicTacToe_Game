@@ -32,7 +32,7 @@ public class TicTacToe_Server extends Application {
     @Override
     public void stop() throws Exception {
         ServerConnector sever = ServerConnector.getServerConnectorInstance(5005, (message) -> {
-        });
+        },(count)->{});
         if (sever.getIsServerConected()) {
             sever.disCounnect();
         }

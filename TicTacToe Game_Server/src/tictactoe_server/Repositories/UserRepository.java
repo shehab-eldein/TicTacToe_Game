@@ -42,7 +42,7 @@ public class UserRepository {
 
     public static int getUsersCount() throws SQLException {
         ResultSet resultSet =DBConnector.executeQuery("select count(*) \"count\" from Users ");
-        resultSet.first();       
+        resultSet.next();       
         return resultSet.getInt("count");
     }
     
