@@ -1,6 +1,7 @@
 package tictactoe_client.Controllers;
 
 import javafx.event.ActionEvent;
+import javafx.event.Event;
 import javafx.event.EventHandler;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
@@ -17,6 +18,7 @@ public class ChooseLevel extends AnchorPane {
     protected final Button btnMedium;
     protected final Button btnHard;
     protected final Label label;
+    protected final ImageView backArowPlayerName;
 
     public ChooseLevel() {
         this.getStylesheets().add("tictactoe_client/Views/style/style.css");
@@ -26,6 +28,7 @@ public class ChooseLevel extends AnchorPane {
         btnMedium = new Button();
         btnHard = new Button();
         label = new Label();
+        backArowPlayerName = new ImageView();
 
         setId("AnchorPane");
         setPrefHeight(409.0);
@@ -78,6 +81,21 @@ public class ChooseLevel extends AnchorPane {
         btnHard.setFont(new Font("System Bold Italic", 20.0));
         btnHard.getStyleClass().add("changeButtonStyle");
 
+        backArowPlayerName.setFitHeight(26.0);
+        backArowPlayerName.setFitWidth(23.0);
+        backArowPlayerName.setLayoutX(6.0);
+        backArowPlayerName.setLayoutY(6.0);
+        backArowPlayerName.setPickOnBounds(true);
+        backArowPlayerName.setImage(new Image("tictactoe_client/Views/img/backarow.png"));
+        backArowPlayerName.setOnMouseClicked(new EventHandler() {
+
+            @Override
+            public void handle(Event event) {
+                Navigation.navigateTo(new ChooseMode(), event);
+
+            }
+        });
+
         label.setLayoutX(31.0);
         label.setLayoutY(45.0);
         label.setPrefHeight(58.0);
@@ -91,6 +109,7 @@ public class ChooseLevel extends AnchorPane {
         getChildren().add(btnMedium);
         getChildren().add(btnHard);
         getChildren().add(label);
+        getChildren().add(backArowPlayerName);
 
     }
 }
