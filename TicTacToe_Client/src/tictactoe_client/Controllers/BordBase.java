@@ -91,6 +91,7 @@ public class BordBase extends AnchorPane {
                             playState(getBordButtonByNumber(move.getIndex()), gameState, (Stage) gridPane.getScene().getWindow());
                         });
                     } else if (response.split("-")[0].equals("408")) {
+                        System.out.println("hamed");
                         Platform.runLater(() -> {
                             Alerts.showAlert(response.split("-")[1] + " closed yours game", (error) -> {
                             });
@@ -475,7 +476,7 @@ public class BordBase extends AnchorPane {
 
                 break;
             case X_WIN:
-                
+
                 dataSaver.setwinnerData(dataSaver.getPlayer1Data());
                 Navigation.navigateTo(new WinScreen(), stage);
                 break;

@@ -48,9 +48,11 @@ public class RequestHandler {
                 break;
             case 8:
                 sendEndGameRequest(client);
+                System.out.println("408");
                 break;
             case 9:
-                endGame(client);
+                sendPlayAgainRequest(client);
+                System.out.println("409");
                 break;
 
         }
@@ -164,14 +166,22 @@ public class RequestHandler {
 
     private static void endGame(Client client) {
         client.setIsBusy(false);
-        client.setOpponentName(null);
     }
 
     private static void sendEndGameRequest(Client client) {
+        String response = "408-" + client.getUser().getName();
         Client clientResponsed = Communicator.getClientByName(splitUserName(client.getRequest()));
-        ResponseHandler.response(clientResponsed, "408-" + client.getUser().getName());
+        ResponseHandler.response(clientResponsed, response);
         Communicator.removeClient(client);
-
+        endGame(clientResponsed);
+    }
+    
+    private static void sendPlayAgainRequest(Client client) {
+        String response = "409-" + client.getUser().getName();
+        Client clientResponsed = Communicator.getClientByName(splitUserName(client.getRequest()));
+        ResponseHandler.response(clientResponsed, response);
+        endGame(clientResponsed);
+        endGame(client);
     }
 
 }
