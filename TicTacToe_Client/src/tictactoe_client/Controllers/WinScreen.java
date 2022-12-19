@@ -69,7 +69,7 @@ public class WinScreen extends AnchorPane {
             if (DataSaver.dataSaverInstance().getModeData() == "Online Mode") {
                 try {
                     Navigation.navigateTo(FXMLLoader.load(tictactoe_client.TicTacToe_Client.class.getResource("Views/ChoosePlayers.fxml")), event);
-
+                    
                     System.out.println("online");
                 } catch (IOException ex) {
                     ex.printStackTrace();

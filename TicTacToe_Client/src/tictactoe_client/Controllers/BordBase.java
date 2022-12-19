@@ -66,44 +66,49 @@ public class BordBase extends AnchorPane {
     private Game game;
     private Player player1;
     private Player player2;
-    
+
     public BordBase(Player player1, Player player2) {
+        DataSaver dataSaver = DataSaver.dataSaverInstance();
+
         player1Name = new Label(player1.getName());
         Player2Name = new Label(player2.getName());
+        DataSaver.dataSaverInstance().setPlayer1Data(player1Name.getText());
+        DataSaver.dataSaverInstance().setPlayer2Data(Player2Name.getText());
         this.player1 = player1;
         this.player2 = player2;
         game = new Game(player1, player2);
         init();
-         Platform.runLater(() -> {
+        Platform.runLater(() -> {
             try {
                 gameHandler = GameHandler.getInstance((message) -> {
                     System.out.println(message);
                 }, (response) -> {
                     System.out.println(response);
-                if(response.split("-")[0].equals("7")){
-                    Platform.runLater(() -> {
-                    Move move = new Move(response.split("-")[1]);
-                    GameState gameState = game.action(move);
-                    playState(getBordButtonByNumber(move.getIndex()), gameState, (Stage)gridPane.getScene().getWindow());
-                    });
-                }else if(response.split("-")[0].equals("408")){
-                    Platform.runLater(() -> {
-                        Alerts.showAlert(response.split("-")[1] + " closed yours game", (error)->{});
-                        gameHandler.writeData("2");
-                        try {
-                            Navigation.navigateTo(FXMLLoader.load(tictactoe_client.TicTacToe_Client.class.getResource("Views/ChoosePlayers.fxml")), StageSaver.getStageSeverInstance().getStage());
-                        } catch (IOException ex) {
-                            ex.printStackTrace();
-                        }
-                    });
-                }
+                    if (response.split("-")[0].equals("7")) {
+                        Platform.runLater(() -> {
+                            Move move = new Move(response.split("-")[1]);
+                            GameState gameState = game.action(move);
+                            playState(getBordButtonByNumber(move.getIndex()), gameState, (Stage) gridPane.getScene().getWindow());
+                        });
+                    } else if (response.split("-")[0].equals("408")) {
+                        Platform.runLater(() -> {
+                            Alerts.showAlert(response.split("-")[1] + " closed yours game", (error) -> {
+                            });
+                            gameHandler.writeData("2");
+                            try {
+                                Navigation.navigateTo(FXMLLoader.load(tictactoe_client.TicTacToe_Client.class.getResource("Views/ChoosePlayers.fxml")), StageSaver.getStageSeverInstance().getStage());
+                            } catch (IOException ex) {
+                                ex.printStackTrace();
+                            }
+                        });
+                    }
                 });
             } catch (IOException ex) {
                 ex.printStackTrace();
             }
-         });
+        });
     }
-    
+
     public BordBase() {
         player1Name = new Label(DataSaver.dataSaverInstance().getPlayer1Data());
         Player2Name = new Label(DataSaver.dataSaverInstance().getPlayer2Data());
@@ -116,7 +121,7 @@ public class BordBase extends AnchorPane {
     private void init() {
         shap = Shape.X;
         this.getStylesheets().add("tictactoe_client/Views/style/style.css");
-      
+
         gridPane = new GridPane();
         columnConstraints = new ColumnConstraints();
         columnConstraints0 = new ColumnConstraints();
@@ -188,13 +193,13 @@ public class BordBase extends AnchorPane {
 
             @Override
             public void handle(ActionEvent event) {
-                if(isPlayerTurn()){
-                     Move move =new Move(0, shap);
+                if (isPlayerTurn()) {
+                    Move move = new Move(0, shap);
                     sendMoveToServer(move);
-                GameState gameState = game.action(move);
-                playState(btn0, gameState, event);
+                    GameState gameState = game.action(move);
+                    playState(btn0, gameState, event);
 
-            }
+                }
             }
         });
 
@@ -207,12 +212,12 @@ public class BordBase extends AnchorPane {
         btn1.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent event) {
-                if(isPlayerTurn()){
-                     Move move =new Move(1, shap);
+                if (isPlayerTurn()) {
+                    Move move = new Move(1, shap);
                     sendMoveToServer(move);
-                GameState gameState = game.action(move);
-                playState(btn1, gameState, event);
-            }
+                    GameState gameState = game.action(move);
+                    playState(btn1, gameState, event);
+                }
             }
         });
 
@@ -225,12 +230,12 @@ public class BordBase extends AnchorPane {
         btn2.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent event) {
-                if(isPlayerTurn()){
-                     Move move =new Move(2, shap);
+                if (isPlayerTurn()) {
+                    Move move = new Move(2, shap);
                     sendMoveToServer(move);
-                GameState gameState = game.action(move);
-                playState(btn2, gameState, event);
-            }
+                    GameState gameState = game.action(move);
+                    playState(btn2, gameState, event);
+                }
             }
         });
 
@@ -243,12 +248,12 @@ public class BordBase extends AnchorPane {
         btn3.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent event) {
-                if(isPlayerTurn()){
-                     Move move =new Move(3, shap);
+                if (isPlayerTurn()) {
+                    Move move = new Move(3, shap);
                     sendMoveToServer(move);
-                GameState gameState = game.action(move);
-                playState(btn3, gameState, event);
-            }
+                    GameState gameState = game.action(move);
+                    playState(btn3, gameState, event);
+                }
             }
         });
 
@@ -261,12 +266,12 @@ public class BordBase extends AnchorPane {
         btn6.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent event) {
-                if(isPlayerTurn()){
-                     Move move =new Move(6, shap);
+                if (isPlayerTurn()) {
+                    Move move = new Move(6, shap);
                     sendMoveToServer(move);
-                GameState gameState = game.action(move);
-                playState(btn6, gameState, event);
-            }
+                    GameState gameState = game.action(move);
+                    playState(btn6, gameState, event);
+                }
             }
         });
 
@@ -280,12 +285,12 @@ public class BordBase extends AnchorPane {
         btn5.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent event) {
-                if(isPlayerTurn()){
-                     Move move =new Move(5, shap);
+                if (isPlayerTurn()) {
+                    Move move = new Move(5, shap);
                     sendMoveToServer(move);
-                GameState gameState = game.action(move);
-                playState(btn5, gameState, event);
-            }
+                    GameState gameState = game.action(move);
+                    playState(btn5, gameState, event);
+                }
             }
         });
 
@@ -299,12 +304,12 @@ public class BordBase extends AnchorPane {
         btn4.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent event) {
-                if(isPlayerTurn()){
-                     Move move =new Move(4, shap);
+                if (isPlayerTurn()) {
+                    Move move = new Move(4, shap);
                     sendMoveToServer(move);
-                GameState gameState = game.action(move);
-                playState(btn4, gameState, event);
-            }
+                    GameState gameState = game.action(move);
+                    playState(btn4, gameState, event);
+                }
             }
         });
 
@@ -318,12 +323,12 @@ public class BordBase extends AnchorPane {
         btn7.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent event) {
-                if(isPlayerTurn()){
-                    Move move =new Move(7, shap);
+                if (isPlayerTurn()) {
+                    Move move = new Move(7, shap);
                     sendMoveToServer(move);
-                GameState gameState = game.action(move);
-                playState(btn7, gameState, event);
-            }
+                    GameState gameState = game.action(move);
+                    playState(btn7, gameState, event);
+                }
             }
         });
 
@@ -338,8 +343,8 @@ public class BordBase extends AnchorPane {
             @Override
             public void handle(ActionEvent event) {
                 Alert a;
-                if(isPlayerTurn()){
-                   Move move =new Move(8, shap); 
+                if (isPlayerTurn()) {
+                    Move move = new Move(8, shap);
                     sendMoveToServer(move);
                     GameState gameState = game.action(move);
                     playState(btn8, gameState, event);
@@ -437,12 +442,12 @@ public class BordBase extends AnchorPane {
         getChildren().add(player1Score);
         getChildren().add(player2Score);
     }
-    
+
     //play sate
     public void playState(Button b, GameState gameState, ActionEvent event) {
-        playState(b, gameState, (Stage)((Node)event.getSource()).getScene().getWindow());
+        playState(b, gameState, (Stage) ((Node) event.getSource()).getScene().getWindow());
     }
-    
+
     public void playState(Button b, GameState gameState, Stage stage) {
         DataSaver dataSaver = DataSaver.dataSaverInstance();
         Button a = null;
@@ -463,13 +468,14 @@ public class BordBase extends AnchorPane {
                 Player2Name.setStyle("-fx-text-fill:#46C464;");
                 player1Name.setStyle(" -fx-text-fill:#ffffff;"
                         + "    -fx-opacity: 0.5;");
-                if(DataSaver.dataSaverInstance().getModeData() == "Single Mode"){
+                if (DataSaver.dataSaverInstance().getModeData() == "Single Mode") {
                     int blocId = game.getAiTurn();
                     playState(getBordButtonByNumber(blocId), game.action(new Move(blocId, shap)), stage);
                 }
-                
+
                 break;
             case X_WIN:
+                
                 dataSaver.setwinnerData(dataSaver.getPlayer1Data());
                 Navigation.navigateTo(new WinScreen(), stage);
                 break;
@@ -485,50 +491,51 @@ public class BordBase extends AnchorPane {
 
     }
 
-    private Button getBordButtonByNumber(int bordNumber){
-        switch(bordNumber){
+    private Button getBordButtonByNumber(int bordNumber) {
+        switch (bordNumber) {
             case 0:
-               return btn0;
+                return btn0;
             case 1:
-               return btn1;
+                return btn1;
             case 2:
-               return btn2;
+                return btn2;
             case 3:
-               return btn3;
+                return btn3;
             case 4:
-               return btn4;
+                return btn4;
             case 5:
-               return btn5;
+                return btn5;
             case 6:
-               return btn6;
+                return btn6;
             case 7:
-               return btn7;
+                return btn7;
             case 8:
-               return btn8;
+                return btn8;
         }
         return null;
     }
-    private boolean  isPlayerTurn() {
-        if(DataSaver.dataSaverInstance().getModeData() == "Online Mode"){
-              if (shap == Shape.X && player1.getType() == PlayerType.HUMAN) {
-                  return true;
-              } else if (shap == Shape.O && player2.getType() == PlayerType.HUMAN) {
-                  return true;
-              }
-              return false;
+
+    private boolean isPlayerTurn() {
+        if (DataSaver.dataSaverInstance().getModeData() == "Online Mode") {
+            if (shap == Shape.X && player1.getType() == PlayerType.HUMAN) {
+                return true;
+            } else if (shap == Shape.O && player2.getType() == PlayerType.HUMAN) {
+                return true;
+            }
+            return false;
         }
         return true;
     }
-    
-    private void sendMoveToServer(Move move){
-        if(DataSaver.dataSaverInstance().getModeData() == "Online Mode"){
-        String opponentName;
-        if(player1.getType() == PlayerType.SERVER){
-            opponentName = player1.getName();
-        }else{
-            opponentName = player2.getName();
-        }
-        gameHandler.writeData("7-"+opponentName+"-"+move.toString());
+
+    private void sendMoveToServer(Move move) {
+        if (DataSaver.dataSaverInstance().getModeData() == "Online Mode") {
+            String opponentName;
+            if (player1.getType() == PlayerType.SERVER) {
+                opponentName = player1.getName();
+            } else {
+                opponentName = player2.getName();
+            }
+            gameHandler.writeData("7-" + opponentName + "-" + move.toString());
         }
     }
 }
