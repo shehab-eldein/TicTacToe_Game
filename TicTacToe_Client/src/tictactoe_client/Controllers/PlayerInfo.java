@@ -8,6 +8,7 @@ import javafx.scene.Parent;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.control.ListView;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
@@ -26,6 +27,8 @@ public  class PlayerInfo extends AnchorPane {
     protected final Label label;
     protected final Button btnStartGame;
     protected final ImageView backArowPlayerName;
+    protected final ListView listView;
+    protected final Label label0;
 
     public PlayerInfo() {
         labelPlayer1 = new Label();
@@ -36,6 +39,8 @@ public  class PlayerInfo extends AnchorPane {
         label = new Label();
         btnStartGame = new Button();
         backArowPlayerName = new ImageView();
+        listView = new ListView();
+        label0 = new Label();
 
         setId("AnchorPane");
         setPrefHeight(409.0);
@@ -136,15 +141,28 @@ public  class PlayerInfo extends AnchorPane {
               
             }
         });
+        
+        listView.setLayoutX(299.0);
+        listView.setLayoutY(71.0);
+        listView.setPrefHeight(327.0);
+        listView.setPrefWidth(250.0);
+        
+        label0.setLayoutX(362.0);
+        label0.setLayoutY(38.0);
+        label0.setText("Recorded Games");
+        label0.setTextFill(javafx.scene.paint.Color.WHITE);
+        label0.setFont(new Font("System Bold Italic", 16.0));
 
         getChildren().add(labelPlayer1);
-        getChildren().add(imageView);
+//        getChildren().add(imageView);
         getChildren().add(labelPlayer2);
         getChildren().add(player1Name);
         getChildren().add(player2Name);
         getChildren().add(label);
         getChildren().add(btnStartGame);
         getChildren().add(backArowPlayerName);
+        getChildren().add(listView);
+        getChildren().add(label0);
     }
     public void switchToSingleMode(){
         if (DataSaver.dataSaverInstance().getModeData() == "Single Mode"){
