@@ -1,6 +1,10 @@
 package tictactoe_client.Controllers;
 
 import java.io.IOException;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javafx.application.Platform;
@@ -27,6 +31,7 @@ import javafx.scene.text.Font;
 import javafx.stage.Stage;
 import services.Alerts;
 import services.DataSaver;
+import services.FileManger;
 import services.Navigation;
 import services.StageSaver;
 import tictactoe_client.Enums.GameState;
@@ -54,6 +59,7 @@ public class BordBase extends AnchorPane {
     protected Button btn4;
     protected Button btn7;
     protected Button btn8;
+    protected Button record;
     protected ImageView backArowPlayerName;
     protected Label player1Name;
     protected ImageView backArowPlayerName1;
@@ -66,6 +72,11 @@ public class BordBase extends AnchorPane {
     private Game game;
     private Player player1;
     private Player player2;
+    private String recordGame = "";
+    Date date;
+    DateFormat dateFormat;
+    String strDate;
+    String fileName;
 
     public BordBase(Player player1, Player player2) {
         DataSaver dataSaver = DataSaver.dataSaverInstance();
@@ -122,7 +133,9 @@ public class BordBase extends AnchorPane {
     private void init() {
         shap = Shape.X;
         this.getStylesheets().add("tictactoe_client/Views/style/style.css");
-
+        date = Calendar.getInstance().getTime();
+        dateFormat = new SimpleDateFormat("E dd MMM yyyy HH mm ss z");
+        strDate = dateFormat.format(date);
         gridPane = new GridPane();
         columnConstraints = new ColumnConstraints();
         columnConstraints0 = new ColumnConstraints();
@@ -139,6 +152,8 @@ public class BordBase extends AnchorPane {
         btn4 = new Button();
         btn7 = new Button();
         btn8 = new Button();
+        record = new Button();
+
         backArowPlayerName = new ImageView();
         backArowPlayerName1 = new ImageView();
         label = new Label();
@@ -188,6 +203,7 @@ public class BordBase extends AnchorPane {
         btn0.setMnemonicParsing(false);
         btn0.setPrefHeight(70.0);
         btn0.setPrefWidth(100.0);
+        btn0.setId("btn0");
         btn0.setStyle("-fx-background-color: #3F2D73;");
         btn0.setTextFill(javafx.scene.paint.Color.WHITE);
         btn0.setOnAction(new EventHandler<ActionEvent>() {
@@ -208,6 +224,7 @@ public class BordBase extends AnchorPane {
         btn1.setMnemonicParsing(false);
         btn1.setPrefHeight(70.0);
         btn1.setPrefWidth(100.0);
+        btn1.setId("btn1");
         btn1.setStyle("-fx-background-color: #3F2D73;");
         btn1.setTextFill(javafx.scene.paint.Color.WHITE);
         btn1.setOnAction(new EventHandler<ActionEvent>() {
@@ -226,6 +243,7 @@ public class BordBase extends AnchorPane {
         btn2.setMnemonicParsing(false);
         btn2.setPrefHeight(70.0);
         btn2.setPrefWidth(100.0);
+        btn2.setId("btn2");
         btn2.setStyle("-fx-background-color: #3F2D73;");
         btn2.setTextFill(javafx.scene.paint.Color.WHITE);
         btn2.setOnAction(new EventHandler<ActionEvent>() {
@@ -244,6 +262,7 @@ public class BordBase extends AnchorPane {
         btn3.setMnemonicParsing(false);
         btn3.setPrefHeight(70.0);
         btn3.setPrefWidth(100.0);
+        btn3.setId("btn3");
         btn3.setStyle("-fx-background-color: #3F2D73;");
         btn3.setTextFill(javafx.scene.paint.Color.WHITE);
         btn3.setOnAction(new EventHandler<ActionEvent>() {
@@ -262,6 +281,7 @@ public class BordBase extends AnchorPane {
         btn6.setMnemonicParsing(false);
         btn6.setPrefHeight(70.0);
         btn6.setPrefWidth(100.0);
+        btn6.setId("btn6");
         btn6.setStyle("-fx-background-color: #3F2D73;");
         btn6.setTextFill(javafx.scene.paint.Color.WHITE);
         btn6.setOnAction(new EventHandler<ActionEvent>() {
@@ -281,6 +301,7 @@ public class BordBase extends AnchorPane {
         btn5.setMnemonicParsing(false);
         btn5.setPrefHeight(70.0);
         btn5.setPrefWidth(100.0);
+        btn5.setId("btn5");
         btn5.setStyle("-fx-background-color: #3F2D73;");
         btn5.setTextFill(javafx.scene.paint.Color.WHITE);
         btn5.setOnAction(new EventHandler<ActionEvent>() {
@@ -300,6 +321,7 @@ public class BordBase extends AnchorPane {
         btn4.setMnemonicParsing(false);
         btn4.setPrefHeight(70.0);
         btn4.setPrefWidth(100.0);
+        btn4.setId("btn4");
         btn4.setStyle("-fx-background-color: #3F2D73;");
         btn4.setTextFill(javafx.scene.paint.Color.WHITE);
         btn4.setOnAction(new EventHandler<ActionEvent>() {
@@ -319,6 +341,7 @@ public class BordBase extends AnchorPane {
         btn7.setMnemonicParsing(false);
         btn7.setPrefHeight(70.0);
         btn7.setPrefWidth(100.0);
+        btn7.setId("btn7");
         btn7.setStyle("-fx-background-color: #3F2D73;");
         btn7.setTextFill(javafx.scene.paint.Color.WHITE);
         btn7.setOnAction(new EventHandler<ActionEvent>() {
@@ -338,6 +361,7 @@ public class BordBase extends AnchorPane {
         btn8.setMnemonicParsing(false);
         btn8.setPrefHeight(70.0);
         btn8.setPrefWidth(100.0);
+        btn8.setId("btn8");
         btn8.setStyle("-fx-background-color: #3F2D73;");
         btn8.setTextFill(javafx.scene.paint.Color.WHITE);
         btn8.setOnAction(new EventHandler<ActionEvent>() {
@@ -392,6 +416,32 @@ public class BordBase extends AnchorPane {
             }
         });
 
+        record.setMnemonicParsing(false);
+        record.setPrefHeight(10);
+
+        record.setPrefWidth(80);
+        record.setLayoutX(420);
+        record.setLayoutY(360);
+        record.setText("Record");
+        record.setStyle("-fx-background-color: #ff5c9d;");
+        record.setTextFill(javafx.scene.paint.Color.WHITE);
+        record.setFont(new Font("System Bold Italic", 15.0));
+        record.setOnAction(new EventHandler<ActionEvent>() {
+
+            @Override
+            public void handle(ActionEvent event) {
+                try {
+                    System.out.println(recordGame);
+//                    System.out.print(strDate);
+                    fileName = player1Name.getText() + "" + Player2Name.getText() + "" + strDate;
+//                    System.out.println(fileName);
+                    FileManger.saveFile(fileName, recordGame);
+                } catch (IOException ex) {
+                    Logger.getLogger(BordBase.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            }
+        });
+
         Player2Name.setLayoutX(365.0);
         Player2Name.setLayoutY(14.0);
         Player2Name.setPrefHeight(42.0);
@@ -442,6 +492,7 @@ public class BordBase extends AnchorPane {
         getChildren().add(label);
         getChildren().add(player1Score);
         getChildren().add(player2Score);
+        getChildren().add(record);
     }
 
     //play sate
@@ -450,45 +501,53 @@ public class BordBase extends AnchorPane {
     }
 
     public void playState(Button b, GameState gameState, Stage stage) {
-        DataSaver dataSaver = DataSaver.dataSaverInstance();
-        Button a = null;
-        switch (gameState) {
-            case X_TURN:
-                shap = Shape.X;
-                b.setText("o");
-                b.getStyleClass().add("OStyle");
-                player1Name.setStyle("-fx-text-fill:#46C464;");
-                Player2Name.setStyle(" -fx-text-fill:#ffffff;"
-                        + "    -fx-opacity: 0.5;");
-                break;
-            case O_TURN:
-                shap = Shape.O;
-                b.setText("x");
-                //  System.out.println(x);
-                b.getStyleClass().add("XStyle");
-                Player2Name.setStyle("-fx-text-fill:#46C464;");
-                player1Name.setStyle(" -fx-text-fill:#ffffff;"
-                        + "    -fx-opacity: 0.5;");
-                if (DataSaver.dataSaverInstance().getModeData() == "Single Mode") {
-                    int blocId = game.getAiTurn();
-                    playState(getBordButtonByNumber(blocId), game.action(new Move(blocId, shap)), stage);
-                }
+        try {
+            DataSaver dataSaver = DataSaver.dataSaverInstance();
+            Button a = null;
+            switch (gameState) {
+                case X_TURN:
+                    shap = Shape.X;
+                    b.setText("o");
+                    recordGame = recordGame + b.getId() + "-o-";
+                    b.getStyleClass().add("OStyle");
+                    player1Name.setStyle("-fx-text-fill:#46C464;");
+                    Player2Name.setStyle(" -fx-text-fill:#ffffff;"
+                            + "    -fx-opacity: 0.5;");
+                    break;
+                case O_TURN:
+                    shap = Shape.O;
+                    b.setText("x");
+                    recordGame = recordGame + b.getId() + "-x-";
+                    b.getStyleClass().add("XStyle");
+                    Player2Name.setStyle("-fx-text-fill:#46C464;");
+                    player1Name.setStyle(" -fx-text-fill:#ffffff;"
+                            + "    -fx-opacity: 0.5;");
+                    if (DataSaver.dataSaverInstance().getModeData() == "Single Mode") {
+                        int blocId = game.getAiTurn();
+                        playState(getBordButtonByNumber(blocId), game.action(new Move(blocId, shap)), stage);
+                    }
 
-                break;
-            case X_WIN:
-
-                dataSaver.setwinnerData(dataSaver.getPlayer1Data());
-                Navigation.navigateTo(new WinScreen(), stage);
-                break;
-            case O_WIN:
-                dataSaver.setwinnerData(dataSaver.getPlayer2Data());
-                Navigation.navigateTo(new WinScreen(), stage);
-                break;
-            default:
-                Navigation.navigateTo(new DrawScreen(), stage);
-                break;
+                    break;
+                case X_WIN:
+                    recordGame = recordGame + b.getId() + "-x-";
+                    FileManger.saveFile(fileName, recordGame);
+                    dataSaver.setwinnerData(dataSaver.getPlayer1Data());
+                    Navigation.navigateTo(new WinScreen(), stage);
+                    break;
+                case O_WIN:
+                    recordGame = recordGame + b.getId() + "-o-";
+                    FileManger.saveFile(fileName, recordGame);
+                    dataSaver.setwinnerData(dataSaver.getPlayer2Data());
+                    Navigation.navigateTo(new WinScreen(), stage);
+                    break;
+                default:
+                    Navigation.navigateTo(new DrawScreen(), stage);
+                    break;
+            }
+            b.setDisable(true);
+        } catch (IOException ex) {
+            Logger.getLogger(BordBase.class.getName()).log(Level.SEVERE, null, ex);
         }
-        b.setDisable(true);
 
     }
 

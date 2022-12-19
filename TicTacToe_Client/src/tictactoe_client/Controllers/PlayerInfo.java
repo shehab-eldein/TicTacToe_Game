@@ -1,5 +1,13 @@
 package tictactoe_client.Controllers;
 
+import java.io.File;
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.event.Event;
 import javafx.event.EventHandler;
@@ -7,17 +15,21 @@ import javafx.scene.Parent;
 
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
+import javafx.scene.control.ButtonBar;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.text.Font;
+import services.Alerts;
 import services.DataSaver;
+import services.FileManger;
 import services.Navigation;
 
-public  class PlayerInfo extends AnchorPane {
+public class PlayerInfo extends AnchorPane {
 
     protected final Label labelPlayer1;
     protected final ImageView imageView;
@@ -29,6 +41,7 @@ public  class PlayerInfo extends AnchorPane {
     protected final ImageView backArowPlayerName;
     protected final ListView listView;
     protected final Label label0;
+    List fileNames;
 
     public PlayerInfo() {
         labelPlayer1 = new Label();
@@ -41,6 +54,7 @@ public  class PlayerInfo extends AnchorPane {
         backArowPlayerName = new ImageView();
         listView = new ListView();
         label0 = new Label();
+        fileNames = new ArrayList();
 
         setId("AnchorPane");
         setPrefHeight(409.0);
@@ -92,7 +106,6 @@ public  class PlayerInfo extends AnchorPane {
         label.setFont(new Font("System Bold Italic", 38.0));
         switchToSingleMode();
 
-
         btnStartGame.setLayoutX(111.0);
         btnStartGame.setLayoutY(296.0);
         btnStartGame.setMnemonicParsing(false);
@@ -108,7 +121,7 @@ public  class PlayerInfo extends AnchorPane {
         btnStartGame.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent event) {
-                
+
                 if (player1Name.getText().isEmpty()) {
                     Alert a = new Alert(Alert.AlertType.INFORMATION);
                     a.setContentText("Player1 name is required");
@@ -133,20 +146,40 @@ public  class PlayerInfo extends AnchorPane {
         backArowPlayerName.setPickOnBounds(true);
         backArowPlayerName.setImage(new Image("tictactoe_client/Views/img/backarow.png"));
         backArowPlayerName.setOnMouseClicked(new EventHandler() {
-            
 
             @Override
             public void handle(Event event) {
                 Navigation.navigateTo(new ChooseMode(), event);
-              
+
             }
         });
-        
+
         listView.setLayoutX(299.0);
         listView.setLayoutY(71.0);
         listView.setPrefHeight(327.0);
         listView.setPrefWidth(250.0);
-        
+        getFilesNames();
+        ObservableList<String> names = FXCollections.observableArrayList(fileNames);
+        listView.setItems(names);
+        listView.setOnMouseClicked(new EventHandler<MouseEvent>() {
+            @Override
+            public void handle(MouseEvent event) {
+                try {
+                    DataSaver.dataSaverInstance().setGame(FileManger.loadFile((String) listView.getSelectionModel().getSelectedItem()));
+                    Alert a = new Alert(Alert.AlertType.CONFIRMATION);
+                    a.setContentText("Do you want to watch the record game?");
+                    if (a.showAndWait().get().getButtonData() == ButtonBar.ButtonData.OK_DONE) {
+                        Navigation.navigateTo(new RecordedBordBase(), event);
+                    }
+                    System.out.println("clicked on " + listView.getSelectionModel().getSelectedItem());
+                    System.out.println(DataSaver.dataSaverInstance().getGame());
+                } catch (IOException ex) {
+                    Logger.getLogger(PlayerInfo.class.getName()).log(Level.SEVERE, null, ex);
+                }
+
+            }
+        });
+
         label0.setLayoutX(362.0);
         label0.setLayoutY(38.0);
         label0.setText("Recorded Games");
@@ -164,11 +197,31 @@ public  class PlayerInfo extends AnchorPane {
         getChildren().add(listView);
         getChildren().add(label0);
     }
-    public void switchToSingleMode(){
-        if (DataSaver.dataSaverInstance().getModeData() == "Single Mode"){
+
+    public void switchToSingleMode() {
+        if (DataSaver.dataSaverInstance().getModeData() == "Single Mode") {
             player2Name.setVisible(false);
             player2Name.setText("Computer");
             labelPlayer2.setVisible(false);
         }
+    }
+
+    public void getFilesNames() {
+        File folder = new File(System.getProperty("user.home") + "/tic_tac_toe_files");
+        File[] listOfFiles = folder.listFiles();
+
+        for (int i = 0; i < listOfFiles.length; i++) {
+            if (listOfFiles[i].isFile()) {
+                System.out.println(listOfFiles[i].getName());
+                int dotIndex = listOfFiles[i].getName().lastIndexOf('.');
+
+                String fileNameWithOutExtention = listOfFiles[i].getName().substring(0, dotIndex);
+
+                fileNames.add(fileNameWithOutExtention);
+            } else if (listOfFiles[i].isDirectory()) {
+                System.out.println("Directory " + listOfFiles[i].getName());
+            }
+        }
+//        return fileNames;
     }
 }

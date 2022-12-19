@@ -16,6 +16,7 @@ public class DataSaver {
     private String player2;
     private String winner;
     private String mode;
+    private String game;
 
     private DataSaver() {
 
@@ -31,14 +32,15 @@ public class DataSaver {
     public void setModeData(String data) {
         mode = data;
     }
+
     public void setPlayer1Data(String data) {
         player1 = data;
     }
-    
+
     public void setPlayer2Data(String data) {
         player2 = data;
     }
-    
+
     public void setwinnerData(String data) {
         winner = data;
     }
@@ -46,13 +48,24 @@ public class DataSaver {
     public String getPlayer1Data() {
         return player1;
     }
+
     public String getPlayer2Data() {
         return player2;
     }
+
     public String getwinnerData() {
-       return winner;
+        return winner;
     }
-    public String  getModeData() {
+
+    public String getModeData() {
         return mode;
+    }
+
+    public String getGame() {
+        return game;
+    }
+
+    public void setGame(String game) {
+        this.game = game;
     }
 }

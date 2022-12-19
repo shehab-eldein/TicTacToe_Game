@@ -9,6 +9,7 @@ import javafx.event.Event;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
 /**
  *
@@ -28,6 +29,12 @@ public class Navigation {
     
     // navigate by event parameter
     public static void navigateTo(Parent distinationRoot, Event event){
+        scene = new Scene(distinationRoot);
+        stage = (Stage)((Node)event.getSource()).getScene().getWindow();
+        showScene();
+    }
+    // navigate by mouse event
+     public static void navigateTo(Parent distinationRoot, MouseEvent event){
         scene = new Scene(distinationRoot);
         stage = (Stage)((Node)event.getSource()).getScene().getWindow();
         showScene();

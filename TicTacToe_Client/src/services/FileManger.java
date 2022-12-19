@@ -67,6 +67,15 @@ public class FileManger {
         }
         return false;
     }
+    
+      public static boolean checkFileExistance(String fileName) {
+        File file = new File(System.getProperty("user.home") + "/tic_tac_toe_files",
+                fileName + ".encrypted");
+        if (file.exists()) {
+            return true;
+        }
+        return false;
+    }
 
     private static void openOutputStream(String fileName) throws FileNotFoundException {
         fileOutputStream = new FileOutputStream(getFile(fileName));
