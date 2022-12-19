@@ -58,7 +58,7 @@ public class FileManger {
         return new File(System.getProperty("user.home")+"/tic_tac_toe_files", fileName+".encrypted");
     }
     
-    private static boolean createFolderIfNotExist(){
+    public static boolean createFolderIfNotExist(){
         File file = new File(System.getProperty("user.home")+"/tic_tac_toe_files");
         if(!file.exists()){
             file.mkdir();

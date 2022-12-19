@@ -207,6 +207,7 @@ public class PlayerInfo extends AnchorPane {
     }
 
     public void getFilesNames() {
+        FileManger.createFolderIfNotExist();
         File folder = new File(System.getProperty("user.home") + "/tic_tac_toe_files");
         File[] listOfFiles = folder.listFiles();
 
