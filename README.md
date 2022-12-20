@@ -31,22 +31,24 @@
 <hr>
 <h2>How to play the game</h2>
 
+-setup database.
 
+-start the server Kindly use the JAR file of the server to open the GUI and then press the start button to turn it on.
 
+-fill the requirment in the signup page Launch any number you want of clients but keep in mind to sign up first before trying to sign in with an account.
 
+-choose which player you want to play with by sending him an invitation or you can just play with ui by choosing the difficulty level
 
-
-
-
-
-
-
-
-
-
-
-
-
+<hr>
+<h2>Application domain</h2>
+-Client
+-Login/Register
+-single player vs Computer
+-player vs player
+-show recorded games
+-server Activate or disable the server
+<hr>
+<h2>Game UI</h2>
 
 ![start](https://user-images.githubusercontent.com/83082791/206190852-11bc3f99-9de6-490b-acaa-f8ac6f55e7ff.png)
 ![mode screen](https://user-images.githubusercontent.com/83082791/206190838-cc60aeff-9434-4b38-a24d-8ac13873156b.png)
