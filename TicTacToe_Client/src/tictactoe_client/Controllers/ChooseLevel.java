@@ -42,7 +42,7 @@ public class ChooseLevel extends AnchorPane {
         imageView.setImage(new Image("tictactoe_client/Views/img/start.png"));
 
         btnEasy.setLayoutX(44.0);
-        btnEasy.setLayoutY(138.0);
+        btnEasy.setLayoutY(208.0);
         btnEasy.setMnemonicParsing(false);
         btnEasy.setPrefHeight(46.0);
         btnEasy.setPrefWidth(184.0);
@@ -106,8 +106,8 @@ public class ChooseLevel extends AnchorPane {
 
         getChildren().add(imageView);
         getChildren().add(btnEasy);
-        getChildren().add(btnMedium);
-        getChildren().add(btnHard);
+//        getChildren().add(btnMedium);
+//        getChildren().add(btnHard);
         getChildren().add(label);
         getChildren().add(backArowPlayerName);
 
