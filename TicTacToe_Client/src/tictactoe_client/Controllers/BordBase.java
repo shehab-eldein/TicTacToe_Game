@@ -484,10 +484,13 @@ public class BordBase extends AnchorPane {
         gridPane.getChildren().add(btn4);
         gridPane.getChildren().add(btn7);
         gridPane.getChildren().add(btn8);
+        if (DataSaver.dataSaverInstance().getModeData() == "Online Mode"){
+            backArowPlayerName1.setVisible(false);
+        }
         getChildren().add(gridPane);
         getChildren().add(backArowPlayerName);
-        getChildren().add(player1Name);
         getChildren().add(backArowPlayerName1);
+        getChildren().add(player1Name);
         getChildren().add(Player2Name);
         getChildren().add(label);
         getChildren().add(player1Score);
