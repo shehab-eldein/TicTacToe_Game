@@ -74,7 +74,7 @@ public class WinScreen extends AnchorPane {
             gameHandler = GameHandler.getInstance((erro) -> {
             }, (response) -> {
                 if (response.split("-")[0].equals("409")) {
-                    
+
                     Platform.runLater(() -> {
                         Alerts.showAlert(response.split("-")[1] + " is win", (error) -> {
                         });
@@ -96,8 +96,8 @@ public class WinScreen extends AnchorPane {
                 Platform.runLater(() -> {
                     try {
                         gameHandler.writeData("9-" + DataSaver.dataSaverInstance().getPlayer2Data());
-                         Thread.sleep(1500);
-                         gameHandler.setIsInGame(false);
+                        Thread.sleep(1500);
+                        gameHandler.setIsInGame(false);
                         Navigation.navigateTo(FXMLLoader.load(tictactoe_client.TicTacToe_Client.class.getResource("Views/ChoosePlayers.fxml")), event);
                     } catch (IOException ex) {
                         ex.printStackTrace();
@@ -132,7 +132,15 @@ public class WinScreen extends AnchorPane {
         label.setLayoutY(255.0);
         label.setPrefHeight(17.0);
         label.setPrefWidth(112.0);
-        label.setText("Congratulation");
+        if (DataSaver.dataSaverInstance().getModeData() == "Online Mode") {
+            label.setText("the winner is:");
+            btnWinExit.setVisible(false);
+            btnWinPlayAgain.setText("Another Game?!");
+            btnWinPlayAgain.setLayoutX(210.0);
+            btnWinPlayAgain.setPrefWidth(175.0);
+        } else {
+            label.setText("Congratulation");
+        }
         label.setTextFill(javafx.scene.paint.Color.WHITE);
         label.setFont(new Font("System Italic", 16.0));
 

@@ -1,7 +1,10 @@
 package tictactoe_client.Controllers;
 
 import java.io.File;
+import java.io.IOException;
+import javafx.application.Platform;
 import javafx.event.ActionEvent;
+import javafx.fxml.FXMLLoader;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.layout.AnchorPane;
@@ -9,7 +12,10 @@ import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
 import javafx.scene.media.MediaView;
 import javafx.scene.text.Font;
+import services.Alerts;
+import services.DataSaver;
 import services.Navigation;
+import services.StageSaver;
 
 public class DrawScreen extends AnchorPane {
 
@@ -20,6 +26,7 @@ public class DrawScreen extends AnchorPane {
     private File file;
     private MediaPlayer mediaplayer;
     private Media media;
+    private GameHandler gameHandler;
 
     public DrawScreen() {
 
@@ -56,9 +63,47 @@ public class DrawScreen extends AnchorPane {
         btnDrawPlayAgain.getStyleClass().add("changeButtonStyle");
         this.getStylesheets().add("tictactoe_client/Views/style/style.css");
         System.out.println();
+        
+          try {
+            gameHandler = GameHandler.getInstance((erro) -> {
+            }, (response) -> {
+                if (response.split("-")[0].equals("409")) {
 
+                    Platform.runLater(() -> {
+                        Alerts.showAlert(response.split("-")[1] + " you draw with the other player", (error) -> {
+                        });
+                        try {
+                            gameHandler.setIsInGame(false);
+                            Navigation.navigateTo(FXMLLoader.load(tictactoe_client.TicTacToe_Client.class.getResource("Views/ChoosePlayers.fxml")), StageSaver.getStageSeverInstance().getStage());
+                        } catch (IOException ex) {
+                            ex.printStackTrace();
+                        }
+                    });
+                }
+            });
+
+        } catch (IOException ex) {
+            ex.printStackTrace();
+        }
         btnDrawPlayAgain.setOnAction((ActionEvent event) -> {
-            Navigation.navigateTo(new BordBase(), event);
+            if (DataSaver.dataSaverInstance().getModeData() == "Online Mode") {
+                Platform.runLater(() -> {
+                    try {
+                        gameHandler.writeData("9-" + DataSaver.dataSaverInstance().getPlayer2Data());
+                        Thread.sleep(1500);
+                        gameHandler.setIsInGame(false);
+                        Navigation.navigateTo(FXMLLoader.load(tictactoe_client.TicTacToe_Client.class.getResource("Views/ChoosePlayers.fxml")), event);
+                    } catch (IOException ex) {
+                        ex.printStackTrace();
+                    } catch (InterruptedException ex) {
+                        ex.printStackTrace();
+                    }
+                });
+
+                //Navigation.navigateTo(new BordBase(), event);
+            } else {
+                Navigation.navigateTo(new BordBase(), event);
+            }
         });
 
         btnDrawExit.setLayoutX(193.0);
@@ -70,6 +115,12 @@ public class DrawScreen extends AnchorPane {
         btnDrawExit.setTextFill(javafx.scene.paint.Color.WHITE);
         btnDrawExit.setFont(new Font("System Bold Italic", 19.0));
         btnDrawExit.getStyleClass().add("changeButtonStyle");
+        if (DataSaver.dataSaverInstance().getModeData() == "Online Mode") {
+            btnDrawExit.setVisible(false);
+            btnDrawPlayAgain.setText("Another Game?!");
+            btnDrawPlayAgain.setLayoutX(200.0);
+            btnDrawPlayAgain.setPrefWidth(175.0);
+        }
         this.getStylesheets().add("tictactoe_client/Views/style/style.css");
         System.out.println();
 

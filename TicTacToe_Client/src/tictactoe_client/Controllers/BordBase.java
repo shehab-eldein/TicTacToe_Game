@@ -80,7 +80,6 @@ public class BordBase extends AnchorPane {
 
     public BordBase(Player player1, Player player2) {
         DataSaver dataSaver = DataSaver.dataSaverInstance();
-
         player1Name = new Label(player1.getName());
         Player2Name = new Label(player2.getName());
         DataSaver.dataSaverInstance().setPlayer1Data(player1Name.getText());
@@ -102,7 +101,7 @@ public class BordBase extends AnchorPane {
                     } else if (response.split("-")[0].equals("408")) {
                         gameHandler.setIsInGame(false);
                         Platform.runLater(() -> {
-                            try {   
+                            try {
                                 Navigation.navigateTo(FXMLLoader.load(tictactoe_client.TicTacToe_Client.class.getResource("Views/ChoosePlayers.fxml")), StageSaver.getStageSeverInstance().getStage());
                             } catch (IOException ex) {
                                 ex.printStackTrace();
@@ -417,6 +416,9 @@ public class BordBase extends AnchorPane {
         record.setPrefWidth(80);
         record.setLayoutX(420);
         record.setLayoutY(360);
+        if (DataSaver.dataSaverInstance().getModeData() == "Online Mode") {
+            record.setVisible(false);
+        }
         record.setText("Record");
         record.setStyle("-fx-background-color: #ff5c9d;");
         record.setTextFill(javafx.scene.paint.Color.WHITE);
@@ -524,12 +526,16 @@ public class BordBase extends AnchorPane {
 
                     break;
                 case X_WIN:
+                    b.setText("x");
+                    b.getStyleClass().add("XStyle");
                     recordGame = recordGame + b.getId() + "-x-";
                     FileManger.saveFile(fileName, recordGame);
                     dataSaver.setwinnerData(dataSaver.getPlayer1Data());
                     Navigation.navigateTo(new WinScreen(), stage);
                     break;
                 case O_WIN:
+                    b.setText("x");
+                    b.getStyleClass().add("XStyle");
                     recordGame = recordGame + b.getId() + "-o-";
                     FileManger.saveFile(fileName, recordGame);
                     dataSaver.setwinnerData(dataSaver.getPlayer2Data());
