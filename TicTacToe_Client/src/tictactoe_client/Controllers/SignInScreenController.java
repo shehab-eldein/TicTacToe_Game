@@ -127,6 +127,7 @@ public class SignInScreenController implements Initializable {
             logInButton.setDisable(true);
             connectingLable.setVisible(true);
 
+
         }
 
     }

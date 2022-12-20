@@ -7,10 +7,13 @@ package services;
 
 import java.util.Optional;
 import java.util.function.Consumer;
+import javafx.geometry.Rectangle2D;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.ButtonBar;
 import javafx.scene.control.ButtonType;
+import javafx.stage.Modality;
+import javafx.stage.Screen;
 import tictactoe_client.Controllers.GameHandler;
 
 /**

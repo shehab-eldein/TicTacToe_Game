@@ -92,9 +92,7 @@ public class BordBase extends AnchorPane {
         Platform.runLater(() -> {
             try {
                 gameHandler = GameHandler.getInstance((message) -> {
-                    System.out.println(message);
                 }, (response) -> {
-                    System.out.println(response);
                     if (response.split("-")[0].equals("7")) {
                         Platform.runLater(() -> {
                             Move move = new Move(response.split("-")[1]);
@@ -102,12 +100,9 @@ public class BordBase extends AnchorPane {
                             playState(getBordButtonByNumber(move.getIndex()), gameState, (Stage) gridPane.getScene().getWindow());
                         });
                     } else if (response.split("-")[0].equals("408")) {
-                        System.out.println("hamed");
+                        gameHandler.setIsInGame(false);
                         Platform.runLater(() -> {
-                            Alerts.showAlert(response.split("-")[1] + " closed yours game", (error) -> {
-                            });
-                            gameHandler.writeData("2");
-                            try {
+                            try {   
                                 Navigation.navigateTo(FXMLLoader.load(tictactoe_client.TicTacToe_Client.class.getResource("Views/ChoosePlayers.fxml")), StageSaver.getStageSeverInstance().getStage());
                             } catch (IOException ex) {
                                 ex.printStackTrace();

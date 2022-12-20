@@ -5,9 +5,12 @@
  */
 package tictactoe_server.Models;
 
+import java.io.BufferedReader;
 import java.io.DataInputStream;
 import java.io.IOException;
+import java.io.InputStreamReader;
 import java.io.PrintStream;
+import java.io.PrintWriter;
 import java.net.Socket;
 import java.util.Arrays;
 import java.util.List;
@@ -29,60 +32,68 @@ import tictactoe_server.Services.RequestHandler;
 public class Client extends Thread {
 
     private static boolean isStarted = true;
-    private DataInputStream dataInputStream;
-    private PrintStream dataOutPutStream;
+    private BufferedReader dataInputStream;
+    private PrintWriter dataOutPutStream;
     private User user;
     private int requestCode;
-    private String request; 
+    private String request;
     private boolean isBusy = false;
     private Socket socket;
     private String opponentName;
     private Consumer<String> onlineClientsCount;
 
-    public Client(Socket socket,Consumer clientCount) throws IOException {
+    public Client(Socket socket, Consumer clientCount) throws IOException {
         this.socket = socket;
-        this.onlineClientsCount=clientCount;
+        this.onlineClientsCount = clientCount;
         StartSocket();
         start();
     }
 
-       @Override
+    public static void setIsStarted(boolean isStarted) {
+        Client.isStarted = isStarted;
+    }
+
+    @Override
     public void run() {
         while (isStarted) {
             try {
-                
+
                 request = dataInputStream.readLine();
                 if (request != null) {
+                    System.out.println(request);
                     setRequestCode(request);
-                    RequestHandler.queryHandler(this);
-                   onlineClientsCount.accept(request);
+                    RequestHandler.queryHandler(this, onlineClientsCount);
                 }else{
-                    isStarted = false;
-                    Communicator.removeClient(this);
-                    RequestHandler.getAllActivePlayers();
-                    
+                    closeSocket();
+                    Communicator.disconnectVector();
+                    this.onlineClientsCount.accept("delete");
                 }
+
             } catch (IOException ex) {
+                ex.printStackTrace();
                 try {
                     closeSocket();
                 } catch (IOException ex1) {
-                    isStarted = false;
-                    
+                    //isStarted = false;
                 }
             }
         }
+    }
+
+    public String getOpponentName() {
+        return opponentName;
     }
 
     public boolean isStarted() {
         return isStarted;
     }
 
-
-    public PrintStream getDataOutPutStream() {
+    public PrintWriter getDataOutPutStream() {
         return dataOutPutStream;
     }
-    private void setRequestCode(String data){
-       requestCode = Integer.parseInt(data.split("\\-")[0] + "");
+
+    private void setRequestCode(String data) {
+        requestCode = Integer.parseInt(data.split("\\-")[0] + "");
     }
 
     public void closeSocket() throws IOException {
@@ -93,8 +104,8 @@ public class Client extends Thread {
     }
 
     public void StartSocket() throws IOException {
-        dataInputStream = new DataInputStream(socket.getInputStream());
-        dataOutPutStream = new PrintStream(socket.getOutputStream());
+        dataInputStream = new BufferedReader(new InputStreamReader(socket.getInputStream()));
+        dataOutPutStream = new PrintWriter(socket.getOutputStream(), true);
         isStarted = true;
         isBusy = false;
     }
@@ -103,7 +114,6 @@ public class Client extends Thread {
         this.isBusy = isBusy;
     }
 
-    
     public boolean getIsBusy() {
         return isBusy;
     }
@@ -115,10 +125,11 @@ public class Client extends Thread {
     public User getUser() {
         return user;
     }
-    
+
     public void setUser(User user) {
         this.user = user;
     }
+
     public int getRequestCode() {
         return requestCode;
     }
@@ -126,7 +137,7 @@ public class Client extends Thread {
     public String getRequest() {
         return request;
     }
-    
+
     public void setOpponentName(String opponentName) {
         this.opponentName = opponentName;
     }

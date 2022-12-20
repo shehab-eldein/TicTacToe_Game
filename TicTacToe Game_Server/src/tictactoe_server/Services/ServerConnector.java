@@ -63,7 +63,8 @@ public class ServerConnector implements Runnable {
     }
     
     public void connect() throws IOException {
-        this.serverSock = new ServerSocket(portNumber);
+        this.serverSock = new ServerSocket(portNumber,100);
+        this.serverSock.setSoTimeout(0);
         isServerConected = true;
         new Thread(this).start();
     }

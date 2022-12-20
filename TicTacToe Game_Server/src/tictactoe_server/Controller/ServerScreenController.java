@@ -20,6 +20,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.geometry.Side;
 import javafx.scene.chart.PieChart;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import tictactoe_server.Repositories.UserRepository;
@@ -44,7 +45,7 @@ public class ServerScreenController implements Initializable {
     private ServerConnector serverConnector;
     private PieChart.Data online;
     private PieChart.Data offline;
-
+    private Alert alert = new Alert(Alert.AlertType.INFORMATION);
     /**
      * Initializes the controller class.
      */
@@ -54,7 +55,6 @@ public class ServerScreenController implements Initializable {
         try {
             serverConnector = ServerConnector.getServerConnectorInstance(5005, (message) -> {
             }, (count) -> {
-                System.out.println("count ");
                 Platform.runLater(() -> {
                     try {
 
@@ -83,6 +83,11 @@ public class ServerScreenController implements Initializable {
                 serverConnector.connect();
                 serverStatusLable.setText("On");
                 startServerButton.setText("Stop");
+                online = new PieChart.Data("online", Communicator.getUserCount());
+                offline = new PieChart.Data("offline", UserRepository.getUsersCount() - Communicator.getUserCount());
+                ObservableList<PieChart.Data> pieChartData = FXCollections.observableArrayList(online, offline);
+                UsersPieChart.setData(pieChartData);
+
                 UsersPieChart.setVisible(true);
 
             } else {
@@ -93,6 +98,7 @@ public class ServerScreenController implements Initializable {
             }
         } catch (IOException ex) {
             serverStatusLable.setText("Off");
+        } catch (SQLException ex) {
         }
     }
 

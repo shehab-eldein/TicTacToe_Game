@@ -35,6 +35,9 @@ public class Communicator {
     public static void disconnectClosed(){
         clients.removeIf(client -> !client.isStarted());
     }
+    public static void disconnectVector(){
+        clients.removeIf(client -> client.getRequest() == null);
+    }
     
     public static void terminateSockets() throws IOException{
         for (Client client : clients) {
@@ -58,12 +61,13 @@ public class Communicator {
     }
 
     public static Client getClientByName(String name) {
+        Client clientInstance = null;
         for (Client client : clients) {
             if (client.getUser().getName().equals(name)) {
-                return client;
+                clientInstance = client;
             }
         }
-        return null;
+        return clientInstance;
     }
     
     public static void removeClient(Client client){

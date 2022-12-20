@@ -9,6 +9,9 @@ import java.io.IOException;
 import java.sql.SQLException;
 import java.util.Arrays;
 import java.util.List;
+import java.util.function.Consumer;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import java.util.stream.Collectors;
 import services.RequestStringHandler;
 import tictactoe_server.Models.Client;
@@ -21,15 +24,17 @@ import tictactoe_server.Repositories.UserRepository;
  */
 public class RequestHandler {
 
-    public static void queryHandler(Client client) throws IOException {
+    public static void queryHandler(Client client, Consumer onlineClients) throws IOException {
         switch (client.getRequestCode()) {
             case 0:
                 setUserData(client);
                 logIn(client);
+                onlineClients.accept("login");
                 break;
             case 1:
                 setUserData(client);
                 signUP(client);
+                onlineClients.accept("sign up");
                 break;
             case 2:
                 getAllActivePlayers();
@@ -48,11 +53,10 @@ public class RequestHandler {
                 break;
             case 8:
                 sendEndGameRequest(client);
-                System.out.println("408");
+                onlineClients.accept("remove");
                 break;
             case 9:
                 sendPlayAgainRequest(client);
-                System.out.println("409");
                 break;
 
         }
@@ -68,8 +72,8 @@ public class RequestHandler {
                 } else {
                     ResponseHandler.response(client, "0");
                 }
-            }else{
-               ResponseHandler.response(client, "409"); 
+            } else {
+                ResponseHandler.response(client, "409");
             }
         } catch (SQLException ex) {
             ResponseHandler.response(client, "-1");
@@ -101,7 +105,7 @@ public class RequestHandler {
     public static void getAllActivePlayers() {
         List<Client> clients = Communicator.getClients();
         for (Client aClient : clients) {
-            if (clients.size() == 1) {
+            if (clients.size() <= 1) {
                 ResponseHandler.response(aClient, "405");
             } else {
                 getActivePlayers(aClient);
@@ -110,7 +114,7 @@ public class RequestHandler {
     }
 
     private static void setUserData(Client client) {
-        client.setUser(splitRequest(client.getRequest()));
+        client.setUser(new User(client.getRequest().split("\\-")[1], client.getRequest().split("\\-")[2]));
     }
 
     private static User splitRequest(String data) {
@@ -166,19 +170,19 @@ public class RequestHandler {
 
     private static void endGame(Client client) {
         client.setIsBusy(false);
+        client.setOpponentName(null);
     }
 
     private static void sendEndGameRequest(Client client) {
-        String response = "408-" + client.getUser().getName();
-        Client clientResponsed = Communicator.getClientByName(splitUserName(client.getRequest()));
-        ResponseHandler.response(clientResponsed, response);
-        Communicator.removeClient(client);
+        Client clientResponsed = Communicator.getClientByName(client.getOpponentName());
+        ResponseHandler.response(clientResponsed, "408-" + client.getUser().getName());
         endGame(clientResponsed);
+        endGame(client);
     }
-    
+
     private static void sendPlayAgainRequest(Client client) {
         String response = "409-" + client.getUser().getName();
-        Client clientResponsed = Communicator.getClientByName(splitUserName(client.getRequest()));
+        Client clientResponsed = Communicator.getClientByName(client.getOpponentName());
         ResponseHandler.response(clientResponsed, response);
         endGame(clientResponsed);
         endGame(client);

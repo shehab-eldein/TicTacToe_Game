@@ -60,7 +60,7 @@
                </image>
             </ImageView>
          </children></AnchorPane>
-      <AnchorPane layoutX="414.0" prefHeight="450.0" prefWidth="287.0" styleClass="RightSideSignInBackground" stylesheets="@style/style.css">
+      <AnchorPane layoutX="417.0" prefHeight="450.0" prefWidth="273.0" styleClass="RightSideSignInBackground" stylesheets="@style/style.css">
          <children>
             <Label layoutX="56.0" layoutY="98.0" text="Log in your account" textFill="#3f2e74">
                <font>

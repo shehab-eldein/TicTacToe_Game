@@ -5,11 +5,17 @@
  */
 package tictactoe_client.Controllers;
 
+import java.io.BufferedReader;
 import java.io.DataInputStream;
 import java.io.IOException;
+import java.io.InputStreamReader;
 import java.io.PrintStream;
+import java.io.PrintWriter;
+import static java.lang.Thread.sleep;
 import java.net.Socket;
 import java.util.function.Consumer;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import services.ErrorMessageSender;
 
 /**
@@ -20,27 +26,27 @@ public class GameHandler implements Runnable {
 
     private static GameHandler instance;
     private Socket socket;
-    private final DataInputStream dataInputstream;
-    private final PrintStream printStream;
+    private BufferedReader dataInputstream;
+    private PrintWriter printStream;
     private boolean isRunning = false;
     private boolean isInGame = false;
-    private  ErrorMessageSender errorMessageSender;
-    private  Consumer<String> responseMessage;
+    private ErrorMessageSender errorMessageSender;
+    private Consumer<String> responseMessage;
 
     private GameHandler(ErrorMessageSender errorMessageSender, Consumer reConsumer) throws IOException {
         this.errorMessageSender = errorMessageSender;
         responseMessage = reConsumer;
         socket = new Socket("127.0.0.1", 5005);
-        dataInputstream = new DataInputStream(socket.getInputStream());
-        printStream = new PrintStream(socket.getOutputStream());
+        dataInputstream = new BufferedReader(new InputStreamReader(socket.getInputStream()));
+        printStream = new PrintWriter(socket.getOutputStream(), true);
     }
 
-    public static GameHandler getInstance(ErrorMessageSender errorMessageSender,Consumer<String> respose) throws IOException {
+    public static GameHandler getInstance(ErrorMessageSender errorMessageSender, Consumer<String> respose) throws IOException {
         if (instance == null) {
-            instance = new GameHandler(errorMessageSender,respose);
+            instance = new GameHandler(errorMessageSender, respose);
         }
-        instance.errorMessageSender=errorMessageSender;
-        instance.responseMessage=respose;
+        instance.errorMessageSender = errorMessageSender;
+        instance.responseMessage = respose;
         return instance;
     }
 
@@ -50,7 +56,6 @@ public class GameHandler implements Runnable {
         while (isRunning) {
 
             try {
-
                 String str = dataInputstream.readLine();
 
                 if (str != null) {
@@ -81,17 +86,18 @@ public class GameHandler implements Runnable {
         socket.close();
 
     }
-    
 
-    public void connect() throws IOException {      
-        isRunning=true;
-        socket= new Socket("127.0.0.1", 5005);
+    public void connect() throws IOException {
+        isRunning = true;
+        socket = new Socket("127.0.0.1", 5005);
         new Thread(this).start();
-                
+
     }
 
     public void writeData(String msg) {
+
         printStream.println(msg);
+
     }
 
     public boolean getIsRunning() {
@@ -105,7 +111,5 @@ public class GameHandler implements Runnable {
     public boolean getIsInGame() {
         return isInGame;
     }
-    
-    
 
 }

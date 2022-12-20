@@ -26,7 +26,6 @@ public class DBConnector {
         Connection connection = null;
         DriverManager.registerDriver(new ClientDriver());
         connection = DriverManager.getConnection("jdbc:derby://localhost:1527/TicTacToe_Server", "root", "root");
-        System.out.println("Connected to DataBase");
         return connection;
     }
 

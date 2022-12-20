@@ -64,82 +64,80 @@ public class ChoosePlayersController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle rb) {
 //        // TODO
-        Platform.runLater(() -> {
-            try {
-                gameHandler = GameHandler.getInstance((message) -> {
-                    System.out.println(message);
-                }, (response) -> {
+        try {
+            gameHandler = GameHandler.getInstance((message) -> {
+            }, (response) -> {
 
-                    if (splitRequest(response).get(0).equals("4")) {
-                        Platform.runLater(() -> {
-                            Alerts.showRequestAlert(splitRequest(response).get(1)
-                                    + " wants to play with You", (accept) -> {
-                                        System.out.println("accept");
-                                        gameHandler.writeData("5-" + splitRequest(response).get(1));
-                                    }, (reject) -> {
+                if (splitRequest(response).get(0).equals("4")) {
+                    Platform.runLater(() -> {
+                        Alerts.showRequestAlert(splitRequest(response).get(1)
+                                + " wants to play with You", (accept) -> {
+                                    System.out.println("accept");
+                                    gameHandler.writeData("5-" + splitRequest(response).get(1));
+                                }, (reject) -> {
 
-                                        System.out.println("reject");
-                                        gameHandler.writeData("6-" + splitRequest(response).get(1));
+                                    System.out.println("reject");
+                                    gameHandler.writeData("6-" + splitRequest(response).get(1));
 
-                                    });
+                                });
+                    });
+
+                } else if (splitRequest(response).get(0).equals("5")) {
+                    Platform.runLater(() -> {
+                        String myName = splitRequest(response).get(1);
+                        String opponentName = splitRequest(response).get(2);
+                        String myShape = splitRequest(response).get(3);
+                        Player player1;
+                        Player player2;
+                        DataSaver.dataSaverInstance().setPlayer2Data(opponentName);
+                        if (myShape.equals("X")) {
+                            player1 = new Player(myName, PlayerType.HUMAN, Shape.X);
+                            player2 = new Player(opponentName, PlayerType.SERVER, Shape.O);
+                        } else {
+                            player1 = new Player(opponentName, PlayerType.SERVER, Shape.X);
+                            player2 = new Player(myName, PlayerType.HUMAN, Shape.O);
+                        }
+                        gameHandler.setIsInGame(true);
+                        Navigation.navigateTo(new BordBase(player1, player2), StageSaver.getStageSeverInstance().getStage());
+                    });
+
+                } else if (splitRequest(response).get(0).equals("6")) {
+                    Platform.runLater(() -> {
+                        Alerts.showAlert(splitRequest(response).get(1) + " reject your request", (message) -> {
 
                         });
+                    });
 
-                    } else if (splitRequest(response).get(0).equals("5")) {
-                        Platform.runLater(() -> {
-                            String myName = splitRequest(response).get(1);
-                            String opponentName = splitRequest(response).get(2);
-                            String myShape = splitRequest(response).get(3);
-                            Player player1;
-                            Player player2;
-                            DataSaver.dataSaverInstance().setPlayer2Data(opponentName);
-                            if (myShape.equals("X")) {
-                                player1 = new Player(myName, PlayerType.HUMAN, Shape.X);
-                                player2 = new Player(opponentName, PlayerType.SERVER, Shape.O);
-                            } else {
-                                player1 = new Player(opponentName, PlayerType.SERVER, Shape.X);
-                                player2 = new Player(myName, PlayerType.HUMAN, Shape.O);
-                            }
-                            gameHandler.setIsInGame(true);
-                            Navigation.navigateTo(new BordBase(player1, player2), StageSaver.getStageSeverInstance().getStage());
+                } else if (splitRequest(response).get(0).equals("404")) {
+                    Platform.runLater(() -> {
+                        Alerts.showAlert(splitRequest(response).get(1) + " is already in another game", (message) -> {
+
                         });
+                    });
 
-                    } else if (splitRequest(response).get(0).equals("6")) {
-                        Platform.runLater(() -> {
-                            Alerts.showAlert(splitRequest(response).get(1) + " reject your request", (message) -> {
+                } else if (splitRequest(response).get(0).equals("405")) {
+                    Platform.runLater(() -> {
+                        ObservableList<String> names = FXCollections.observableArrayList("");
+                        onlinePlayersListView.setItems(names);
+                    });
+                } else {
+                    Platform.runLater(() -> {
+                        ObservableList<String> names = FXCollections.observableArrayList(splitRequest(response));
+                        onlinePlayersListView.setItems(names);
+                    });
 
-                            });
-                        });
-
-                    } else if (splitRequest(response).get(0).equals("404")) {
-                        Platform.runLater(() -> {
-                            Alerts.showAlert(splitRequest(response).get(1) + " is already in another game", (message) -> {
-
-                            });
-                        });
-
-                    }else if(splitRequest(response).get(0).equals("405")) {
-                        Platform.runLater(() -> {
-                            ObservableList<String> names = FXCollections.observableArrayList("");
-                            onlinePlayersListView.setItems(names);
-                        });
-                    }
-                    else {
-                        Platform.runLater(() -> {
-                            ObservableList<String> names = FXCollections.observableArrayList(splitRequest(response));
-                            onlinePlayersListView.setItems(names);
-                        });
-
-                    }
-                });
+                }
+            });
+            
+            Platform.runLater(() -> {
                 gameHandler.writeData("2");
                 UserNameLable.setText(DataSaver.dataSaverInstance().getPlayer1Data());
+            });
 
-            } catch (IOException ex) {
-                ex.printStackTrace();
-            }
-
-        });
+            
+        } catch (IOException ex) {
+            ex.printStackTrace();
+        }
 
     }
 
@@ -152,6 +150,7 @@ public class ChoosePlayersController implements Initializable {
 
     @FXML
     public void ask() {
+        gameHandler.writeData("2");
         gameHandler.writeData("3-" + onlinePlayersListView.getSelectionModel().getSelectedItem());
     }
 

@@ -74,11 +74,12 @@ public class WinScreen extends AnchorPane {
             gameHandler = GameHandler.getInstance((erro) -> {
             }, (response) -> {
                 if (response.split("-")[0].equals("409")) {
+                    
                     Platform.runLater(() -> {
                         Alerts.showAlert(response.split("-")[1] + " is win", (error) -> {
                         });
-                        gameHandler.writeData("2");
                         try {
+                            gameHandler.setIsInGame(false);
                             Navigation.navigateTo(FXMLLoader.load(tictactoe_client.TicTacToe_Client.class.getResource("Views/ChoosePlayers.fxml")), StageSaver.getStageSeverInstance().getStage());
                         } catch (IOException ex) {
                             ex.printStackTrace();
@@ -92,11 +93,15 @@ public class WinScreen extends AnchorPane {
         }
         btnWinPlayAgain.setOnAction((event) -> {
             if (DataSaver.dataSaverInstance().getModeData() == "Online Mode") {
-                gameHandler.writeData("9-" + DataSaver.dataSaverInstance().getPlayer2Data());
                 Platform.runLater(() -> {
                     try {
+                        gameHandler.writeData("9-" + DataSaver.dataSaverInstance().getPlayer2Data());
+                         Thread.sleep(1500);
+                         gameHandler.setIsInGame(false);
                         Navigation.navigateTo(FXMLLoader.load(tictactoe_client.TicTacToe_Client.class.getResource("Views/ChoosePlayers.fxml")), event);
                     } catch (IOException ex) {
+                        ex.printStackTrace();
+                    } catch (InterruptedException ex) {
                         ex.printStackTrace();
                     }
                 });

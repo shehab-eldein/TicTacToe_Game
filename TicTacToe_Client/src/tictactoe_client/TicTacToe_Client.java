@@ -9,6 +9,7 @@ import java.io.IOException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javafx.application.Application;
+import static javafx.application.Application.launch;
 import javafx.application.Platform;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -27,6 +28,8 @@ import tictactoe_client.Controllers.Start;
  */
 public class TicTacToe_Client extends Application {
 
+    private GameHandler gameHandler;
+
     @Override
     public void start(Stage stage) throws Exception {
         Navigation.navigateTo(new Start(), stage);
@@ -34,33 +37,42 @@ public class TicTacToe_Client extends Application {
         stageSever.setStage(stage);
 
         stage.setOnCloseRequest(event -> {
-            event.consume();
+
             try {
-                GameHandler gameHandler = GameHandler.getInstance((error) -> {
+                gameHandler = GameHandler.getInstance((error) -> {
                 }, (response) -> {
                 });
                 if (gameHandler.getIsRunning() && gameHandler.getIsInGame()) {
                     Alerts.showAlert("you will leave the game", (accept) -> {
                         try {
-                            gameHandler.writeData("8-" + DataSaver.dataSaverInstance().getPlayer2Data());
+                            gameHandler.writeData("8");
+                            Thread.sleep(1500);
                             gameHandler.disconnect();
                             stage.close();
-                        } catch (IOException ex) {
+                            event.consume();
+                        } catch (InterruptedException ex) {
                             ex.printStackTrace();
+                        } catch (IOException ex) {
+                            Logger.getLogger(TicTacToe_Client.class.getName()).log(Level.SEVERE, null, ex);
                         }
                     });
-                } else {
-                    Alerts.showRequestAlert("do you want to close the application", (accept) -> {
+                } else if (gameHandler.getIsRunning()) {
+                    Alerts.showRequestAlert("do you want to close the connection", (accept) -> {
+
                         try {
                             gameHandler.disconnect();
                             stage.close();
                         } catch (IOException ex) {
-                            ex.printStackTrace();
                         }
                     }, (reject) -> {
-                        event.consume();
+
+                    });
+                } else {
+                    Alerts.showAlert("do you want to close the application", (accept) -> {
+                        stage.close();
                     });
                 }
+
             } catch (IOException ex) {
                 ex.printStackTrace();
             }
