@@ -35,6 +35,7 @@ public class TicTacToe_Client extends Application {
         Navigation.navigateTo(new Start(), stage);
         StageSaver stageSever = StageSaver.getStageSeverInstance();
         stageSever.setStage(stage);
+        DataSaver.dataSaverInstance().setModeData("normal");
         
         stage.setOnCloseRequest(event -> {
             if (DataSaver.dataSaverInstance().getModeData().equals("Online Mode")) {
