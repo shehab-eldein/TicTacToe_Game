@@ -58,6 +58,11 @@ public class RequestHandler {
             case 9:
                 sendPlayAgainRequest(client);
                 break;
+            case 11:
+                ResponseHandler.response(client, "411");
+                Communicator.removeClient(client);
+                onlineClients.accept("remove");
+                break;
 
         }
 

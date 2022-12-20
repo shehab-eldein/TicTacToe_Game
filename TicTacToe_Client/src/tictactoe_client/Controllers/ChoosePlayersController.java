@@ -11,6 +11,8 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.ResourceBundle;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import java.util.stream.Collectors;
 import javafx.application.Platform;
 import javafx.collections.FXCollections;
@@ -120,6 +122,8 @@ public class ChoosePlayersController implements Initializable {
                         ObservableList<String> names = FXCollections.observableArrayList("");
                         onlinePlayersListView.setItems(names);
                     });
+                } else if (splitRequest(response).get(0).equals("411")) {
+
                 } else {
                     Platform.runLater(() -> {
                         ObservableList<String> names = FXCollections.observableArrayList(splitRequest(response));
@@ -128,13 +132,12 @@ public class ChoosePlayersController implements Initializable {
 
                 }
             });
-            
+
             Platform.runLater(() -> {
                 gameHandler.writeData("2");
                 UserNameLable.setText(DataSaver.dataSaverInstance().getPlayer1Data());
             });
 
-            
         } catch (IOException ex) {
             ex.printStackTrace();
         }
@@ -152,6 +155,12 @@ public class ChoosePlayersController implements Initializable {
     public void ask() {
         gameHandler.writeData("2");
         gameHandler.writeData("3-" + onlinePlayersListView.getSelectionModel().getSelectedItem());
+    }
+
+    @FXML
+    public void logout() {
+        gameHandler.writeData("11");
+        Navigation.navigateTo(new ChooseMode(), StageSaver.getStageSeverInstance().getStage());
     }
 
 }

@@ -27,54 +27,57 @@ import tictactoe_client.Controllers.Start;
  * @author DELL
  */
 public class TicTacToe_Client extends Application {
-
+    
     private GameHandler gameHandler;
-
+    
     @Override
     public void start(Stage stage) throws Exception {
         Navigation.navigateTo(new Start(), stage);
         StageSaver stageSever = StageSaver.getStageSeverInstance();
         stageSever.setStage(stage);
-
+        
         stage.setOnCloseRequest(event -> {
-
-            try {
-                gameHandler = GameHandler.getInstance((error) -> {
-                }, (response) -> {
-                });
-                if (gameHandler.getIsRunning() && gameHandler.getIsInGame()) {
-                    Alerts.showAlert("you will leave the game", (accept) -> {
-                        try {
-                            gameHandler.writeData("8");
-                            Thread.sleep(1500);
-                            gameHandler.disconnect();
+            if (DataSaver.dataSaverInstance().getModeData().equals("Online Mode")) {
+                try {
+                    gameHandler = GameHandler.getInstance((error) -> {
+                    }, (response) -> {
+                    });
+                    if (gameHandler.getIsRunning() && gameHandler.getIsInGame()) {
+                        Alerts.showAlert("you will leave the game", (accept) -> {
+                            try {
+                                gameHandler.writeData("8");
+                                Thread.sleep(1500);
+                                gameHandler.disconnect();
+                                stage.close();
+                                event.consume();
+                            } catch (InterruptedException ex) {
+                                ex.printStackTrace();
+                            } catch (IOException ex) {
+                                Logger.getLogger(TicTacToe_Client.class.getName()).log(Level.SEVERE, null, ex);
+                            }
+                        });
+                    } else if (gameHandler.getIsRunning()) {
+                        Alerts.showRequestAlert("do you want to close the connection", (accept) -> {
+                            
+                            try {
+                                gameHandler.disconnect();
+                                stage.close();
+                            } catch (IOException ex) {
+                            }
+                        }, (reject) -> {
+                            
+                        });
+                    } else {
+                        Alerts.showAlert("do you want to close the application", (accept) -> {
                             stage.close();
-                            event.consume();
-                        } catch (InterruptedException ex) {
-                            ex.printStackTrace();
-                        } catch (IOException ex) {
-                            Logger.getLogger(TicTacToe_Client.class.getName()).log(Level.SEVERE, null, ex);
-                        }
-                    });
-                } else if (gameHandler.getIsRunning()) {
-                    Alerts.showRequestAlert("do you want to close the connection", (accept) -> {
-
-                        try {
-                            gameHandler.disconnect();
-                            stage.close();
-                        } catch (IOException ex) {
-                        }
-                    }, (reject) -> {
-
-                    });
-                } else {
-                    Alerts.showAlert("do you want to close the application", (accept) -> {
-                        stage.close();
-                    });
+                        });
+                    }
+                    
+                } catch (IOException ex) {
+                    ex.printStackTrace();
                 }
-
-            } catch (IOException ex) {
-                ex.printStackTrace();
+            }else{
+                stage.close();
             }
         });
     }
@@ -85,10 +88,10 @@ public class TicTacToe_Client extends Application {
     public static void main(String[] args) {
         launch(args);
     }
-
+    
     @Override
     public void stop() throws Exception {
-
+        
     }
-
+    
 }

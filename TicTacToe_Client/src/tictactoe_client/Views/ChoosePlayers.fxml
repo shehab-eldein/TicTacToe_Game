@@ -17,7 +17,7 @@
                   <Image url="@img/Choose-cuate.png" />
                </image>
             </ImageView>
-            <Label fx:id="backButton" layoutX="14.0" layoutY="9.0" prefHeight="30.0" prefWidth="79.0" styleClass="back" text="Log out" textFill="WHITE">
+            <Label fx:id="backButton" layoutX="14.0" layoutY="9.0" onMouseClicked="#logout" prefHeight="30.0" prefWidth="79.0" styleClass="back" text="Log out" textFill="WHITE">
                <font>
                   <Font name="System Bold" size="16.0" />
                </font>
