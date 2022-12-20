@@ -1,5 +1,6 @@
 package tictactoe_client.Controllers;
 
+import tictactoe_client.Models.History;
 import java.io.IOException;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
@@ -77,6 +78,7 @@ public class BordBase extends AnchorPane {
     DateFormat dateFormat;
     String strDate;
     String fileName;
+    History history;
 
     public BordBase(Player player1, Player player2) {
         DataSaver dataSaver = DataSaver.dataSaverInstance();
@@ -433,6 +435,7 @@ public class BordBase extends AnchorPane {
                     fileName = player1Name.getText() + "" + Player2Name.getText() + "" + strDate;
 //                    System.out.println(fileName);
                     FileManger.saveFile(fileName, recordGame);
+                    record.setDisable(true);
                 } catch (IOException ex) {
                     Logger.getLogger(BordBase.class.getName()).log(Level.SEVERE, null, ex);
                 }
@@ -530,6 +533,12 @@ public class BordBase extends AnchorPane {
                     b.getStyleClass().add("XStyle");
                     recordGame = recordGame + b.getId() + "-x-";
                     FileManger.saveFile(fileName, recordGame);
+                    if (DataSaver.dataSaverInstance().getModeData() != "Online Mode") {
+                        history = new History(strDate, player1Name.getText(),
+                                Player2Name.getText(), player1Name.getText(),
+                                Player2Name.getText());
+                        FileManger.writeData(history);
+                    }
                     dataSaver.setwinnerData(dataSaver.getPlayer1Data());
                     Navigation.navigateTo(new WinScreen(), stage);
                     break;
@@ -538,10 +547,25 @@ public class BordBase extends AnchorPane {
                     b.getStyleClass().add("XStyle");
                     recordGame = recordGame + b.getId() + "-o-";
                     FileManger.saveFile(fileName, recordGame);
+                    if (DataSaver.dataSaverInstance().getModeData() != "Online Mode") {
+                        history = new History(strDate, player1Name.getText(),
+                                Player2Name.getText(), Player2Name.getText(),
+                                player1Name.getText()
+                        );
+                        FileManger.writeData(history);
+                    }
                     dataSaver.setwinnerData(dataSaver.getPlayer2Data());
                     Navigation.navigateTo(new WinScreen(), stage);
                     break;
                 default:
+                    if (DataSaver.dataSaverInstance().getModeData() != "Online Mode") {
+                        history = new History(strDate, player1Name.getText(),
+                                Player2Name.getText(), "draw", "draw"
+                        );
+                        FileManger.writeData(history);
+                    }
+                    recordGame = recordGame + b.getId() + "-x-";
+                    FileManger.saveFile(fileName, recordGame);
                     Navigation.navigateTo(new DrawScreen(), stage);
                     break;
             }

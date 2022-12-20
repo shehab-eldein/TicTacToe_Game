@@ -25,6 +25,7 @@ public class ChooseMode extends AnchorPane {
     protected final Button btnOnlineMode;
     protected final Label label;
     private GameHandler gameHandler;
+    protected Button btnHistory;
 
     public ChooseMode() {
 
@@ -32,6 +33,7 @@ public class ChooseMode extends AnchorPane {
         btnSingleMode = new Button();
         btnMultiMode = new Button();
         btnOnlineMode = new Button();
+        btnHistory = new Button();
         label = new Label();
 
         setId("AnchorPane");
@@ -101,6 +103,27 @@ public class ChooseMode extends AnchorPane {
 
         });
 
+        btnHistory.setMnemonicParsing(false);
+        btnHistory.setPrefHeight(46.0);
+        btnHistory.setPrefWidth(114.0);
+        btnHistory.setLayoutX(400.0);
+        btnHistory.setLayoutY(22.0);
+        btnHistory.setText("History");
+        btnHistory.setFont(new Font("System Bold Italic", 20.0));
+        btnHistory.setTextFill(javafx.scene.paint.Color.WHITE);
+        btnHistory.getStyleClass().add("changeButtonStyle");
+        this.getStylesheets().add("tictactoe_client/Views/style/style.css");
+        btnHistory.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent event) {
+                try {
+                    Navigation.navigateTo(new HistoryBase(), event);
+                } catch (IOException ex) {
+                    Logger.getLogger(ChooseMode.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            }
+        });
+
         label.setLayoutX(31.0);
         label.setLayoutY(45.0);
         label.setPrefHeight(58.0);
@@ -114,6 +137,7 @@ public class ChooseMode extends AnchorPane {
         getChildren().add(btnMultiMode);
         getChildren().add(btnOnlineMode);
         getChildren().add(label);
+        getChildren().add(btnHistory);
 
     }
 }
