@@ -50,10 +50,11 @@
 
 <hr>
 <h2>team member</h2>
-- Shehab Eldein 
-- Hamed Mohamed
-- Rafeef Esam
-- Esraa AbdElfatah 
+
+-  Shehab Eldein 
+-  Hamed Mohamed
+-  Rafeef Esam
+-  Esraa AbdElfatah 
 
 <hr>
 <h2>Game UI</h2>
