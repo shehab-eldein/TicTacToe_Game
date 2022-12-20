@@ -159,8 +159,14 @@ public class ChoosePlayersController implements Initializable {
 
     @FXML
     public void logout() {
-        gameHandler.writeData("11");
-        Navigation.navigateTo(new ChooseMode(), StageSaver.getStageSeverInstance().getStage());
+        try {
+            if(!gameHandler.getIsRunning())
+                gameHandler.connect();
+            gameHandler.disconnect();
+            Navigation.navigateTo(new ChooseMode(), StageSaver.getStageSeverInstance().getStage());
+        } catch (IOException ex) {
+        }
+        
     }
 
 }

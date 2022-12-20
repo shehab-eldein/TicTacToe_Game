@@ -36,7 +36,7 @@ public class GameHandler implements Runnable {
     private GameHandler(ErrorMessageSender errorMessageSender, Consumer reConsumer) throws IOException {
         this.errorMessageSender = errorMessageSender;
         responseMessage = reConsumer;
-        socket = new Socket("127.0.0.1", 5005); //10.178.241.83
+        socket = new Socket("127.0.0.1", 5005);
         dataInputstream = new BufferedReader(new InputStreamReader(socket.getInputStream()));
         printStream = new PrintWriter(socket.getOutputStream(), true);
     }
@@ -91,7 +91,6 @@ public class GameHandler implements Runnable {
         isRunning = true;
         socket = new Socket("127.0.0.1", 5005);
         new Thread(this).start();
-
     }
 
     public void writeData(String msg) {

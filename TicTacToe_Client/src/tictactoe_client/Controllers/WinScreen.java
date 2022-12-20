@@ -69,27 +69,28 @@ public class WinScreen extends AnchorPane {
         btnWinPlayAgain.setFont(new Font("System Bold Italic", 19.0));
         btnWinPlayAgain.getStyleClass().add("changeButtonStyle");
         //play again
+        if (DataSaver.dataSaverInstance().getModeData() == "Online Mode") {
+            try {
+                gameHandler = GameHandler.getInstance((erro) -> {
+                }, (response) -> {
+                    if (response.split("-")[0].equals("409")) {
 
-        try {
-            gameHandler = GameHandler.getInstance((erro) -> {
-            }, (response) -> {
-                if (response.split("-")[0].equals("409")) {
-
-                    Platform.runLater(() -> {
-                        Alerts.showAlert(response.split("-")[1] + " is win", (error) -> {
+                        Platform.runLater(() -> {
+                            Alerts.showAlert(response.split("-")[1] + " is win", (error) -> {
+                            });
+                            try {
+                                gameHandler.setIsInGame(false);
+                                Navigation.navigateTo(FXMLLoader.load(tictactoe_client.TicTacToe_Client.class.getResource("Views/ChoosePlayers.fxml")), StageSaver.getStageSeverInstance().getStage());
+                            } catch (IOException ex) {
+                                ex.printStackTrace();
+                            }
                         });
-                        try {
-                            gameHandler.setIsInGame(false);
-                            Navigation.navigateTo(FXMLLoader.load(tictactoe_client.TicTacToe_Client.class.getResource("Views/ChoosePlayers.fxml")), StageSaver.getStageSeverInstance().getStage());
-                        } catch (IOException ex) {
-                            ex.printStackTrace();
-                        }
-                    });
-                }
-            });
+                    }
+                });
 
-        } catch (IOException ex) {
-            ex.printStackTrace();
+            } catch (IOException ex) {
+                ex.printStackTrace();
+            }
         }
         btnWinPlayAgain.setOnAction((event) -> {
             if (DataSaver.dataSaverInstance().getModeData() == "Online Mode") {

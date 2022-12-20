@@ -60,7 +60,6 @@ public class Client extends Thread {
 
                 request = dataInputStream.readLine();
                 if (request != null) {
-                    System.out.println(request);
                     setRequestCode(request);
                     RequestHandler.queryHandler(this, onlineClientsCount);
                 }else{
