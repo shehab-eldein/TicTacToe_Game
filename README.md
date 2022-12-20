@@ -10,50 +10,50 @@
 
 <h2>Objective</h2>
 
--This project aims to develop a Tic Tac Toe game using java and javafx . It mainly consists of developing and implementing a computer program that plays Tic Tac Toe against another player or computer (AI)
+- This project aims to develop a Tic Tac Toe game using java and javafx . It mainly consists of developing and implementing a computer program that plays Tic Tac Toe against another player or computer (AI)
 
--In order to understand what Tic Tac Toe game is and how to play the game, below is the description.
+- In order to understand what Tic Tac Toe game is and how to play the game, below is the description.
 
 
 <hr>
 <h2>GAME DESCRIPTION:</h2>
 
--In this game, there is a board with 3 x 3 squares. The two players take turns putting marks on a 3x3 board. The goal of Tic Tac Toe game is to be one of the players to get three same symbols in a row - horizontally, vertically or diagonally on a 3 x 3 grid. The player who first gets 3 of his/her symbols (marks) in a row - vertically, horizontally, or diagonally wins the game, and the other loses the game. The game can be played by two players. There are two options for players: (a) Human (b) Computer
+- In this game, there is a board with 3 x 3 squares. The two players take turns putting marks on a 3x3 board. The goal of Tic Tac Toe game is to be one of the players to get three same symbols in a row - horizontally, vertically or diagonally on a 3 x 3 grid. The player who first gets 3 of his/her symbols (marks) in a row - vertically, horizontally, or diagonally wins the game, and the other loses the game. The game can be played by two players. There are two options for players: (a) Human (b) Computer
 
 
 <hr>
 <h2>GAME RULES:</h2>
 
--Player 1 and 2 take turns making moves with Player 1 playing mark “X” and Player 2 playing mark “O”.
+- Player 1 and 2 take turns making moves with Player 1 playing mark “X” and Player 2 playing mark “O”.
 
--A player marks any of the 3x3 squares with his mark (“X” or “O”) and their aim is to create a straight line horizontally, vertically or diagonally with two intensions: a. One of the players gets three of his/her marks in a row (vertically, horizontally, or diagonally) i.e. that player wins the game. b. If no one can create a straight line with their own mark and all the positions on the board are occupied, then the game ends in a draw/tie.
+- A player marks any of the 3x3 squares with his mark (“X” or “O”) and their aim is to create a straight line horizontally, vertically or diagonally with two intensions: a. One of the players gets three of his/her marks in a row (vertically, horizontally, or diagonally) i.e. that player wins the game. b. If no one can create a straight line with their own mark and all the positions on the board are occupied, then the game ends in a draw/tie.
 
 <hr>
 <h2>How to play the game</h2>
 
--setup database.
+- setup database.
 
--start the server Kindly use the JAR file of the server to open the GUI and then press the start button to turn it on.
+- start the server Kindly use the JAR file of the server to open the GUI and then press the start button to turn it on.
 
--fill the requirment in the signup page Launch any number you want of clients but keep in mind to sign up first before trying to sign in with an account.
+- fill the requirment in the signup page Launch any number you want of clients but keep in mind to sign up first before trying to sign in with an account.
 
--choose which player you want to play with by sending him an invitation or you can just play with ui by choosing the difficulty level
+- choose which player you want to play with by sending him an invitation or you can just play with ui by choosing the difficulty level
 
 <hr>
 <h2>Application domain</h2>
--Client
--Login/Register
--single player vs Computer
--player vs player
--show recorded games
--server Activate or disable the server
+- Client
+- Login/Register
+- single player vs Computer
+- player vs player
+- show recorded games
+- server Activate or disable the server
 
 <hr>
 <h2>team member</h2>
--Shehab Eldein 
--Hamed Mohamed
--Rafeef Esam
--Esraa AbdElfatah 
+- Shehab Eldein 
+- Hamed Mohamed
+- Rafeef Esam
+- Esraa AbdElfatah 
 <hr>
 <h2>Game UI</h2>
 
