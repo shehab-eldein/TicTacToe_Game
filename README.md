@@ -73,4 +73,3 @@
 ![win screen](https://user-images.githubusercontent.com/83082791/206190863-f14e6fc8-36e1-419d-8cf8-8114340d4192.png)
 ![draw screen](https://user-images.githubusercontent.com/83082791/206190869-e71e7c66-ef61-4036-ae43-72448a5316af.png)
 ![Game over](https://user-images.githubusercontent.com/83082791/206190871-3eaa70da-8288-4a70-a4cf-df70a74de88f.png)
-![server](https://user-images.githubusercontent.com/86933863/208898021-13256621-8cc2-477d-8892-7e0d810586ce.PNG)
