@@ -45,6 +45,7 @@
 -  player vs player ofline
 -  player vs player online
 -  show recorded games 
+-  show history of each playe game
 -  server Activate or disable the server
 -  In online mode choose another player to play with
 
@@ -95,13 +96,25 @@ Draw Screen
 
 ![Game over](https://user-images.githubusercontent.com/83082791/206190871-3eaa70da-8288-4a70-a4cf-df70a74de88f.png)
 
+when playing you can record a game and the records shows in a list , when you select any record game it shows as a vedio
+![RecordedGameList](https://user-images.githubusercontent.com/83082791/208906117-ee3efc71-ce8d-48a6-a8d0-7f4dfc97ecb4.jpg)
+
+After playing any game it recorded in history
+![HistoryList](https://user-images.githubusercontent.com/83082791/208906102-aa16b19f-01d7-4277-85bb-261d4a9e06f0.jpg)
+
 Start server
 
 ![server](https://user-images.githubusercontent.com/86933863/208898021-13256621-8cc2-477d-8892-7e0d810586ce.PNG)
 
+After Start server
+![serverChart](https://user-images.githubusercontent.com/83082791/208906110-40a061de-d30c-44a0-a582-af80b501022b.jpg)
+
 Login Screen
 
 ![login](https://user-images.githubusercontent.com/86933863/208898514-fdca588a-6222-4847-83cc-fff6b39a1968.PNG)
+
+After login a list with available online users appear
+![playerListInOnlineMode](https://user-images.githubusercontent.com/83082791/208906113-62416881-7a3d-4559-8e0e-4e18d99af8cd.jpg)
 
 Sign Up Screen
 
