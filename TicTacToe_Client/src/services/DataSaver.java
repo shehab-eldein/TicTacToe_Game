@@ -17,7 +17,10 @@ public class DataSaver {
     private String winner;
     private String mode;
     private String game;
+    private String ip;
 
+ 
+    
     private DataSaver() {
 
     }
@@ -68,4 +71,13 @@ public class DataSaver {
     public void setGame(String game) {
         this.game = game;
     }
+    
+       public String getIp() {
+        return ip;
+    }
+
+    public void setIp(String ip) {
+        this.ip = ip;
+    }
+
 }

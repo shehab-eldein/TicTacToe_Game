@@ -16,6 +16,7 @@ import java.net.Socket;
 import java.util.function.Consumer;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import services.DataSaver;
 import services.ErrorMessageSender;
 
 /**
@@ -36,7 +37,7 @@ public class GameHandler implements Runnable {
     private GameHandler(ErrorMessageSender errorMessageSender, Consumer reConsumer) throws IOException {
         this.errorMessageSender = errorMessageSender;
         responseMessage = reConsumer;
-        socket = new Socket("127.0.0.1", 5005);
+        socket = new Socket(DataSaver.dataSaverInstance().getIp(), 5005);
         dataInputstream = new BufferedReader(new InputStreamReader(socket.getInputStream()));
         printStream = new PrintWriter(socket.getOutputStream(), true);
     }
@@ -89,7 +90,7 @@ public class GameHandler implements Runnable {
 
     public void connect() throws IOException {
         isRunning = true;
-        socket = new Socket("127.0.0.1", 5005);
+        socket = new Socket(DataSaver.dataSaverInstance().getIp(), 5005);
         new Thread(this).start();
     }
 

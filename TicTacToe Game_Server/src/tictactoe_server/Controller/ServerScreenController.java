@@ -46,6 +46,7 @@ public class ServerScreenController implements Initializable {
     private PieChart.Data online;
     private PieChart.Data offline;
     private Alert alert = new Alert(Alert.AlertType.INFORMATION);
+
     /**
      * Initializes the controller class.
      */
@@ -64,7 +65,10 @@ public class ServerScreenController implements Initializable {
                         UsersPieChart.setData(pieChartData);
                         //System.out.println("count ");
                     } catch (SQLException ex) {
-                        ex.printStackTrace();
+                        Platform.runLater(() -> {
+                            alert.setContentText("please opent database connection");
+                            alert.show();
+                        });
                     }
 
                 });
@@ -97,8 +101,13 @@ public class ServerScreenController implements Initializable {
                 UsersPieChart.setVisible(false);
             }
         } catch (IOException ex) {
-            serverStatusLable.setText("Off");
         } catch (SQLException ex) {
+            serverStatusLable.setText("Off");
+            startServerButton.setText("Start");
+            Platform.runLater(() -> {
+                alert.setContentText("please open database connection");
+                alert.show();
+            });
         }
     }
 

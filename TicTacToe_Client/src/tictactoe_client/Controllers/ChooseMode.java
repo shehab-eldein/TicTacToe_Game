@@ -9,6 +9,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.control.TextInputDialog;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
@@ -96,6 +97,9 @@ public class ChooseMode extends AnchorPane {
         btnOnlineMode.setOnAction((event) -> {
             try {
                 DataSaver.dataSaverInstance().setModeData("Online Mode");
+                TextInputDialog ipTextInputDialog = new TextInputDialog("enter any text");
+                ipTextInputDialog.setHeaderText("please enter the server's IP");
+                DataSaver.dataSaverInstance().setIp(ipTextInputDialog.showAndWait().get());
                 Navigation.navigateTo(new FXMLLoader().load(tictactoe_client.TicTacToe_Client.class.getResource("Views/ConnectingSplashScreen.fxml")), event);
             } catch (IOException ex) {
 //                ex.printStackTrace();

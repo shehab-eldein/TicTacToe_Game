@@ -51,8 +51,7 @@ public class WinScreen extends AnchorPane {
         winVideo.setLayoutX(40.0);
         winVideo.setLayoutY(14.0);
         winVideo.setPreserveRatio(false);
-        file = new File("src/tictactoe_client/Views/img/win.mp4");
-        media = new Media(file.toURI().toString());
+        media = new Media(tictactoe_client.TicTacToe_Client.class.getResource("Views/img/win.mp4").toExternalForm());
         mediaplayer = new MediaPlayer(media);
         winVideo.setMediaPlayer(mediaplayer);
         mediaplayer.play();

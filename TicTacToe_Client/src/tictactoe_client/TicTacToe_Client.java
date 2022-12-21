@@ -27,16 +27,16 @@ import tictactoe_client.Controllers.Start;
  * @author DELL
  */
 public class TicTacToe_Client extends Application {
-    
+
     private GameHandler gameHandler;
-    
+
     @Override
     public void start(Stage stage) throws Exception {
         Navigation.navigateTo(new Start(), stage);
         StageSaver stageSever = StageSaver.getStageSeverInstance();
         stageSever.setStage(stage);
         DataSaver.dataSaverInstance().setModeData("normal");
-        
+
         stage.setOnCloseRequest(event -> {
             if (DataSaver.dataSaverInstance().getModeData().equals("Online Mode")) {
                 try {
@@ -59,26 +59,30 @@ public class TicTacToe_Client extends Application {
                         });
                     } else if (gameHandler.getIsRunning()) {
                         Alerts.showRequestAlert("do you want to close the connection", (accept) -> {
-                            
+
                             try {
                                 gameHandler.disconnect();
                                 stage.close();
                             } catch (IOException ex) {
                             }
                         }, (reject) -> {
-                            
+
                         });
                     } else {
                         Alerts.showAlert("do you want to close the application", (accept) -> {
                             stage.close();
                         });
                     }
-                    
+
                 } catch (IOException ex) {
-                    ex.printStackTrace();
+                    Alerts.showAlert("do you want to close the application", (accept) -> {
+                        stage.close();
+                    });
                 }
-            }else{
-                stage.close();
+            } else {
+                Alerts.showAlert("do you want to close the application", (accept) -> {
+                    stage.close();
+                });
             }
         });
     }
@@ -89,10 +93,10 @@ public class TicTacToe_Client extends Application {
     public static void main(String[] args) {
         launch(args);
     }
-    
+
     @Override
     public void stop() throws Exception {
-        
+
     }
-    
+
 }

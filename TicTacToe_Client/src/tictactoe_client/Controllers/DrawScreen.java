@@ -46,8 +46,7 @@ public class DrawScreen extends AnchorPane {
         DrawVideo.setLayoutX(40.0);
         DrawVideo.setLayoutY(14.0);
         DrawVideo.setPreserveRatio(false);
-        file = new File("src/tictactoe_client/Views/img/draw.mp4");
-        media = new Media(file.toURI().toString());
+        media = new Media(tictactoe_client.TicTacToe_Client.class.getResource("Views/img/draw.mp4").toExternalForm());
         mediaplayer = new MediaPlayer(media);
         DrawVideo.setMediaPlayer(mediaplayer);
         mediaplayer.setAutoPlay(true);
