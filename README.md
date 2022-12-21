@@ -34,8 +34,6 @@
 
 - choose which player you want to play with by sending him an invitation or you can just play with ui by choosing the difficulty level
 
--  (server must run from  device that has server ) 
-
 <hr>
 <h2>Application domain</h2>
 
