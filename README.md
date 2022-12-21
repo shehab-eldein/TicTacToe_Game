@@ -37,14 +37,16 @@
 -  (server must run from  device that has server ) 
 
 <hr>
-<h2>Application domain</h2>
+<h2>Application Features</h2>
 
 -  Client
 -  Login/Register
 -  single player vs Computer
--  player vs player
--  show recorded games
+-  player vs player ofline
+-  player vs player online
+-  show recorded games 
 -  server Activate or disable the server
+-  In online mode choose another player to play with
 
 <hr>
 
