@@ -41,13 +41,12 @@
 
 <hr>
 <h2>Application domain</h2>
-
--  Client
--  Login/Register
--  single player vs Computer
--  player vs player
--  show recorded games
--  server Activate or disable the server
+- Client
+- Login/Register
+- single player vs Computer
+- player vs player
+- show recorded games
+- server Activate or disable the server
 
 <hr>
 <h2>team member</h2>
