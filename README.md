@@ -16,8 +16,8 @@
 ![draw screen](https://user-images.githubusercontent.com/83082791/206190869-e71e7c66-ef61-4036-ae43-72448a5316af.png)
 ![Game over](https://user-images.githubusercontent.com/83082791/206190871-3eaa70da-8288-4a70-a4cf-df70a74de88f.png)
 
-### Objective
+#objective
 
--This project aims to develop a Tic Tac Toe game using java and javafx . It mainly consists of developing and implementing a computer program that plays Tic Tac Toe against another player or computer (AI)
+This project aims to develop a Tic Tac Toe game using java and javafx . It mainly consists of developing and implementing a computer program that plays Tic Tac Toe against another player or computer (AI)
 
--In order to understand what Tic Tac Toe game is and how to play the game, below is the description.
+In order to understand what Tic Tac Toe game is and how to play the game, below is the description.
