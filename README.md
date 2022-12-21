@@ -64,24 +64,44 @@
 <hr>
 <h2>Game UI</h2>
 Start Screen
+
 ![start](https://user-images.githubusercontent.com/83082791/206190852-11bc3f99-9de6-490b-acaa-f8ac6f55e7ff.png)
+
 choose Mode
+
 ![mode screen](https://user-images.githubusercontent.com/83082791/206190838-cc60aeff-9434-4b38-a24d-8ac13873156b.png)
+
 Players Information
+
 ![players name](https://user-images.githubusercontent.com/83082791/206190845-62aefd38-ae1b-4ce0-b1a2-1ea4e6d80b90.png)
+
 Board Screen
+
 ![play screen](https://user-images.githubusercontent.com/83082791/206190841-4d251997-0736-4930-8908-8fba8dad7c97.png)
+
 ![while playing](https://user-images.githubusercontent.com/83082791/206190855-0c1ba993-d98a-41a9-840f-4d49b3d5161a.png)
+
 Win Screen
+
 ![win play](https://user-images.githubusercontent.com/83082791/206190860-0a704299-bf3a-40e3-813b-20eea2966a72.png)
+
 ![win screen](https://user-images.githubusercontent.com/83082791/206190863-f14e6fc8-36e1-419d-8cf8-8114340d4192.png)
+
 Draw Screen
+
 ![draw screen](https://user-images.githubusercontent.com/83082791/206190869-e71e7c66-ef61-4036-ae43-72448a5316af.png)
+
 ![Game over](https://user-images.githubusercontent.com/83082791/206190871-3eaa70da-8288-4a70-a4cf-df70a74de88f.png)
+
 Start server
+
 ![server](https://user-images.githubusercontent.com/86933863/208898021-13256621-8cc2-477d-8892-7e0d810586ce.PNG)
+
 Login Screen
+
 ![login](https://user-images.githubusercontent.com/86933863/208898514-fdca588a-6222-4847-83cc-fff6b39a1968.PNG)
+
 Sign Up Screen
+
 ![signup](https://user-images.githubusercontent.com/86933863/208898628-d4afe6a2-2d55-4a31-ab90-6c979d255596.PNG)
 
