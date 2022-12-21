@@ -74,3 +74,6 @@
 ![draw screen](https://user-images.githubusercontent.com/83082791/206190869-e71e7c66-ef61-4036-ae43-72448a5316af.png)
 ![Game over](https://user-images.githubusercontent.com/83082791/206190871-3eaa70da-8288-4a70-a4cf-df70a74de88f.png)
 ![server](https://user-images.githubusercontent.com/86933863/208898021-13256621-8cc2-477d-8892-7e0d810586ce.PNG)
+![login](https://user-images.githubusercontent.com/86933863/208898514-fdca588a-6222-4847-83cc-fff6b39a1968.PNG)
+![signup](https://user-images.githubusercontent.com/86933863/208898628-d4afe6a2-2d55-4a31-ab90-6c979d255596.PNG)
+
